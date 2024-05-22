@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.bottomNavigation.background = null
-
         loadFragment(HomeFragment())
         changeFragment()
     }
@@ -26,10 +25,12 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
+                    binding.toolbar.title = "Home"
                     loadFragment(HomeFragment())
                     true
                 }
                 R.id.workshop -> {
+                    binding.toolbar.title = "Workshop"
                     loadFragment(WorkshopFragment())
                     true
                 }

@@ -7,4 +7,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_fragment">Home Fragment</string>
     <string name="workshop_fragment">Workshop Fragment</string>
+    <string name="profile">Profile</string>
+    <string name="more">More</string>
 </resources>

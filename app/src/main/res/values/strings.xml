@@ -9,4 +9,6 @@
     <string name="workshop_fragment">Workshop Fragment</string>
     <string name="profile">Profile</string>
     <string name="more">More</string>
+    <string name="language">Language</string>
+    <string name="history">History</string>
 </resources>

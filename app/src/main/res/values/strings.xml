@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CapstoneProject</string>
+    <string name="home">Home</string>
+    <string name="workshop">Workshop</string>
+    <string name="scan_activity_for_classification">Scan Activity for Classification</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_fragment">Home Fragment</string>
+    <string name="workshop_fragment">Workshop Fragment</string>
+</resources>

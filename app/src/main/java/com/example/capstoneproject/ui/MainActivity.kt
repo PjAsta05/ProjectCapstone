@@ -1,13 +1,12 @@
-package com.example.capstoneproject
+package com.example.capstoneproject.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityMainBinding
-import com.example.capstoneproject.home.HomeFragment
-import com.example.capstoneproject.workshop.WorkshopFragment
+import com.example.capstoneproject.ui.home.HomeFragment
+import com.example.capstoneproject.ui.workshop.WorkshopFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

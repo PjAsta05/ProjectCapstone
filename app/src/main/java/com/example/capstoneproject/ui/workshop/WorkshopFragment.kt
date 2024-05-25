@@ -1,4 +1,4 @@
-package com.example.capstoneproject.workshop
+package com.example.capstoneproject.ui.workshop
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

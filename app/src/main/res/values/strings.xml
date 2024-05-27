@@ -21,5 +21,6 @@
     <string name="edit">Edit</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="add">Add</string>
+    <string name="save">Save</string>
 
 </resources>

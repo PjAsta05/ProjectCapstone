@@ -1,12 +1,11 @@
-package com.example.capstoneproject.ui.akun
+package com.example.capstoneproject.ui.account
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.capstoneproject.databinding.ActivityMainBinding
 import com.example.capstoneproject.databinding.ActivityProfileBinding
-import com.example.capstoneproject.ui.akun.editprofile.EditProfileActivity
+import com.example.capstoneproject.ui.account.editprofile.EditProfileActivity
 import com.example.capstoneproject.ui.form.workshop.AddWorkshopActivity
 
 class ProfileActivity : AppCompatActivity() {
@@ -26,7 +25,7 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
     fun editProfile() {
-        binding.btnedit.setOnClickListener {
+        binding.btnEdit.setOnClickListener {
             val intent = Intent(this, EditProfileActivity::class.java)
             startActivity(intent)
             Toast.makeText(this, "Edit Berhasil", Toast.LENGTH_SHORT).show()

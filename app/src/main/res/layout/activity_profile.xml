@@ -5,59 +5,54 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.akun.ProfileActivity">
+    tools:context=".ui.account.ProfileActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="122dp"
-        android:layout_height="122dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="100dp"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ImageView"
+        app:shapeAppearanceOverlay="@style/CircleImageView"
+        android:layout_width="136dp"
+        android:layout_height="136dp"
+        android:layout_marginTop="64dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/user_circle_svgrepo_com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imgprofile"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:background="@drawable/btn_background1" />
-    </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/btnedit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/ic_edit"
-        android:text="Edit"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_edit"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/transparent"
+        android:text="@string/edit"
+        android:textAllCaps="false"
+        app:cornerRadius="100dp"
+        app:icon="@drawable/ic_edit"
+        app:iconSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ImageView" />
 
     <TextView
         android:id="@+id/nama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Fullnama"
+        android:text="@string/username"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/cardView"
-        app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintEnd_toEndOf="@+id/ImageView"
+        app:layout_constraintStart_toStartOf="@+id/ImageView"
+        app:layout_constraintTop_toBottomOf="@+id/ImageView" />
 
     <TextView
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Email"
+        android:layout_marginTop="8dp"
+        android:text="@string/email"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/nama"
         app:layout_constraintHorizontal_bias="0.487"
@@ -69,7 +64,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Add Workshop"
+        android:text="@string/add_workshop"
+        android:textAllCaps="false"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="@+id/email"
         app:layout_constraintStart_toStartOf="@+id/email"
@@ -79,10 +75,10 @@
         android:id="@+id/btnlogout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Logout"
+        android:text="@string/logout"
         app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

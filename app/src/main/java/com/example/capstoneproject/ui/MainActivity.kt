@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityMainBinding
-import com.example.capstoneproject.ui.akun.ProfileActivity
+import com.example.capstoneproject.ui.account.ProfileActivity
 import com.example.capstoneproject.ui.home.HomeFragment
 import com.example.capstoneproject.ui.workshop.WorkshopFragment
 
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     private fun changeActivity() {
         binding.toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.action_settings -> {
+                R.id.profile -> {
                     val intent = Intent(this, ProfileActivity::class.java)
                     startActivity(intent)
                     true

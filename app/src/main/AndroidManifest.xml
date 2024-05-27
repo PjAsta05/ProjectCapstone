@@ -13,7 +13,7 @@
         android:theme="@style/Theme.CapstoneProject"
         tools:targetApi="31">
         <activity
-            android:name=".ui.akun.editprofile.EditProfileActivity"
+            android:name=".ui.account.editprofile.EditProfileActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.akun.ProfileActivity"
+            android:name=".ui.account.ProfileActivity"
             android:exported="false" />
 
         <activity

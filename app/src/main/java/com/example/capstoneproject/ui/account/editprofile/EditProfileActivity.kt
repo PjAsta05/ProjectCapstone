@@ -1,4 +1,4 @@
-package com.example.capstoneproject.ui.akun.editprofile
+package com.example.capstoneproject.ui.account.editprofile
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

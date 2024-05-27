@@ -16,6 +16,12 @@
             android:name=".ui.account.editprofile.EditProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.auth.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.SigninActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -27,7 +33,6 @@
         <activity
             android:name=".ui.account.ProfileActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.form.workshop.AddWorkshopActivity"
             android:exported="false" />

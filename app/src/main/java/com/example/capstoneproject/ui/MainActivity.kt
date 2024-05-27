@@ -18,6 +18,21 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.background = null
         loadFragment(HomeFragment())
         changeFragment()
+        changeActivity()
+    }
+
+    private fun changeActivity() {
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.profile -> {
+                    true
+                }
+                R.id.history -> {
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun changeFragment() {

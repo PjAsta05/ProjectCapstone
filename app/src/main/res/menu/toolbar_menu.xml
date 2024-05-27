@@ -9,7 +9,7 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/profile"
         android:title="@string/profile"
         android:icon="@drawable/user_circle_svgrepo_com"
         app:showAsAction="always"/>

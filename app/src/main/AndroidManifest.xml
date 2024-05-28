@@ -13,6 +13,15 @@
         android:theme="@style/Theme.CapstoneProject"
         tools:targetApi="31">
         <activity
+            android:name=".ui.form.payment.PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.process.ProcessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.form.packet.PacketActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.account.editprofile.EditProfileActivity"
             android:exported="false" />
         <activity

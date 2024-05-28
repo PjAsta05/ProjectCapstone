@@ -22,5 +22,7 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="add">Add</string>
     <string name="save">Save</string>
+    <string name="paket">Paket</string>
+    <string name="noRek">123-345-678-1011</string>
 
 </resources>

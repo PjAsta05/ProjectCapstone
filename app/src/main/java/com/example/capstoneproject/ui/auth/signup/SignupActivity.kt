@@ -1,14 +1,10 @@
-package com.example.capstoneproject.ui.auth
+package com.example.capstoneproject.ui.auth.signup
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivitySigninBinding
 
-class SigninActivity : AppCompatActivity() {
+class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySigninBinding
 
     private var nameValid = false

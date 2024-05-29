@@ -10,7 +10,7 @@ import com.example.capstoneproject.ui.form.packet.PacketActivity
 class AddWorkshopActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddWorkshopBinding
 
-    private var namaValid = false
+    private var nameValid = false
     private var ownerValid = false
     private var phoneValid = false
     private var emailValid = false
@@ -36,7 +36,7 @@ class AddWorkshopActivity : AppCompatActivity() {
         val description = binding.etDescription
 
         nama.addTextChangedListener {
-            namaValid = it.toString().isNotEmpty()
+            nameValid = it.toString().isNotEmpty()
             btnEnabled()
         }
         owner.addTextChangedListener {
@@ -69,7 +69,7 @@ class AddWorkshopActivity : AppCompatActivity() {
 
     private fun btnEnabled() {
         val btn = binding.btnPay
-        btn.isEnabled = namaValid && ownerValid && phoneValid && emailValid && addressValid && descriptionValid
+        btn.isEnabled = nameValid && ownerValid && phoneValid && emailValid && addressValid && descriptionValid
     }
 
     private fun isValidEmail(email: String): Boolean {

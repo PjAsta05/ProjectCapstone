@@ -20,7 +20,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     fun logout() {
-        binding.btnlogout.setOnClickListener {
+        binding.btnLogout.setOnClickListener {
             Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show()
         }
     }

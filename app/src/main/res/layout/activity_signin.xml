@@ -13,7 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -49,8 +49,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_login">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.example.capstoneproject.customview.CustomEditText
                     android:id="@+id/et_name"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/username"
@@ -73,8 +74,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/til_name">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.example.capstoneproject.customview.CustomEditTextEmail
                     android:id="@+id/et_email"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
@@ -94,13 +96,14 @@
                 app:endIconMode="password_toggle"
                 app:helperText="Enter your password"
                 app:helperTextEnabled="true"
-                app:layout_constraintBottom_toTopOf="@+id/btn_login"
+                app:layout_constraintBottom_toTopOf="@+id/btn_signin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/til_email">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.example.capstoneproject.customview.CustomEditTextPassword
                     android:id="@+id/et_password"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
@@ -109,14 +112,15 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_signin"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="64dp"
+                android:paddingVertical="10dp"
                 android:text="@string/sign_in"
-                app:cornerRadius="50dp"
+                app:cornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

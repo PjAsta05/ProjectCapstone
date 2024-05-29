@@ -48,13 +48,7 @@ class AddWorkshopActivity : AppCompatActivity() {
             btnEnabled()
         }
         email.addTextChangedListener {
-            val emailText = it.toString()
-            emailValid = isValidEmail(emailText)
-            if (emailValid) {
-                email.error = null
-            } else {
-                email.error = "Email tidak valid"
-            }
+            emailValid = it.toString().isNotEmpty()
             btnEnabled()
         }
         address.addTextChangedListener {
@@ -72,10 +66,6 @@ class AddWorkshopActivity : AppCompatActivity() {
         btn.isEnabled = nameValid && ownerValid && phoneValid && emailValid && addressValid && descriptionValid
     }
 
-    private fun isValidEmail(email: String): Boolean {
-        val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"
-        return email.matches(emailRegex.toRegex())
-    }
 
     fun btnPayment() {
         binding.btnPay.setOnClickListener {

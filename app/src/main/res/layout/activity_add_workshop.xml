@@ -58,7 +58,7 @@
                     android:layout_marginStart="16dp"
                     android:drawableLeft="@drawable/ic_camera"
                     android:text="Add"
-                    app:cornerRadius="10dp"
+                    app:cornerRadius="8dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView"
                     app:layout_constraintStart_toStartOf="@+id/imageView"
                     app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -78,8 +78,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btnadd">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.example.capstoneproject.customview.CustomEditText
                         android:id="@+id/et_nama"
+                        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Title"
@@ -102,8 +103,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/til_nama">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.example.capstoneproject.customview.CustomEditText
                         android:id="@+id/et_owner"
+                        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Name"
@@ -126,8 +128,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/til_owner">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.example.capstoneproject.customview.CustomEditText
                         android:id="@+id/et_phone"
+                        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Phone Number"
@@ -150,8 +153,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/til_phone">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.example.capstoneproject.customview.CustomEditTextEmail
                         android:id="@+id/et_email"
+                        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Email"
@@ -174,8 +178,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/til_email">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.example.capstoneproject.customview.CustomEditText
                         android:id="@+id/et_address"
+                        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address"
@@ -200,8 +205,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/til_address">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.example.capstoneproject.customview.CustomEditText
                         android:id="@+id/et_description"
+                        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:gravity="top"

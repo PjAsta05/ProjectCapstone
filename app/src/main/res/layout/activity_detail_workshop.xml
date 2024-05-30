@@ -64,14 +64,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sanggar :"
+                        android:text="Sanggar"
                         android:textSize="16sp" />
                     <TextView
                         android:id="@+id/sanggarname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Sanggar Name"
+                        android:text=": Sanggar Name"
                         android:textSize="16sp" />
                 </TableRow>
 
@@ -79,14 +79,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Owner :"
+                        android:text="Owner"
                         android:textSize="16sp" />
                     <TextView
                         android:id="@+id/ownername"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Owner Name"
+                        android:text=": Owner Name"
                         android:textSize="16sp" />
                 </TableRow>
 
@@ -94,14 +94,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Address :"
+                        android:text="Address"
                         android:textSize="16sp" />
                     <TextView
                         android:id="@+id/address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Address"
+                        android:text=": Address"
                         android:textSize="16sp" />
                 </TableRow>
 
@@ -109,14 +109,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Email :"
+                        android:text="Email"
                         android:textSize="16sp" />
                     <TextView
                         android:id="@+id/email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Email@gmail.com"
+                        android:text=": Email@gmail.com"
                         android:textSize="16sp" />
                 </TableRow>
 
@@ -124,14 +124,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Phone :"
+                        android:text="Phone"
                         android:textSize="16sp" />
                     <TextView
                         android:id="@+id/phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="+628123456789"
+                        android:text=": +628123456789"
                         android:textSize="16sp" />
                 </TableRow>
             </TableLayout>
@@ -172,6 +172,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="64.5dp"
             android:text="Register"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

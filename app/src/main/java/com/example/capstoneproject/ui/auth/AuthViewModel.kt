@@ -24,6 +24,12 @@ class AuthViewModel @Inject constructor(
         return repository.getSession().asLiveData()
     }
 
+    fun updateSession(user: UserModel) {
+        viewModelScope.launch {
+            repository.updateSession(user)
+        }
+    }
+
     fun logout() {
         viewModelScope.launch {
             repository.logout()

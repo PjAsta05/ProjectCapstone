@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.bottomNavigation.background = null
+        binding.toolbar.title = "Home"
         loadFragment(HomeFragment())
         changeFragment()
         changeActivity()

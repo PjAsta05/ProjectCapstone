@@ -16,6 +16,10 @@ class Repository @Inject constructor(
         return userPreference.getSession()
     }
 
+    suspend fun updateSession(user: UserModel) {
+        userPreference.updateSession(user)
+    }
+
     suspend fun logout() {
         userPreference.deleteSession()
     }

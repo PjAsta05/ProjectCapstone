@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 
@@ -22,6 +23,20 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             it[TOKEN] = user.token
             it[IS_LOGIN] = true
         }
+    }
+
+    suspend fun updateSession(user: UserModel) {
+        val currentUser = getSession().first()
+
+        val updatedUser = currentUser.copy(
+            id = user.id.ifBlank { currentUser.id },
+            name = user.name.ifBlank { currentUser.name },
+            email = user.email.ifBlank { currentUser.email },
+            token = user.token.ifBlank { currentUser.token },
+            isLogin = true
+        )
+        
+        saveSession(updatedUser)
     }
 
     fun getSession(): Flow<UserModel> {

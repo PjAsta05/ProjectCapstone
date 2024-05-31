@@ -1,7 +1,13 @@
 package com.example.capstoneproject.ui.form.workshop
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.capstoneproject.databinding.ActivityAddWorkshopBinding
@@ -17,14 +23,18 @@ class AddWorkshopActivity : AppCompatActivity() {
     private var addressValid = false
     private var descriptionValid = false
 
+    private var currentImageUri: Uri? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddWorkshopBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        btnGallery()
         input()
         btnEnabled()
         btnPayment()
+        setupActionBar()
     }
 
     private fun input() {
@@ -34,6 +44,7 @@ class AddWorkshopActivity : AppCompatActivity() {
         val email = binding.etEmail
         val address = binding.etAddress
         val description = binding.etDescription
+
 
         nama.addTextChangedListener {
             nameValid = it.toString().isNotEmpty()
@@ -67,10 +78,71 @@ class AddWorkshopActivity : AppCompatActivity() {
     }
 
 
-    fun btnPayment() {
+    private fun btnPayment() {
         binding.btnPay.setOnClickListener {
-            val intent = Intent(this, PacketActivity::class.java)
-            startActivity(intent)
+            showConfirmationDialog()
         }
     }
+
+    private fun btnGallery() {
+        binding.btnadd.setOnClickListener {
+            startGallery()
+        }
+    }
+
+    private fun showConfirmationDialog() {
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setMessage("Are all the details correct?")
+            .setCancelable(false)
+            .setPositiveButton("Continue") { dialog, id ->
+                startActivity(Intent(this, PacketActivity::class.java))
+            }
+            .setNegativeButton("Back") { dialog, id ->
+                dialog.dismiss()
+            }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle("Confirm Details")
+        alert.show()
+    }
+
+
+    private fun com.google.android.material.textfield.TextInputEditText.addValidation(validation: (String) -> Unit) {
+        addTextChangedListener {
+            validation(it.toString())
+            btnEnabled()
+        }
+    }
+
+    private fun startGallery() {
+        launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+
+    private val launcherGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            currentImageUri = uri
+            showImage()
+        } else {
+            Log.d("Photo Picker", "No media selected")
+        }
+    }
+
+    private fun showImage() {
+        currentImageUri?.let { uri ->
+            Log.d("Image URI", "showImage: $uri")
+            binding.ivWorkshop.setImageURI(uri)
+        }
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        binding.toolbar.setNavigationOnClickListener {
+            super.onBackPressed()
+        }
+    }
+
 }

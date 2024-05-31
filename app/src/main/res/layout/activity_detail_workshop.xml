@@ -10,36 +10,47 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        >
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="0dp"
-            android:layout_height="294dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/btn_background1"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrowback" />
+
+        <ImageView
+            android:id="@+id/iv_detail_workshop"
+            android:layout_width="0dp"
+            android:layout_height="294dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/btn_background1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintWidth_percent="0.9" />
 
         <TextView
             android:id="@+id/nameworkshop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:text="Name Workshop"
             android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image" />
+            app:layout_constraintTop_toBottomOf="@id/iv_detail_workshop"
+            tools:text="Name Workshop" />
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
-            android:text="Detail"
+            android:text="@string/detail"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,11 +60,13 @@
             android:id="@+id/detailCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView11"
-            app:cardCornerRadius="8dp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView11">
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -61,78 +74,123 @@
                 android:padding="16dp">
 
                 <TableRow>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sanggar"
+                        android:text="@string/sanggar"
                         android:textSize="16sp" />
+
                     <TextView
-                        android:id="@+id/sanggarname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text=": Sanggar Name"
+                        android:text="@string/colon"
                         android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_sanggar_workshop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textSize="16sp"
+                        tools:text="Sanggar Name" />
                 </TableRow>
 
                 <TableRow>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Owner"
+                        android:text="@string/owner"
                         android:textSize="16sp" />
+
                     <TextView
-                        android:id="@+id/ownername"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text=": Owner Name"
+                        android:text="@string/colon"
                         android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_owner_workshop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textSize="16sp"
+                        tools:text="Owner Name" />
                 </TableRow>
 
                 <TableRow>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Address"
+                        android:text="@string/address"
                         android:textSize="16sp" />
+
                     <TextView
-                        android:id="@+id/address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text=": Address"
+                        android:text="@string/colon"
                         android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_address_workshop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textSize="16sp"
+                        tools:text="Address" />
                 </TableRow>
 
                 <TableRow>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Email"
+                        android:text="@string/email"
                         android:textSize="16sp" />
+
                     <TextView
-                        android:id="@+id/email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text=": Email@gmail.com"
+                        android:text="@string/colon"
                         android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_email_workshop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textSize="16sp"
+                        tools:text="Email@gmail.com" />
                 </TableRow>
 
                 <TableRow>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Phone"
+                        android:text="@string/phone"
                         android:textSize="16sp" />
+
                     <TextView
-                        android:id="@+id/phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text=": +628123456789"
+                        android:text="@string/colon"
                         android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_phone_workshop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textSize="16sp"
+                        tools:text="+628123456789" />
                 </TableRow>
             </TableLayout>
         </androidx.cardview.widget.CardView>
@@ -141,8 +199,9 @@
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
-            android:text="Description"
+            android:text="@string/description"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -152,19 +211,21 @@
             android:id="@+id/cardView3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView10"
-            app:cardCornerRadius="8dp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView10">
 
             <TextView
-                android:id="@+id/descriptiontari"
+                android:id="@+id/tv_description_workshop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="@string/detaildescription"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:text="@string/detaildescription" />
         </androidx.cardview.widget.CardView>
 
         <com.google.android.material.button.MaterialButton
@@ -174,7 +235,8 @@
             android:layout_marginBottom="16dp"
             android:paddingVertical="10dp"
             android:paddingHorizontal="64.5dp"
-            android:text="Register"
+            android:text="@string/register"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

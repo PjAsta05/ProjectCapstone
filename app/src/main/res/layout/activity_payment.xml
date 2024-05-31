@@ -7,18 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.form.payment.PaymentActivity">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Payment"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrowback"
+        app:title="Payment"
+        app:titleCentered="true"/>
+
+
 
     <TextView
         android:id="@+id/textView6"
@@ -29,7 +27,7 @@
         android:text="account number"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView5" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -66,19 +64,20 @@
         app:layout_constraintTop_toBottomOf="@id/cardView" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnadd"
+        android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:icon="@drawable/ic_camera"
-        android:text="Add"
+        android:text="@string/add"
+        android:textAllCaps="false"
         app:cornerRadius="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView7" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/iv_payment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -89,7 +88,7 @@
         app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnadd" />
+        app:layout_constraintTop_toBottomOf="@id/btn_add" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
@@ -122,37 +121,39 @@
                 tools:text="paket" />
 
             <TextView
-                android:id="@+id/namapaket"
+                android:id="@+id/tv_item_namapaket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="nama paket"
+                tools:text="nama paket"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_item_name" />
 
             <TextView
-                android:id="@+id/hargapaket"
+                android:id="@+id/tv_item_hargapaket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="Rp. 100.000"
+                tools:text="Rp. 100.000"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_process"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="process"
+                android:text="@string/process"
+                android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/namapaket"
+                app:layout_constraintTop_toBottomOf="@id/tv_item_hargapaket"
                 app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

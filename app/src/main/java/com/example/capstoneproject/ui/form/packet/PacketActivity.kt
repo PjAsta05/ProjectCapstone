@@ -13,5 +13,15 @@ class PacketActivity : AppCompatActivity() {
         binding = ActivityPacketBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
+        setupActionBar()
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        binding.toolbar.setNavigationOnClickListener {
+            super.onBackPressed()
+        }
     }
 }

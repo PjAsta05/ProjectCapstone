@@ -41,5 +41,15 @@
     <string name="owner">Owner</string>
     <string name="extand">Extand</string>
     <string name="status">Status :</string>
+    <string name="process">process</string>
+    <string name="detail">Detail</string>
+    <string name="sanggar">sanggar</string>
+    <string name="phone">Phone</string>
+    <string name="register">Register</string>
+    <string name="register_for_workshop">Register for Workshop</string>
+    <string name="nama">Nama</string>
+    <string name="gender">Gender</string>
+    <string name="back">Back</string>
+    <string name="process_reg">registration is being processed, please wait for a while</string>
 
 </resources>

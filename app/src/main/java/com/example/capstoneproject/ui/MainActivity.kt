@@ -1,6 +1,8 @@
 package com.example.capstoneproject.ui
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         changeFragment()
         changeActivity()
         observeSession()
+        updateFabColors()
     }
 
     private fun observeSession(){
@@ -75,12 +78,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateFabColors() {
+        val isDarkTheme = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+        val backgroundColor = if (isDarkTheme) {
+           getColor(R.color.gray)
+        } else {
+            getColor(R.color.white)
+        }
+        val iconColor = if (isDarkTheme) {
+            getColor(R.color.lighter_gray)
+        } else {
+            getColor(R.color.light_gray)
+        }
+        binding.scanButton.drawable.setTint(iconColor)
+        binding.scanButton.backgroundTintList = ColorStateList.valueOf(backgroundColor)
+    }
+
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.frame_layout, fragment)
             .commit()
     }
+
     private fun navigateToWelcomeActivity() {
         val intent = Intent(this@MainActivity, WelcomeActivity::class.java)
         startActivity(intent)

@@ -22,6 +22,7 @@ class EditProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
         setLoadPrevUserData()
         saveUserData()
+        setupActionBar()
     }
 
     private fun setLoadPrevUserData() {
@@ -42,6 +43,15 @@ class EditProfileActivity : AppCompatActivity() {
                 viewModel.updateSession(UserModel("", name, email, ""))
                 finish()
             }
+        }
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        binding.toolbar.setNavigationOnClickListener {
+            super.onBackPressed()
         }
     }
 

@@ -31,6 +31,16 @@ class ProfileActivity : AppCompatActivity() {
         logout()
         editProfile()
         addWorkshop()
+        setupActionBar()
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        binding.toolbar.setNavigationOnClickListener {
+            super.onBackPressed()
+        }
     }
 
     private fun observeSession() {

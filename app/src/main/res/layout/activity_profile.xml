@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.account.ProfileActivity">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrowback" />
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ImageView"
         app:shapeAppearanceOverlay="@style/CircleImageView"

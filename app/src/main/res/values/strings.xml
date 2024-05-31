@@ -29,5 +29,17 @@
     <string name="welcome">Welcome</string>
     <string name="welcome_text">Welcome text</string>
     <string name="detaildescription">Lorem ipsum dolor sit amet consectetur. Ut nisl mi porta iaculis lectus porttitor massa mauris laoreet. Sed faucibus viverra vitae id ac. Neque sit in sed at id hendrerit. Id facilisis egestas pulvinar imperdiet lorem odio diam porttitor orci. Nisl hac sit semper volutpat felis cursus dignissim odio id. Turpis.</string>
+    <string name="confirm">Confirm</string>
+    <string name="wrokshop">Wrokshop</string>
+    <string name="title">Title</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="description">Description</string>
+    <string name="proof_of_payment">Proof of Payment</string>
+    <string name="colon">:</string>
+    <string name="owner">Owner</string>
+    <string name="extand">Extand</string>
+    <string name="status">Status :</string>
 
 </resources>

@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 } else {
                     viewModel.successResponse.observe(this@LoginActivity) { user ->
-                        viewModel.saveSession(UserModel(user.user.id, user.user.fullname, user.user.email, user.token))
+                        viewModel.saveSession(UserModel(user.user.id, user.user.fullname, user.user.email, user.user.photo, user.token))
                         Log.d("Success", user.toString())
                         navigateToMainActivity()
                     }

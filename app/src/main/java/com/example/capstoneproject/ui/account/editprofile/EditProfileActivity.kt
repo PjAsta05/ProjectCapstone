@@ -39,7 +39,7 @@ class EditProfileActivity : AppCompatActivity() {
             val email = binding.etEmail.text.toString()
 
             lifecycleScope.launch {
-                viewModel.updateSession(UserModel(0, name, email, ""))
+                viewModel.updateSession(UserModel(0, name, email, "", ""))
                 finish()
             }
         }

@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -29,10 +30,11 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         val currentUser = getSession().first()
 
         val updatedUser = currentUser.copy(
-            id = user.id.ifBlank { currentUser.id },
+            id = currentUser.id,
             name = user.name.ifBlank { currentUser.name },
             email = user.email.ifBlank { currentUser.email },
-            token = user.token.ifBlank { currentUser.token },
+            photo = user.photo.ifBlank { currentUser.photo },
+            token = currentUser.token,
             isLogin = true
         )
         
@@ -42,9 +44,10 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
     fun getSession(): Flow<UserModel> {
         return dataStore.data.map {
             UserModel(
-                it[ID] ?: "",
+                it[ID] ?: 0,
                 it[NAME] ?: "",
                 it[EMAIL] ?: "",
+                it[PHOTO] ?: "",
                 it[TOKEN] ?: "",
                 it[IS_LOGIN] ?: false
             )
@@ -61,9 +64,10 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         @Volatile
         private var INSTANCE: UserPreference? = null
 
-        private val ID = stringPreferencesKey("id")
+        private val ID = intPreferencesKey("id")
         private val NAME = stringPreferencesKey("name")
         private val EMAIL = stringPreferencesKey("email")
+        private val PHOTO = stringPreferencesKey("photo")
         private val TOKEN = stringPreferencesKey("token")
         private val IS_LOGIN = booleanPreferencesKey("isLogin")
 

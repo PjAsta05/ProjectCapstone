@@ -58,12 +58,22 @@ class LoginActivity : AppCompatActivity() {
     private fun loginAction() {
         binding.btnLogin.setOnClickListener {
             //Loading
-            val email = binding.etEmail.text
-            val password = binding.etPassword.text
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
 
             lifecycleScope.launch {
-                viewModel.saveSession(UserModel("1", "Puja", "$email", "$password"))
-                navigateToMainActivity()
+                val isSuccess = viewModel.logIn(email, password)
+                if (!isSuccess) {
+                    viewModel.errorMessage.observe(this@LoginActivity) { message ->
+                        Log.e("Failed", message)
+                    }
+                } else {
+                    viewModel.successResponse.observe(this@LoginActivity) { user ->
+                        viewModel.saveSession(UserModel(user.user.id, user.user.fullname, user.user.email, user.token))
+                        Log.d("Success", user.toString())
+                        navigateToMainActivity()
+                    }
+                }
             }
         }
     }

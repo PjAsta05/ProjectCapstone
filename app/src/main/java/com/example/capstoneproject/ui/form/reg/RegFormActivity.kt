@@ -2,13 +2,8 @@ package com.example.capstoneproject.ui.form.reg
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
-import com.example.capstoneproject.R
-import com.example.capstoneproject.databinding.ActivityEditProfileBinding
 import com.example.capstoneproject.databinding.ActivityRegFormBinding
 import com.example.capstoneproject.ui.process.ProcessRegActivity
 
@@ -23,7 +18,6 @@ class RegFormActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegFormBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
         setContentView(binding.root)
 
         setupActionBar()

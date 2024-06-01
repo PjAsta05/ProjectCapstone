@@ -70,7 +70,6 @@ class ProfileActivity : AppCompatActivity() {
             intent.putExtra("name", name)
             intent.putExtra("email", email)
             startActivity(intent)
-            Toast.makeText(this, "Edit Berhasil", Toast.LENGTH_SHORT).show()
         }
     }
 

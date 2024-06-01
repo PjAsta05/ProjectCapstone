@@ -17,11 +17,12 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-
         <TextView
             android:id="@+id/tv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:textSize="16sp"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
@@ -31,16 +32,18 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:text="@string/status"
             android:textSize="16sp"
             card_view:layout_constraintEnd_toStartOf="@+id/tv_status"
-            card_view:layout_constraintTop_toTopOf="@+id/tv_status"
-             />
+            card_view:layout_constraintTop_toTopOf="@+id/tv_status" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/detailCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/textView">
 
@@ -62,11 +65,12 @@
                         android:layout_marginStart="8dp"
                         android:text="@string/colon"
                         android:textSize="16sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        tools:text="nama"/>
+                        tools:text="nama" />
                 </TableRow>
 
                 <TableRow>
@@ -88,7 +92,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        tools:text="owner"/>
+                        tools:text="owner" />
                 </TableRow>
 
                 <TableRow>
@@ -111,7 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        tools:text="Address"/>
+                        tools:text="Address" />
                 </TableRow>
 
             </TableLayout>

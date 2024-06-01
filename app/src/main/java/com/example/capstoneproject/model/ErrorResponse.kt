@@ -7,5 +7,5 @@ data class ErrorResponse(
     val field: String,
 
     @SerializedName("message")
-    val message: String,
+    val message: String
 )

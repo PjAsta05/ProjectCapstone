@@ -47,6 +47,7 @@ class ProfileActivity : AppCompatActivity() {
         viewModel.getSession().observe(this) { user ->
             name = user.name
             email = user.email
+            photoUrl = user.photo
             token = user.token
             setUpProfile()
             Log.d("Profile", user.toString())
@@ -56,6 +57,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun setUpProfile() {
         binding.name.text = name
         binding.email.text = email
+        //Glide load photo url
     }
 
     private fun logout() {
@@ -67,8 +69,6 @@ class ProfileActivity : AppCompatActivity() {
     private fun editProfile() {
         binding.btnEdit.setOnClickListener {
             val intent = Intent(this, EditProfileActivity::class.java)
-            intent.putExtra("name", name)
-            intent.putExtra("email", email)
             startActivity(intent)
         }
     }

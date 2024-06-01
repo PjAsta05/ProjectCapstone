@@ -29,6 +29,7 @@ class EditProfileActivity : AppCompatActivity() {
             viewModel.getSession().observe(this@EditProfileActivity) {
                 binding.etName.setText(it.name)
                 binding.etEmail.setText(it.email)
+                //Glide load photo url
             }
         }
     }
@@ -39,6 +40,7 @@ class EditProfileActivity : AppCompatActivity() {
             val email = binding.etEmail.text.toString()
 
             lifecycleScope.launch {
+                //Update user
                 viewModel.updateSession(UserModel(0, name, email, "", ""))
                 finish()
             }

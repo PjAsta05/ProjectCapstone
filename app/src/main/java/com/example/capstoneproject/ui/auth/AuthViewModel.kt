@@ -10,10 +10,13 @@ import com.example.capstoneproject.data.Repository
 import com.example.capstoneproject.data.pref.UserModel
 import com.example.capstoneproject.model.AuthResponse
 import com.example.capstoneproject.model.ErrorResponse
+import com.example.capstoneproject.model.User
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.HttpException
 import javax.inject.Inject
 import kotlin.math.log
@@ -23,6 +26,7 @@ class AuthViewModel @Inject constructor(
     private val repository: Repository
 ): ViewModel() {
     val successResponse = MutableLiveData<AuthResponse>()
+    val updateResponse = MutableLiveData<User>()
     val errorMessage = MutableLiveData<String>()
 
     fun saveSession(user: UserModel) {
@@ -38,6 +42,20 @@ class AuthViewModel @Inject constructor(
     fun updateSession(user: UserModel) {
         viewModelScope.launch {
             repository.updateSession(user)
+        }
+    }
+
+    suspend fun updateUser(id: Int, email: RequestBody, password: RequestBody, fullName: RequestBody, urlImage: MultipartBody.Part, token: String): Boolean {
+        return try {
+            val response = repository.updateUser(id, email, password, fullName, urlImage, token)
+            updateResponse.postValue(response.data)
+            Log.d("Update response", response.toString())
+            true
+        } catch (e: HttpException) {
+            val error = e.response()?.errorBody()?.string()
+            val errorResponse = Gson().fromJson(error, ErrorResponse::class.java)
+            errorMessage.postValue(errorResponse.message)
+            false
         }
     }
 

@@ -17,7 +17,7 @@ data class User(
     val email: String,
 
     @SerializedName("fullname")
-    val fullname: String,
+    val fullName: String,
 
     @SerializedName("photo")
     val photo: String,

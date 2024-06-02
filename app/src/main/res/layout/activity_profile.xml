@@ -26,7 +26,7 @@
                 app:navigationIcon="@drawable/ic_arrowback" />
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/ImageView"
+                android:id="@+id/imageProfile"
                 android:layout_width="136dp"
                 android:layout_height="136dp"
                 android:layout_marginTop="64dp"
@@ -51,7 +51,7 @@
                 app:icon="@drawable/ic_edit"
                 app:iconSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ImageView" />
+                app:layout_constraintTop_toTopOf="@+id/imageProfile" />
 
             <TextView
                 android:id="@+id/name"
@@ -61,9 +61,9 @@
                 android:text="@string/username"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/ImageView"
-                app:layout_constraintStart_toStartOf="@+id/ImageView"
-                app:layout_constraintTop_toBottomOf="@+id/ImageView" />
+                app:layout_constraintEnd_toEndOf="@+id/imageProfile"
+                app:layout_constraintStart_toStartOf="@+id/imageProfile"
+                app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
 
             <TextView
                 android:id="@+id/email"

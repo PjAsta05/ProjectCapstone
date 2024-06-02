@@ -6,6 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityProfileBinding
 import com.example.capstoneproject.ui.WelcomeActivity
 import com.example.capstoneproject.ui.account.editprofile.EditProfileActivity
@@ -27,17 +29,21 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        observeSession()
         logout()
         editProfile()
         addWorkshop()
+        observeSession()
         setupActionBar()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        observeSession()
     }
 
     private fun setupActionBar() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-
         binding.toolbar.setNavigationOnClickListener {
             super.onBackPressed()
         }
@@ -50,14 +56,18 @@ class ProfileActivity : AppCompatActivity() {
             photoUrl = user.photo
             token = user.token
             setUpProfile()
-            Log.d("Profile", user.toString())
         }
     }
 
     private fun setUpProfile() {
         binding.name.text = name
         binding.email.text = email
-        //Glide load photo url
+        binding.apply {
+            Glide.with(binding.root)
+                .load(photoUrl)
+                .error(R.drawable.baseline_image_24)
+                .into(imageProfile)
+        }
     }
 
     private fun logout() {

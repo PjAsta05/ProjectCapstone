@@ -1,6 +1,7 @@
 package com.example.capstoneproject.data.pref
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -21,7 +22,9 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             it[ID] = user.id
             it[NAME] = user.name
             it[EMAIL] = user.email
+            it[PHOTO] = user.photo
             it[TOKEN] = user.token
+            it[ROLE] = user.role
             it[IS_LOGIN] = true
         }
     }
@@ -30,14 +33,14 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         val currentUser = getSession().first()
 
         val updatedUser = currentUser.copy(
-            id = currentUser.id,
-            name = user.name.ifBlank { currentUser.name },
-            email = user.email.ifBlank { currentUser.email },
-            photo = user.photo.ifBlank { currentUser.photo },
+            id = user.id,
+            name = user.name,
+            email = user.email,
+            photo = user.photo,
             token = currentUser.token,
+            role = user.role,
             isLogin = true
         )
-        
         saveSession(updatedUser)
     }
 
@@ -49,6 +52,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
                 it[EMAIL] ?: "",
                 it[PHOTO] ?: "",
                 it[TOKEN] ?: "",
+                it[ROLE] ?: "",
                 it[IS_LOGIN] ?: false
             )
         }
@@ -69,6 +73,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         private val EMAIL = stringPreferencesKey("email")
         private val PHOTO = stringPreferencesKey("photo")
         private val TOKEN = stringPreferencesKey("token")
+        private val ROLE = stringPreferencesKey("role")
         private val IS_LOGIN = booleanPreferencesKey("isLogin")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreference {

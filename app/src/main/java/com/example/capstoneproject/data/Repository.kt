@@ -44,7 +44,7 @@ class Repository @Inject constructor(
         return apiService.updateUserProfile(id, email, password, fullName, urlImage,"Bearer $token")
     }
 
-    suspend fun getListTari(token: String, name: String, origin: String):ListTariResponse {
+    suspend fun getListTari(token: String, name: String, origin: String): ListTariResponse {
         return apiService.getListTari("Bearer $token", name, origin)
     }
 }

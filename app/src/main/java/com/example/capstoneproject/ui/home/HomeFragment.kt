@@ -1,30 +1,31 @@
 package com.example.capstoneproject.ui.home
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstoneproject.databinding.FragmentHomeBinding
 import com.example.capstoneproject.model.Tari
-import com.example.capstoneproject.ui.auth.AuthViewModel
-import com.example.capstoneproject.ui.auth.login.LoginActivity
-import com.example.capstoneproject.ui.auth.signup.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var adapter: HomeAdapter
     private val viewModel: HomeViewModel by viewModels()
-    private var token : String =""
+    private lateinit var adapter: HomeAdapter
+    private var token: String = ""
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        token = arguments?.getString("token").toString()
+        Log.d("HomeFragment", "Token: $token")
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

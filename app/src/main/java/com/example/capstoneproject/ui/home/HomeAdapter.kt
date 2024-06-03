@@ -28,7 +28,7 @@ class HomeAdapter(private val tari: List<Tari>) : RecyclerView.Adapter<HomeAdapt
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return tari.size
     }
 
     override fun onBindViewHolder(holder: TariViewHolder, position: Int) {

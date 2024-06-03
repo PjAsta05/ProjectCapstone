@@ -12,12 +12,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
-
+class HomeViewModel @Inject constructor(
+    private val repository: Repository
+): ViewModel() {
     private val _listTari = MutableLiveData<List<Tari>>()
     val listTari: LiveData<List<Tari>> = _listTari
 
-    fun getTari(token: String, name: String = "", origin: String = "") {
+    fun getTari(token: String, name: String = "", origin: String = "bali") {
         viewModelScope.launch {
             try {
                 val response = repository.getListTari(token, name, origin)

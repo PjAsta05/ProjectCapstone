@@ -1,5 +1,6 @@
 package com.example.capstoneproject.ui
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Configuration
@@ -23,17 +24,16 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: AuthViewModel by viewModels()
+    private var token: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.bottomNavigation.background = null
-        binding.toolbar.title = "Home"
-        loadFragment(HomeFragment())
+        observeSession()
         changeFragment()
         changeActivity()
-        observeSession()
         updateFabColors()
     }
 
@@ -43,8 +43,9 @@ class MainActivity : AppCompatActivity() {
                 if (!user.isLogin) {
                     navigateToWelcomeActivity()
                 } else {
-                    Log.d("TOKEN", user.token)
-                    //Do something
+                    token = user.token
+                    binding.toolbar.title = "Home"
+                    loadFragment(HomeFragment())
                 }
             }
         }
@@ -103,10 +104,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.frame_layout, fragment)
-            .commit()
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout, fragment)
+        val bundle = Bundle()
+        bundle.putString("token", token)
+        Log.d("Load Fragment", token)
+        fragment.arguments = bundle
+        fragmentTransaction.commit()
     }
 
     private fun navigateToWelcomeActivity() {

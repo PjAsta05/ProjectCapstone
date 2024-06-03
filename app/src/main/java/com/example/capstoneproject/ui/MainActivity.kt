@@ -13,6 +13,7 @@ import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityMainBinding
 import com.example.capstoneproject.ui.account.ProfileActivity
 import com.example.capstoneproject.ui.auth.AuthViewModel
+import com.example.capstoneproject.ui.history.HistoryActivity
 import com.example.capstoneproject.ui.home.HomeFragment
 import com.example.capstoneproject.ui.workshop.WorkshopFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -72,6 +73,11 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.profile -> {
                     val intent = Intent(this, ProfileActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.history -> {
+                    val intent = Intent(this, HistoryActivity::class.java)
                     startActivity(intent)
                     true
                 }

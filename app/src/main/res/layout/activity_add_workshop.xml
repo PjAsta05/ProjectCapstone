@@ -67,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Add"
+                    android:text="@string/add"
                     android:textAllCaps="false"
                     app:cornerRadius="50dp"
                     app:icon="@drawable/ic_camera"
@@ -75,7 +75,7 @@
                     app:iconSize="18dp"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_workshop"
                     app:layout_constraintStart_toStartOf="@+id/iv_workshop"
-                    app:layout_constraintVertical_bias="0.52" />
+                    app:layout_constraintTop_toBottomOf="@+id/iv_workshop" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_nama"

@@ -4,6 +4,7 @@ import com.example.capstoneproject.api.ApiService
 import com.example.capstoneproject.data.pref.UserModel
 import com.example.capstoneproject.data.pref.UserPreference
 import com.example.capstoneproject.model.AuthResponse
+import com.example.capstoneproject.model.ListTariResponse
 import com.example.capstoneproject.model.UpdateResponse
 import com.example.capstoneproject.model.User
 import kotlinx.coroutines.flow.Flow
@@ -41,5 +42,9 @@ class Repository @Inject constructor(
 
     suspend fun updateUser(id: Int, email: RequestBody, password: RequestBody, fullName: RequestBody, urlImage: MultipartBody.Part, token: String): UpdateResponse {
         return apiService.updateUserProfile(id, email, password, fullName, urlImage,"Bearer $token")
+    }
+
+    suspend fun getListTari(token: String, name: String, origin: String):ListTariResponse {
+        return apiService.getListTari("Bearer $token", name, origin)
     }
 }

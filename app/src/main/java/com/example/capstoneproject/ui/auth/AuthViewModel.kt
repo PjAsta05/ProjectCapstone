@@ -45,7 +45,7 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    suspend fun updateUser(id: Int, email: RequestBody, password: RequestBody, fullName: RequestBody, urlImage: MultipartBody.Part, token: String): Boolean {
+    suspend fun updateUser(id: Int, email: RequestBody ?= null, password: RequestBody ?= null, fullName: RequestBody ?= null, urlImage: MultipartBody.Part ?= null, token: String): Boolean {
         return try {
             val response = repository.updateUser(id, email, password, fullName, urlImage, token)
             updateResponse.postValue(response.data)

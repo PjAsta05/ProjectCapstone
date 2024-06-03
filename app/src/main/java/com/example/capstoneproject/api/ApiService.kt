@@ -37,10 +37,10 @@ interface ApiService {
     @PUT("user/{id}")
     suspend fun updateUserProfile(
         @Path("id") id: Int,
-        @Part("email") email: RequestBody,
-        @Part("password") password: RequestBody,
-        @Part("fullname") fullName: RequestBody,
-        @Part file: MultipartBody.Part,
+        @Part("email") email: RequestBody ?= null,
+        @Part("password") password: RequestBody ?= null,
+        @Part("fullname") fullName: RequestBody ?= null,
+        @Part file: MultipartBody.Part ?= null,
         @Header("Authorization") token: String
     ): UpdateResponse
 

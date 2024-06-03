@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:background="@drawable/btn_background1"
+            android:scaleType="centerCrop"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"

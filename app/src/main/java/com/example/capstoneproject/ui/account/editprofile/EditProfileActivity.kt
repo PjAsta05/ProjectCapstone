@@ -29,6 +29,7 @@ class EditProfileActivity : AppCompatActivity() {
     private var id: Int = 0
     private var token: String = ""
     private var currentImageUri: Uri? = null
+
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
     ) { uri: Uri? ->
@@ -91,26 +92,27 @@ class EditProfileActivity : AppCompatActivity() {
             val emailRequestBody = email.toRequestBody("text/plain".toMediaType())
             val passwordRequestBody = password.toRequestBody("text/plain".toMediaType())
             val nameRequestBody = name.toRequestBody("text/plain".toMediaType())
+            var multipartBody: MultipartBody.Part? = null
             currentImageUri?.let { uri ->
                 val imageFile = uriToFile(uri, this).reduceFileImage()
                 val file = imageFile.asRequestBody("image/jpeg".toMediaType())
-                val multipartBody = MultipartBody.Part.createFormData(
+                multipartBody = MultipartBody.Part.createFormData(
                     "url_gambar",
                     imageFile.name,
                     file
                 )
-                lifecycleScope.launch {
-                    Log.d("Edit Profile", "email: $email, name: $name")
-                    val isSuccess = viewModel.updateUser(id, emailRequestBody, passwordRequestBody, nameRequestBody, multipartBody, token)
-                    if (!isSuccess) {
-                        viewModel.errorMessage.observe(this@EditProfileActivity) { message ->
-                            Log.d("Edit Profile", "Error: $message")
-                        }
-                    }else {
-                        viewModel.updateResponse.observe(this@EditProfileActivity) { response ->
-                            viewModel.updateSession(UserModel(response.id, response.fullName, response.email, response.photo,"", response.role))
-                            finish()
-                        }
+            }
+            lifecycleScope.launch {
+                Log.d("Edit Profile", "email: $email, name: $name")
+                val isSuccess = viewModel.updateUser(id, emailRequestBody, passwordRequestBody, nameRequestBody, multipartBody, token)
+                if (!isSuccess) {
+                    viewModel.errorMessage.observe(this@EditProfileActivity) { message ->
+                        Log.d("Edit Profile", "Error: $message")
+                    }
+                }else {
+                    viewModel.updateResponse.observe(this@EditProfileActivity) { response ->
+                        viewModel.updateSession(UserModel(response.id, response.fullName, response.email, response.photo,"", response.role))
+                        finish()
                     }
                 }
             }

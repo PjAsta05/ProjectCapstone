@@ -39,7 +39,7 @@ class Repository @Inject constructor(
         return apiService.login(email, password)
     }
 
-    suspend fun updateUser(id: Int, email: RequestBody, password: RequestBody, fullName: RequestBody, urlImage: MultipartBody.Part, token: String): UpdateResponse {
+    suspend fun updateUser(id: Int, email: RequestBody? = null, password: RequestBody? = null, fullName: RequestBody? = null, urlImage: MultipartBody.Part? = null, token: String): UpdateResponse {
         return apiService.updateUserProfile(id, email, password, fullName, urlImage,"Bearer $token")
     }
 

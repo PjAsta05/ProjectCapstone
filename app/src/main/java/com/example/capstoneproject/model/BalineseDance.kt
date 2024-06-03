@@ -2,14 +2,7 @@ package com.example.capstoneproject.model
 
 import com.google.gson.annotations.SerializedName
 
-class ListTariResponse (
-    @SerializedName("ListTari")
-    val listTari: List<Tari>,
-    @SerializedName("token")
-    val token: String,
-)
-
-data class Tari (
+data class BalineseDance(
     @SerializedName("id")
     val id: Int,
     @SerializedName("nama_tari")

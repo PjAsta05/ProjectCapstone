@@ -1,15 +1,14 @@
 package com.example.capstoneproject.ui.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ItemRowTariBinding
-import com.example.capstoneproject.model.Tari
+import com.example.capstoneproject.model.BalineseDance
 
-class HomeAdapter(private val tari: List<Tari>) : RecyclerView.Adapter<HomeAdapter.TariViewHolder>() {
+class HomeAdapter(private val tari: List<BalineseDance>) : RecyclerView.Adapter<HomeAdapter.TariViewHolder>() {
 
     private var onItemClickCallback: OnItemClickCallback? = null
 
@@ -36,7 +35,7 @@ class HomeAdapter(private val tari: List<Tari>) : RecyclerView.Adapter<HomeAdapt
     }
 
     inner class TariViewHolder(private val binding: ItemRowTariBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(tari: Tari) {
+        fun bind(tari: BalineseDance) {
             binding.root.setOnClickListener {
                 onItemClickCallback?.onItemClicked(tari)
             }
@@ -52,6 +51,6 @@ class HomeAdapter(private val tari: List<Tari>) : RecyclerView.Adapter<HomeAdapt
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: Tari)
+        fun onItemClicked(data: BalineseDance)
     }
 }

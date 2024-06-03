@@ -4,9 +4,8 @@ import com.example.capstoneproject.api.ApiService
 import com.example.capstoneproject.data.pref.UserModel
 import com.example.capstoneproject.data.pref.UserPreference
 import com.example.capstoneproject.model.AuthResponse
-import com.example.capstoneproject.model.ListTariResponse
+import com.example.capstoneproject.model.BalineseDance
 import com.example.capstoneproject.model.UpdateResponse
-import com.example.capstoneproject.model.User
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -44,7 +43,7 @@ class Repository @Inject constructor(
         return apiService.updateUserProfile(id, email, password, fullName, urlImage,"Bearer $token")
     }
 
-    suspend fun getListTari(token: String, name: String, origin: String): ListTariResponse {
+    suspend fun getListTari(token: String, name: String, origin: String): List<BalineseDance> {
         return apiService.getListTari("Bearer $token", name, origin)
     }
 }

@@ -1,7 +1,7 @@
 package com.example.capstoneproject.api
 
 import com.example.capstoneproject.model.AuthResponse
-import com.example.capstoneproject.model.ListTariResponse
+import com.example.capstoneproject.model.BalineseDance
 import com.example.capstoneproject.model.UpdateResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -49,5 +49,5 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("nama_tari") name: String,
         @Query("asal_tari") origin: String
-    ): ListTariResponse
+    ): List<BalineseDance>
 }

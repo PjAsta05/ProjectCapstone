@@ -1,5 +1,7 @@
 package com.example.capstoneproject.ui.home
 
+
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstoneproject.databinding.FragmentHomeBinding
 import com.example.capstoneproject.model.BalineseDance
+import com.example.capstoneproject.ui.detail.tari.DetailDanceActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -55,22 +58,27 @@ class HomeFragment : Fragment() {
 
     private fun setupRecyclerView() {
         Log.d("HomeFragment", "Setup RecyclerView")
-        with(binding) {
-            rvDanceList.layoutManager = LinearLayoutManager(context)
-            rvDanceList.setHasFixedSize(true)
-        }
+        binding.rvDanceList.layoutManager = LinearLayoutManager(context)
+        binding.rvDanceList.setHasFixedSize(true)
+
+        observeViewModel()
     }
 
     private fun observeViewModel() {
         viewModel.listTari.observe(viewLifecycleOwner) { list ->
-            Log.d("HomeFragment", "Data: $list")
-            adapter = HomeAdapter(list)
-            adapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: BalineseDance) {
-
-                }
-            })
-            binding.rvDanceList.adapter = adapter
+            if (list != null) {
+                adapter = HomeAdapter(list)
+                adapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
+                    override fun onItemClicked(data: BalineseDance) {
+                        val intent = Intent(requireContext(), DetailDanceActivity::class.java)
+                        intent.putExtra(DetailDanceActivity.INTENT_PARCELABLE, data)
+                        Log.d("HomeFragment", "onItemClicked: $data")
+                        startActivity(intent)
+                    }
+                })
+                binding.rvDanceList.adapter = adapter
+                Log.d("HomeFragment", "Data: $list")
+            }
         }
     }
 }

@@ -31,7 +31,7 @@
             android:name=".ui.detail.workshop.DetailWorkshopActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.detail.tari.DetailTariActivity"
+            android:name=".ui.detail.tari.DetailDanceActivity"
             android:exported="false" />
         <activity
             android:name=".ui.process.ProcessRegActivity"

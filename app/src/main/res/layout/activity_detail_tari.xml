@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.tari.DetailTariActivity">
+    tools:context=".ui.detail.tari.DetailDanceActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,15 +19,16 @@
             app:navigationIcon="@drawable/ic_arrowback" />
 
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image"
             android:layout_width="382dp"
-            android:layout_height="294dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/btn_background1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"/>
 
     <TextView
         android:id="@+id/nametari"

@@ -1,7 +1,12 @@
 package com.example.capstoneproject.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+
+@Parcelize
 data class BalineseDance(
     @SerializedName("id")
     val id: Int,
@@ -19,4 +24,4 @@ data class BalineseDance(
     val urlVideo: String,
     @SerializedName("createdAt")
     val createdAt: String
-)
+) :Parcelable

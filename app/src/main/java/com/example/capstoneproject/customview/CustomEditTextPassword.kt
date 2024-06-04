@@ -4,7 +4,6 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.util.Patterns
 import com.example.capstoneproject.R
 import com.google.android.material.textfield.TextInputEditText
 

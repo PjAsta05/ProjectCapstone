@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -13,9 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityNewPasswordBinding
 import com.example.capstoneproject.ui.auth.AuthViewModel
-import com.google.android.material.color.MaterialColors
-import com.google.android.material.color.utilities.MaterialDynamicColors
-import com.google.android.material.theme.overlay.MaterialThemeOverlay
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType

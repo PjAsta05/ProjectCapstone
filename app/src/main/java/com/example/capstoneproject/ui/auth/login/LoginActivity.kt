@@ -3,20 +3,15 @@ package com.example.capstoneproject.ui.auth.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
-import com.example.capstoneproject.R
 import com.example.capstoneproject.data.pref.UserModel
 import com.example.capstoneproject.databinding.ActivityLoginBinding
 import com.example.capstoneproject.ui.MainActivity
 import com.example.capstoneproject.ui.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {

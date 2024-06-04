@@ -1,5 +1,6 @@
 package com.example.capstoneproject.ui.account.editprofile
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -48,6 +49,7 @@ class EditProfileActivity : AppCompatActivity() {
 
         prevData()
         updateUser()
+        updatePassword()
         setupActionBar()
         addImage()
     }
@@ -83,14 +85,20 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun updatePassword() {
+        binding.createNewPassword.setOnClickListener {
+            val intent = Intent(this, NewPasswordActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
     private fun updateUser() {
         binding.btnSave.setOnClickListener {
             val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
             val name = binding.etName.text.toString()
 
             val emailRequestBody = email.toRequestBody("text/plain".toMediaType())
-            val passwordRequestBody = password.toRequestBody("text/plain".toMediaType())
+//            val passwordRequestBody = password.toRequestBody("text/plain".toMediaType())
             val nameRequestBody = name.toRequestBody("text/plain".toMediaType())
             var multipartBody: MultipartBody.Part? = null
             currentImageUri?.let { uri ->
@@ -104,7 +112,7 @@ class EditProfileActivity : AppCompatActivity() {
             }
             lifecycleScope.launch {
                 Log.d("Edit Profile", "email: $email, name: $name")
-                val isSuccess = viewModel.updateUser(id, emailRequestBody, passwordRequestBody, nameRequestBody, multipartBody, token)
+                val isSuccess = viewModel.updateUser(id, emailRequestBody, null, nameRequestBody, multipartBody, token)
                 if (!isSuccess) {
                     viewModel.errorMessage.observe(this@EditProfileActivity) { message ->
                         Log.d("Edit Profile", "Error: $message")

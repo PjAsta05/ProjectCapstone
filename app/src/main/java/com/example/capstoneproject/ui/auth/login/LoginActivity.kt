@@ -51,8 +51,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setButtonEnable() {
-        val button = findViewById<Button>(R.id.btn_login)
-        button.isEnabled = emailValid && passwordValid
+        binding.btnLogin.isEnabled = emailValid && passwordValid
     }
 
     private fun loginAction() {

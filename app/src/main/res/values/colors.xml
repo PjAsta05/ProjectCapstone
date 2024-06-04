@@ -6,6 +6,8 @@
     <color name="light_gray">#666666</color>
     <color name="lighter_gray">#ABABAB</color>
     <color name="transparent">#00000000</color>
+    <color name="error">#FF0000</color>
+    <color name="success">#00A86B</color>"
 
     <color name="primary">#FF9800</color>
     <color name="primary_dark">#F57C00</color>

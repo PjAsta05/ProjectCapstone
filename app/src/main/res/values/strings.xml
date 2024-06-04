@@ -53,5 +53,9 @@
     <string name="process_reg">registration is being processed, please wait for a while</string>
     <string name="percentage">percentage :</string>
     <string name="more_detail">More Detail</string>
+    <string name="create_new_password">Create New Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="forgot_your_password">Forgot your password?</string>
 
 </resources>

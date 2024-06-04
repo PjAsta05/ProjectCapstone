@@ -20,7 +20,7 @@ class HomeViewModel @Inject constructor(
     suspend fun getTari(token: String, name: String = "", origin: String = "bali"): Boolean {
         return try {
             val response = repository.getListTari(token, name, origin)
-            Log.d("getTari", "${response}")
+            Log.d("getTari", "$response")
             _listTari.postValue(response)
             true
         } catch (e: HttpException) {

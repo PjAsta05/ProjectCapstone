@@ -2,7 +2,9 @@ package com.example.capstoneproject.api
 
 import com.example.capstoneproject.model.AuthResponse
 import com.example.capstoneproject.model.BalineseDance
+import com.example.capstoneproject.model.PackageResponse
 import com.example.capstoneproject.model.UpdateResponse
+import com.example.capstoneproject.model.User
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Field
@@ -24,7 +26,7 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String,
         @Field("fullname") fullname: String
-    ): Boolean
+    ): User
 
     @FormUrlEncoded
     @POST("login")
@@ -50,4 +52,9 @@ interface ApiService {
         @Query("nama_tari") name: String,
         @Query("asal_tari") origin: String
     ): List<BalineseDance>
+
+    @GET("paket")
+    suspend fun getPackages(
+        @Header("Authorization") token: String
+    ): List<PackageResponse>
 }

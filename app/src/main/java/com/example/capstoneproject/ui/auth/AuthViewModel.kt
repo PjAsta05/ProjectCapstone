@@ -68,8 +68,10 @@ class AuthViewModel @Inject constructor(
     suspend fun signIn(email: String, password: String, fullname: String): Boolean {
         return try {
             repository.register(email, password, fullname)
+            Log.d("Register Success", "Success")
             true
         } catch (e: HttpException) {
+            Log.d("Register Failed", "Failed")
             false
         }
     }

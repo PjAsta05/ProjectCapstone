@@ -30,12 +30,19 @@ class NewPasswordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNewPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        observeSession()
         setPasswordEditText()
         setConfirmPasswordEditText()
         setButtonEnable()
         setupActionBar()
         changePassword()
+    }
+
+    private fun observeSession() {
+        viewModel.getSession().observe(this) { user ->
+            id = user.id
+            token = user.token
+        }
     }
 
     private fun setPasswordEditText() {

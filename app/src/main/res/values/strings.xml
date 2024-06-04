@@ -57,5 +57,6 @@
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="forgot_your_password">Forgot your password?</string>
+    <string name="scroll_item_will_be_here">Scroll item will be here</string>
 
 </resources>

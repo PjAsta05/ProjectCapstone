@@ -6,16 +6,27 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityNewPasswordBinding
+import com.example.capstoneproject.ui.auth.AuthViewModel
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.color.utilities.MaterialDynamicColors
 import com.google.android.material.theme.overlay.MaterialThemeOverlay
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
 
+@AndroidEntryPoint
 class NewPasswordActivity : AppCompatActivity() {
+    private val viewModel: AuthViewModel by viewModels()
     private lateinit var binding: ActivityNewPasswordBinding
+    private var id: Int = 0
+    private var token: String = ""
     private var passwordValid = false
     private var passwordConfirmation = false
 
@@ -28,6 +39,7 @@ class NewPasswordActivity : AppCompatActivity() {
         setConfirmPasswordEditText()
         setButtonEnable()
         setupActionBar()
+        changePassword()
     }
 
     private fun setPasswordEditText() {
@@ -71,6 +83,24 @@ class NewPasswordActivity : AppCompatActivity() {
 
     private fun setButtonEnable() {
         binding.btnSave.isEnabled = passwordValid && passwordConfirmation
+    }
+
+    private fun changePassword() {
+        binding.btnSave.setOnClickListener {
+            val password = binding.etNewPassword.text.toString()
+            val passwordRequestBody = password.toRequestBody("text/plain".toMediaType())
+            lifecycleScope.launch {
+                val isSuccess = viewModel.updateUser(id, null, passwordRequestBody, null, null, token)
+                if (!isSuccess) {
+                    viewModel.errorMessage.observe(this@NewPasswordActivity) { message ->
+                        Log.d("Change Password", "Error: $message")
+                    }
+                } else {
+                    Log.d("Change Password", "Edit Password Success")
+                    finish()
+                }
+            }
+        }
     }
 
     private fun setupActionBar() {

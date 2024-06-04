@@ -98,7 +98,6 @@ class EditProfileActivity : AppCompatActivity() {
             val name = binding.etName.text.toString()
 
             val emailRequestBody = email.toRequestBody("text/plain".toMediaType())
-//            val passwordRequestBody = password.toRequestBody("text/plain".toMediaType())
             val nameRequestBody = name.toRequestBody("text/plain".toMediaType())
             var multipartBody: MultipartBody.Part? = null
             currentImageUri?.let { uri ->

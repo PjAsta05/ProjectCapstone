@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         observeSession()
         changeFragment()
         changeActivity()
-        updateFabColors()
     }
 
     private fun observeSession(){
@@ -84,22 +83,6 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-    }
-
-    private fun updateFabColors() {
-        val isDarkTheme = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
-        val backgroundColor = if (isDarkTheme) {
-           getColor(R.color.gray)
-        } else {
-            getColor(R.color.white)
-        }
-        val iconColor = if (isDarkTheme) {
-            getColor(R.color.lighter_gray)
-        } else {
-            getColor(R.color.light_gray)
-        }
-        binding.scanButton.drawable.setTint(iconColor)
-        binding.scanButton.backgroundTintList = ColorStateList.valueOf(backgroundColor)
     }
 
     private fun loadFragment(fragment: Fragment) {

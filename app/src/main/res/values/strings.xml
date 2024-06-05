@@ -58,5 +58,6 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="scroll_item_will_be_here">Scroll item will be here</string>
+    <string name="tabs_for_admin">Tabs for admin</string>
 
 </resources>

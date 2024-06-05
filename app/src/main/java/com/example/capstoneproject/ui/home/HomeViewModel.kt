@@ -14,14 +14,13 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repository: Repository
 ): ViewModel() {
-    private val _listTari = MutableLiveData<List<BalineseDance>>()
-    val listTari: LiveData<List<BalineseDance>> = _listTari
+    val listDance = MutableLiveData<List<BalineseDance>>()
 
     suspend fun getTari(token: String, name: String = "", origin: String = "bali"): Boolean {
         return try {
             val response = repository.getListTari(token, name, origin)
             Log.d("getTari", "$response")
-            _listTari.postValue(response)
+            listDance.postValue(response)
             true
         } catch (e: HttpException) {
             Log.d("getTari", "${e.message}")

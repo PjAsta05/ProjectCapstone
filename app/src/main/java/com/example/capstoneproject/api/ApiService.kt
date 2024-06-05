@@ -5,6 +5,7 @@ import com.example.capstoneproject.model.BalineseDance
 import com.example.capstoneproject.model.PackageResponse
 import com.example.capstoneproject.model.UpdateResponse
 import com.example.capstoneproject.model.User
+import com.example.capstoneproject.model.WorkshopResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Field
@@ -57,4 +58,11 @@ interface ApiService {
     suspend fun getPackages(
         @Header("Authorization") token: String
     ): List<PackageResponse>
+
+    @GET("workshop")
+    suspend fun getWorkshop(
+        @Query("status") status: String? = null,
+        @Query("userId") userId: Int? = null,
+        @Header("Authorization") token: String
+    ): List<WorkshopResponse>
 }

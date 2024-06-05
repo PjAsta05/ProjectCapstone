@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.bottomNavigation.background = null
+        binding.toolbarLayout.background = null
         observeSession()
         changeFragment()
         changeActivity()

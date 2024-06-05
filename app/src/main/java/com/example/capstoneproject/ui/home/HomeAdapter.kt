@@ -8,7 +8,7 @@ import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ItemRowTariBinding
 import com.example.capstoneproject.model.BalineseDance
 
-class HomeAdapter(private val tari: List<BalineseDance>) : RecyclerView.Adapter<HomeAdapter.TariViewHolder>() {
+class HomeAdapter(private val dance: List<BalineseDance>) : RecyclerView.Adapter<HomeAdapter.TariViewHolder>() {
 
     private var onItemClickCallback: OnItemClickCallback? = null
 
@@ -27,11 +27,11 @@ class HomeAdapter(private val tari: List<BalineseDance>) : RecyclerView.Adapter<
     }
 
     override fun getItemCount(): Int {
-        return tari.size
+        return dance.size
     }
 
     override fun onBindViewHolder(holder: TariViewHolder, position: Int) {
-        holder.bind(tari[position])
+        holder.bind(dance[position])
     }
 
     inner class TariViewHolder(private val binding: ItemRowTariBinding) : RecyclerView.ViewHolder(binding.root) {

@@ -51,7 +51,6 @@ class HomeFragment : Fragment() {
                 Log.d("HomeFragment", "Failed to get data")
             } else {
                 setupRecyclerView()
-                observeViewModel()
             }
         }
     }
@@ -60,12 +59,11 @@ class HomeFragment : Fragment() {
         Log.d("HomeFragment", "Setup RecyclerView")
         binding.rvDanceList.layoutManager = LinearLayoutManager(context)
         binding.rvDanceList.setHasFixedSize(true)
-
         observeViewModel()
     }
 
     private fun observeViewModel() {
-        viewModel.listTari.observe(viewLifecycleOwner) { list ->
+        viewModel.listDance.observe(viewLifecycleOwner) { list ->
             if (list != null) {
                 adapter = HomeAdapter(list)
                 adapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {

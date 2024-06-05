@@ -8,6 +8,7 @@ import com.example.capstoneproject.model.BalineseDance
 import com.example.capstoneproject.model.PackageResponse
 import com.example.capstoneproject.model.UpdateResponse
 import com.example.capstoneproject.model.User
+import com.example.capstoneproject.model.WorkshopResponse
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -51,5 +52,9 @@ class Repository @Inject constructor(
 
     suspend fun getListPackage(token: String): List<PackageResponse> {
         return apiService.getPackages(token)
+    }
+
+    suspend fun getListWorkshop(status: String, userId: Int?, token: String): List<WorkshopResponse> {
+        return apiService.getWorkshop(status, userId, "Bearer $token")
     }
 }

@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstoneproject.databinding.FragmentHomeBinding
 import com.example.capstoneproject.model.BalineseDance
+import com.example.capstoneproject.ui.detail.admin.DetailAdminActivity
 import com.example.capstoneproject.ui.detail.tari.DetailDanceActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -68,7 +69,7 @@ class HomeFragment : Fragment() {
                 adapter = HomeAdapter(list)
                 adapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
                     override fun onItemClicked(data: BalineseDance) {
-                        val intent = Intent(requireContext(), DetailDanceActivity::class.java)
+                        val intent = Intent(requireContext(), DetailAdminActivity::class.java)
                         intent.putExtra(DetailDanceActivity.INTENT_PARCELABLE, data)
                         Log.d("HomeFragment", "onItemClicked: $data")
                         startActivity(intent)

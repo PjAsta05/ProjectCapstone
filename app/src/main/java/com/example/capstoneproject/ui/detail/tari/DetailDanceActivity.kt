@@ -28,7 +28,6 @@ class DetailDanceActivity : AppCompatActivity() {
                 origintari.text = it.asalTari
                 descriptiontari.text = it.deskripsi
 
-                // Load image with Glide or any image loading library
                 Glide.with(this@DetailDanceActivity)
                     .load(it.urlGambar)
                     .into(image)

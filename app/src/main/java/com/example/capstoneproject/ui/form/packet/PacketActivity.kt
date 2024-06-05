@@ -19,6 +19,13 @@ class PacketActivity : AppCompatActivity() {
         binding = ActivityPacketBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupActionBar()
+
+        getPackages(token)
+
+//        viewModel.packages.observe(this, { packages ->
+//
+//            packageAdapter.submitList(packages)
+//        })
     }
 
     private fun getPackages(token: String) {

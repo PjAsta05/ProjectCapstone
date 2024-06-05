@@ -1,5 +1,6 @@
 package com.example.capstoneproject.ui.workshop
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstoneproject.databinding.FragmentPendingBinding
 import com.example.capstoneproject.model.WorkshopResponse
+import com.example.capstoneproject.ui.detail.admin.DetailAdminActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -64,7 +66,11 @@ class PendingFragment : Fragment() {
                 adapter = WorkshopAdapter(list)
                 adapter.setOnItemClickCallback(object : WorkshopAdapter.OnItemClickCallback{
                     override fun onItemClicked(data: WorkshopResponse) {
-                        TODO("Not yet implemented")
+                        Log.d("PendingFragment", "Workshop clicked: $data")
+                        val intent = Intent(requireContext(), DetailAdminActivity::class.java)
+                            intent.putExtra(DetailAdminActivity.INTENT_PARCELABLE, data)
+                            startActivity(intent)
+
                     }
                 })
                 binding.recyclerView.adapter = adapter

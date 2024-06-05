@@ -1,7 +1,11 @@
 package com.example.capstoneproject.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
+@Parcelize
 data class WorkshopResponse(
     @SerializedName("id")
     val id: Int,
@@ -40,5 +44,5 @@ data class WorkshopResponse(
     val prof: String,
 
     @SerializedName("paket")
-    val paket: PackageResponse
-)
+    val paket: @RawValue PackageResponse
+) : Parcelable

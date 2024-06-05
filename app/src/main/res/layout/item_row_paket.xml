@@ -29,13 +29,13 @@
             tools:text="paket" />
 
         <TextView
-            android:id="@+id/namapaket"
+            android:id="@+id/tv_packet_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="nama paket"
+            tools:text="nama paket"
             android:textSize="25sp"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"
@@ -43,11 +43,11 @@
             card_view:layout_constraintTop_toBottomOf="@+id/tv_item_name" />
 
         <TextView
-            android:id="@+id/hargapaket"
+            android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="Rp. 100.000"
+            tools:text="Rp. 100.000"
             android:textSize="25sp"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"

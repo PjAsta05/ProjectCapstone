@@ -15,7 +15,7 @@ class WorkshopViewModel @Inject constructor(
 ): ViewModel() {
     val workshops = MutableLiveData<List<WorkshopResponse>>()
 
-    suspend fun getWorkshops(status: String, userId: Int?, token: String): Boolean {
+    suspend fun getWorkshops(status: String?, userId: Int?, token: String): Boolean {
         return try {
             val response = repository.getListWorkshop(status, userId, token)
             workshops.postValue(response)

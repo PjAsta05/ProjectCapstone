@@ -54,7 +54,7 @@ class Repository @Inject constructor(
         return apiService.getPackages(token)
     }
 
-    suspend fun getListWorkshop(status: String, userId: Int?, token: String): List<WorkshopResponse> {
+    suspend fun getListWorkshop(status: String?, userId: Int?, token: String): List<WorkshopResponse> {
         return apiService.getWorkshop(status, userId, "Bearer $token")
     }
 }

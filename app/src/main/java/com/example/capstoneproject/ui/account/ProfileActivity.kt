@@ -2,27 +2,36 @@ package com.example.capstoneproject.ui.account
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityProfileBinding
+import com.example.capstoneproject.model.WorkshopResponse
 import com.example.capstoneproject.ui.WelcomeActivity
 import com.example.capstoneproject.ui.account.editprofile.EditProfileActivity
 import com.example.capstoneproject.ui.auth.AuthViewModel
 import com.example.capstoneproject.ui.form.workshop.AddWorkshopActivity
+import com.example.capstoneproject.ui.workshop.WorkshopViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
     private val viewModel: AuthViewModel by viewModels()
+    private val viewModel2: WorkshopViewModel by viewModels()
+    private lateinit var adapter: ProfileWorkshopAdapter
 
+    private var id: Int? = 0
     private var name: String? = ""
     private var email: String? = ""
     private var photoUrl: String? = ""
-    private var token: String? = ""
+    private lateinit var token: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +59,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun observeSession() {
         viewModel.getSession().observe(this) { user ->
+            id = user.id
             name = user.name
             email = user.email
             photoUrl = user.photo
@@ -66,6 +76,39 @@ class ProfileActivity : AppCompatActivity() {
                 .load(photoUrl)
                 .error(R.drawable.baseline_image_24)
                 .into(imageProfile)
+        }
+        getWorkshop()
+    }
+
+    private fun getWorkshop() {
+        Log.d("Token", token)
+        lifecycleScope.launch {
+            val isSuccess = viewModel2.getWorkshops(null, id, token)
+            if (!isSuccess) {
+                Log.d("ProfileActivity", "Failed to get workshops")
+            } else {
+                setupRecyclerView()
+            }
+        }
+    }
+
+    private fun setupRecyclerView() {
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.setHasFixedSize(true)
+        observeWorkshop()
+    }
+
+    private fun observeWorkshop() {
+        viewModel2.workshops.observe(this) { list ->
+            if (list != null) {
+                adapter = ProfileWorkshopAdapter(list)
+                adapter.setOnItemClickCallback(object : ProfileWorkshopAdapter.OnItemClickCallback{
+                    override fun onItemClicked(data: WorkshopResponse) {
+                        TODO("Not yet implemented")
+                    }
+                })
+                binding.recyclerView.adapter = adapter
+            }
         }
     }
 

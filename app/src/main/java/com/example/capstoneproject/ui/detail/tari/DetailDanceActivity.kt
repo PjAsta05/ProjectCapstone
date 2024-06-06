@@ -15,7 +15,6 @@ class DetailDanceActivity : AppCompatActivity() {
         binding = ActivityDetailTariBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         setupActionBar()
         showDetailTari()
     }

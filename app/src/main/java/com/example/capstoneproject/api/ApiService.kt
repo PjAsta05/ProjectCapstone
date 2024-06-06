@@ -54,6 +54,12 @@ interface ApiService {
         @Query("asal_tari") origin: String
     ): List<BalineseDance>
 
+    @GET("tari/{tari}")
+    suspend fun findTari(
+        @Path("tari") tari: String,
+        @Header("Authorization") token: String
+    ): BalineseDance
+
     @GET("paket")
     suspend fun getPackages(
         @Header("Authorization") token: String
@@ -65,4 +71,51 @@ interface ApiService {
         @Query("userId") userId: Int? = null,
         @Header("Authorization") token: String
     ): List<WorkshopResponse>
+
+    @POST("workshop")
+    suspend fun addWorkshop(
+        @Part("paketId") packageId: Int,
+        @Part("userId") userId: Int,
+        @Part("nama_workshop") workshopName: String,
+        @Part("nama_sanggar") sanggarName: String,
+        @Part("alamat") address: String,
+        @Part("email") email: String,
+        @Part("phone") phone: String,
+        @Part("nama_pemilik") owner: String,
+        @Part("deskripsi") description: String,
+        @Part("price") price: Int,
+        @Part photo: MultipartBody.Part,
+        @Part proof: MultipartBody.Part,
+        @Header("Authorization") token: String
+    ): UpdateResponse
+
+    @PUT("workshop/{id}")
+    suspend fun updateWorkshop(
+        @Path("id") id: Int,
+        @Part("paketId") packageId: Int? = null,
+        @Part("userId") userId: Int? = null,
+        @Part("nama_workshop") workshopName: String? = null,
+        @Part("nama_sanggar") sanggarName: String? = null,
+        @Part("alamat") address: String? = null,
+        @Part("email") email: String? = null,
+        @Part("phone") phone: String? = null,
+        @Part("nama_pemilik") owner: String? = null,
+        @Part("deskripsi") description: String? = null,
+        @Part("price") price: Int? = null,
+        @Part photo: MultipartBody.Part? = null,
+        @Part proof: MultipartBody.Part? = null,
+        @Header("Authorization") token: String
+    ): UpdateResponse
+
+    @FormUrlEncoded
+    @POST("pendaftaran-workshop")
+    suspend fun workshopRegistration(
+        @Field("workshopId") workshopId: Int,
+        @Field("nama") name: String,
+        @Field("email") email: String,
+        @Field("phone") phone: String,
+        @Field("umur") age: Int,
+        @Field("jenis_kelamin") gender: String,
+        @Header("Authorization") token: String
+    ): UpdateResponse
 }

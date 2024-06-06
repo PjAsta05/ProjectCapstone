@@ -22,6 +22,9 @@ data class WorkshopResponse(
     @SerializedName("alamat")
     val address: String,
 
+    @SerializedName("email")
+    val email: String,
+
     @SerializedName("phone")
     val phone: String,
 
@@ -41,7 +44,7 @@ data class WorkshopResponse(
     val status: String,
 
     @SerializedName("bukti_pembayaran")
-    val prof: String,
+    val proof: String,
 
     @SerializedName("paket")
     val paket: @RawValue PackageResponse

@@ -1,60 +1,94 @@
 package com.example.capstoneproject.ui.admin.workshop.pending
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.capstoneproject.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.capstoneproject.databinding.FragmentPendingBinding
+import com.example.capstoneproject.model.WorkshopResponse
+import com.example.capstoneproject.ui.detail.admin.DetailAdminActivity
+import com.example.capstoneproject.ui.workshop.WorkshopAdapter
+import com.example.capstoneproject.ui.workshop.WorkshopViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PendingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class PendingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentPendingBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: WorkshopViewModel by viewModels()
+    private lateinit var adapter: WorkshopAdapter
+    private lateinit var token: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        token = arguments?.getString(ARG_TOKEN).toString()
+        Log.d("PendingFragment", "Token: $token")
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getWorkshop()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pending, container, false)
+    ): View {
+        _binding = FragmentPendingBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    private fun getWorkshop() {
+        lifecycleScope.launch {
+            val isSuccess = viewModel.getWorkshops("pending", null, token)
+            if (!isSuccess) {
+                Log.d("PendingFragment", "Failed to get workshops")
+            } else {
+                setupRecyclerView()
+            }
+        }
+    }
+
+    private fun setupRecyclerView() {
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.setHasFixedSize(true)
+        observeWorkshop()
+    }
+
+    private fun observeWorkshop() {
+        viewModel.workshops.observe(viewLifecycleOwner) { list ->
+            if (list != null) {
+                adapter = WorkshopAdapter(list)
+                adapter.setOnItemClickCallback(object : WorkshopAdapter.OnItemClickCallback {
+                    override fun onItemClicked(data: WorkshopResponse) {
+                        Log.d("PendingFragment", "Workshop clicked: $data")
+                        val intent = Intent(requireContext(), DetailAdminActivity::class.java)
+                            intent.putExtra(DetailAdminActivity.INTENT_PARCELABLE, data)
+                            startActivity(intent)
+
+                    }
+                })
+                binding.recyclerView.adapter = adapter
+            }
+        }
+    }
+
+    fun newInstance(token: String): PendingFragment {
+        val fragment = PendingFragment()
+        val args = Bundle()
+        args.putString(ARG_TOKEN, token)
+        fragment.arguments = args
+        return fragment
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PendingFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PendingFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        private const val ARG_TOKEN = "token"
     }
 }

@@ -15,6 +15,7 @@ class HomeViewModel @Inject constructor(
     private val repository: Repository
 ): ViewModel() {
     val listDance = MutableLiveData<List<BalineseDance>>()
+    val balineseDance = MutableLiveData<BalineseDance>()
 
     suspend fun getTari(token: String, name: String = "", origin: String = "bali"): Boolean {
         return try {
@@ -24,6 +25,17 @@ class HomeViewModel @Inject constructor(
             true
         } catch (e: HttpException) {
             Log.d("getTari", "${e.message}")
+            false
+        }
+    }
+
+    suspend fun findTari(dance: String, token: String): Boolean{
+        return try {
+            val response = repository.findTari(dance, token)
+            balineseDance.postValue(response)
+            true
+        } catch (e: HttpException) {
+            Log.d("findTari", "${e.message}")
             false
         }
     }

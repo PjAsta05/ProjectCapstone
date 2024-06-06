@@ -45,7 +45,14 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    suspend fun updateUser(id: Int, email: RequestBody ?= null, password: RequestBody ?= null, fullName: RequestBody ?= null, urlImage: MultipartBody.Part ?= null, token: String): Boolean {
+    suspend fun updateUser(
+        id: Int,
+        email: RequestBody ?= null,
+        password: RequestBody ?= null,
+        fullName: RequestBody ?= null,
+        urlImage: MultipartBody.Part ?= null,
+        token: String
+    ): Boolean {
         return try {
             val response = repository.updateUser(id, email, password, fullName, urlImage, token)
             updateResponse.postValue(response.data)
@@ -65,7 +72,11 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    suspend fun signIn(email: String, password: String, fullname: String): Boolean {
+    suspend fun signIn(
+        email: String,
+        password: String,
+        fullname: String
+    ): Boolean {
         return try {
             repository.register(email, password, fullname)
             Log.d("Register Success", "Success")
@@ -76,7 +87,10 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    suspend fun logIn(email: String, password: String): Boolean {
+    suspend fun logIn(
+        email: String,
+        password: String
+    ): Boolean {
         return try {
             val response = repository.login(email, password)
             successResponse.postValue(response)

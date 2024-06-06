@@ -13,7 +13,7 @@ import com.example.capstoneproject.ui.account.ProfileActivity
 import com.example.capstoneproject.ui.auth.AuthViewModel
 import com.example.capstoneproject.ui.history.HistoryActivity
 import com.example.capstoneproject.ui.home.HomeFragment
-import com.example.capstoneproject.ui.workshop.WorkshopFragment
+import com.example.capstoneproject.ui.admin.workshop.WorkshopFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

@@ -39,7 +39,7 @@
     <string name="proof_of_payment">Proof of Payment</string>
     <string name="colon">:</string>
     <string name="owner">Owner</string>
-    <string name="extand">Extand</string>
+    <string name="extend">Extend</string>
     <string name="status">Status :</string>
     <string name="process">process</string>
     <string name="detail">Detail</string>
@@ -60,5 +60,10 @@
     <string name="scroll_item_will_be_here">Scroll item will be here</string>
     <string name="tabs_for_admin">Tabs for admin</string>
     <string name="price">Price</string>
+    <string name="_10000">10000</string>
+    <string name="active">Active</string>
+    <string name="pending">Pending</string>
+    <string name="inactive">Inactive</string>
+    <string name="delete">Delete</string>
 
 </resources>

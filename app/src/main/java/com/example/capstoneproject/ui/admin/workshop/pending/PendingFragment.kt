@@ -70,8 +70,9 @@ class PendingFragment : Fragment() {
                     override fun onItemClicked(data: WorkshopResponse) {
                         Log.d("PendingFragment", "Workshop clicked: $data")
                         val intent = Intent(requireContext(), DetailAdminActivity::class.java)
-                            intent.putExtra(DetailAdminActivity.INTENT_PARCELABLE, data)
-                            startActivity(intent)
+                        intent.putExtra(DetailAdminActivity.INTENT_PARCELABLE, data)
+                        intent.putExtra("token", token)
+                        startActivity(intent)
 
                     }
                 })

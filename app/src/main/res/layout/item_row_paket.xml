@@ -26,6 +26,17 @@
             android:textSize="16sp"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
+            android:text="paket" />
+
+        <TextView
+            android:id="@+id/tv_item_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            card_view:layout_constraintStart_toEndOf="@+id/tv_item_name"
+            card_view:layout_constraintTop_toTopOf="parent"
             tools:text="paket" />
 
         <TextView
@@ -35,24 +46,23 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            tools:text="nama paket"
             android:textSize="25sp"
-            android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/tv_item_name" />
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_item_name"
+            tools:text="nama paket" />
 
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            tools:text="Rp. 100.000"
             android:textSize="25sp"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:text="Rp.100.000" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

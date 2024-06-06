@@ -14,6 +14,7 @@ import com.example.capstoneproject.ui.auth.AuthViewModel
 import com.example.capstoneproject.ui.history.HistoryActivity
 import com.example.capstoneproject.ui.home.HomeFragment
 import com.example.capstoneproject.ui.admin.workshop.WorkshopFragment
+import com.example.capstoneproject.ui.workshop.UserFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: AuthViewModel by viewModels()
     private var token: String = ""
+    private var role: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                     navigateToWelcomeActivity()
                 } else {
                     token = user.token
+                    role = user.role
                     binding.toolbar.title = "Home"
                     loadFragment(HomeFragment())
                 }
@@ -58,7 +61,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.workshop -> {
                     binding.toolbar.title = "Workshop"
-                    loadFragment(WorkshopFragment())
+                    if (role == "admin") {
+                        loadFragment(WorkshopFragment())
+                    }else {
+                        loadFragment(UserFragment())
+                    }
+
                     true
                 }
                 else -> false

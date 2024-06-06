@@ -1,19 +1,32 @@
 package com.example.capstoneproject.ui.form.packet
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.databinding.ItemRowPaketBinding
 import com.example.capstoneproject.model.PackageResponse
+import java.text.NumberFormat
+import java.util.Locale
 
-class PackageAdapter : RecyclerView.Adapter<PackageAdapter.ViewHolder>() {
+class PackageAdapter(private val packages: List<PackageResponse>) : RecyclerView.Adapter<PackageAdapter.ViewHolder>() {
+    private var onItemClickCallback: OnItemClickCallback? = null
 
-    private var packages: List<PackageResponse> = listOf()
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     inner class ViewHolder(private val binding: ItemRowPaketBinding) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(packageItem: PackageResponse) {
+            binding.root.setOnClickListener {
+                onItemClickCallback?.onItemClicked(packageItem)
+            }
+            binding.tvItemId.text = packageItem.id.toString()
             binding.tvPacketName.text = packageItem.packageName
-            binding.tvPrice.text = "Rp. ${packageItem.price}"
+            val formatter = NumberFormat.getNumberInstance(Locale("in", "ID"))
+            val formattedPrice = formatter.format(packageItem.price)
+            binding.tvPrice.text = "Rp.${formattedPrice}"
         }
     }
 
@@ -30,8 +43,7 @@ class PackageAdapter : RecyclerView.Adapter<PackageAdapter.ViewHolder>() {
         return packages.size
     }
 
-    fun submitList(packages: List<PackageResponse>) {
-        this.packages = packages
-        notifyDataSetChanged()
+    interface OnItemClickCallback {
+        fun onItemClicked(data: PackageResponse)
     }
 }

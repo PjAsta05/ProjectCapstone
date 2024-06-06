@@ -26,7 +26,7 @@ class RegFormActivity : AppCompatActivity() {
     }
 
     private fun input() {
-        val name = binding.etNama
+        val name = binding.etName
         val email = binding.etEmail
         val phone = binding.etPhone
         val gender = binding.etGender

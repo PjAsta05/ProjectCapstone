@@ -102,11 +102,6 @@ class ProfileActivity : AppCompatActivity() {
         viewModel2.workshops.observe(this) { list ->
             if (list != null) {
                 adapter = ProfileWorkshopAdapter(list)
-                adapter.setOnItemClickCallback(object : ProfileWorkshopAdapter.OnItemClickCallback{
-                    override fun onItemClicked(data: WorkshopResponse) {
-                        TODO("Not yet implemented")
-                    }
-                })
                 binding.recyclerView.adapter = adapter
             }
         }
@@ -128,8 +123,9 @@ class ProfileActivity : AppCompatActivity() {
     private fun addWorkshop() {
         binding.btnaddws.setOnClickListener {
             val intent = Intent(this, AddWorkshopActivity::class.java)
+            intent.putExtra("token", token)
+            intent.putExtra("userId", id)
             startActivity(intent)
-            Toast.makeText(this, "Add Workshop Berhasil", Toast.LENGTH_SHORT).show()
         }
     }
 

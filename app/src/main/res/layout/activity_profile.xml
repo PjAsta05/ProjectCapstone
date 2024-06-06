@@ -101,7 +101,7 @@
                 android:id="@+id/btnaddws"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:paddingHorizontal="45dp"
                 android:paddingVertical="10dp"
                 android:text="@string/add_workshop"

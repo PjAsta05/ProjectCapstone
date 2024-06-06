@@ -51,7 +51,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_nama"
+                    android:id="@+id/til_name"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView2">
 
                     <com.example.capstoneproject.customview.CustomEditText
-                        android:id="@+id/et_nama"
+                        android:id="@+id/et_name"
                         style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                     app:helperTextEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/til_nama">
+                    app:layout_constraintTop_toBottomOf="@+id/til_name">
 
                     <com.example.capstoneproject.customview.CustomEditTextEmail
                         android:id="@+id/et_email"

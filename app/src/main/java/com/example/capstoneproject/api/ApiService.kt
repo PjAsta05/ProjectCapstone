@@ -8,6 +8,7 @@ import com.example.capstoneproject.model.User
 import com.example.capstoneproject.model.WorkshopResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -72,38 +73,47 @@ interface ApiService {
         @Header("Authorization") token: String
     ): List<WorkshopResponse>
 
+    @Multipart
     @POST("workshop")
     suspend fun addWorkshop(
-        @Part("paketId") packageId: Int,
-        @Part("userId") userId: Int,
-        @Part("nama_workshop") workshopName: String,
-        @Part("nama_sanggar") sanggarName: String,
-        @Part("alamat") address: String,
-        @Part("email") email: String,
-        @Part("phone") phone: String,
-        @Part("nama_pemilik") owner: String,
-        @Part("deskripsi") description: String,
-        @Part("price") price: Int,
-        @Part photo: MultipartBody.Part,
-        @Part proof: MultipartBody.Part,
+        @Part("paketId") packageId: RequestBody,
+        @Part("userId") userId: RequestBody,
+        @Part("nama_workshop") workshopName: RequestBody,
+        @Part("nama_sanggar") sanggarName: RequestBody,
+        @Part("alamat") address: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("phone") phone: RequestBody,
+        @Part("nama_pemilik") owner: RequestBody,
+        @Part("deskripsi") description: RequestBody,
+        @Part("price") price: RequestBody,
+        @Part photo: MultipartBody.Part? = null,
+        @Part proof: MultipartBody.Part? = null,
         @Header("Authorization") token: String
     ): UpdateResponse
 
+    @Multipart
     @PUT("workshop/{id}")
     suspend fun updateWorkshop(
         @Path("id") id: Int,
-        @Part("paketId") packageId: Int? = null,
-        @Part("userId") userId: Int? = null,
-        @Part("nama_workshop") workshopName: String? = null,
-        @Part("nama_sanggar") sanggarName: String? = null,
-        @Part("alamat") address: String? = null,
-        @Part("email") email: String? = null,
-        @Part("phone") phone: String? = null,
-        @Part("nama_pemilik") owner: String? = null,
-        @Part("deskripsi") description: String? = null,
-        @Part("price") price: Int? = null,
+        @Part("paketId") packageId: RequestBody? = null,
+        @Part("userId") userId: RequestBody? = null,
+        @Part("nama_workshop") workshopName: RequestBody? = null,
+        @Part("nama_sanggar") sanggarName: RequestBody? = null,
+        @Part("alamat") address: RequestBody? = null,
+        @Part("email") email: RequestBody? = null,
+        @Part("phone") phone: RequestBody? = null,
+        @Part("nama_pemilik") owner: RequestBody? = null,
+        @Part("deskripsi") description: RequestBody? = null,
+        @Part("price") price: RequestBody? = null,
+        @Part("status") status: RequestBody? = null,
         @Part photo: MultipartBody.Part? = null,
         @Part proof: MultipartBody.Part? = null,
+        @Header("Authorization") token: String
+    ): UpdateResponse
+
+    @DELETE("workshop/{id}")
+    suspend fun deleteWorkshop(
+        @Path("id") id: Int,
         @Header("Authorization") token: String
     ): UpdateResponse
 

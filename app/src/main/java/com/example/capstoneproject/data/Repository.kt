@@ -75,7 +75,7 @@ class Repository @Inject constructor(
     }
 
     suspend fun getListPackage(token: String): List<PackageResponse> {
-        return apiService.getPackages(token)
+        return apiService.getPackages("Bearer $token")
     }
 
     suspend fun getListWorkshop(
@@ -87,40 +87,45 @@ class Repository @Inject constructor(
     }
 
     suspend fun addWorkshop(
-        packageId: Int,
-        userId: Int,
-        workshopName: String,
-        sanggarName: String,
-        address: String,
-        email: String,
-        phone: String,
-        owner: String,
-        description: String,
-        price: Int,
-        photo: MultipartBody.Part,
-        proof: MultipartBody.Part,
+        packageId: RequestBody,
+        userId: RequestBody,
+        workshopName: RequestBody,
+        sanggarName: RequestBody,
+        address: RequestBody,
+        email: RequestBody,
+        phone: RequestBody,
+        owner: RequestBody,
+        description: RequestBody,
+        price: RequestBody,
+        photo: MultipartBody.Part ?= null,
+        proof: MultipartBody.Part ?= null,
         token: String
     ): UpdateResponse {
-        return apiService.addWorkshop(packageId, userId, workshopName, sanggarName, address, email, phone, owner, description, price, photo, proof, token)
+        return apiService.addWorkshop(packageId, userId, workshopName, sanggarName, address, email, phone, owner, description, price, photo, proof, "Bearer $token")
     }
 
     suspend fun updateWorkshop(
         id: Int,
-        packageId: Int? = null,
-        userId: Int? = null,
-        workshopName: String? = null,
-        sanggarName: String? = null,
-        address: String? = null,
-        email: String? = null,
-        phone: String? = null,
-        owner: String? = null,
-        description: String? = null,
-        price: Int? = null,
+        packageId: RequestBody? = null,
+        userId: RequestBody? = null,
+        workshopName: RequestBody? = null,
+        sanggarName: RequestBody? = null,
+        address: RequestBody? = null,
+        email: RequestBody? = null,
+        phone: RequestBody? = null,
+        owner: RequestBody? = null,
+        description: RequestBody? = null,
+        price: RequestBody? = null,
+        status: RequestBody? = null,
         photo: MultipartBody.Part? = null,
         proof: MultipartBody.Part? = null,
         token: String
     ): UpdateResponse {
-        return apiService.updateWorkshop(id, packageId, userId, workshopName, sanggarName, address, email, phone, owner, description, price, photo, proof, token)
+        return apiService.updateWorkshop(id, packageId, userId, workshopName, sanggarName, address, email, phone, owner, description, price, status, photo, proof, "Bearer $token")
+    }
+
+    suspend fun deleteWorkshop(id: Int, token: String): UpdateResponse {
+        return apiService.deleteWorkshop(id, "Bearer $token")
     }
 
     suspend fun workshopRegistration(
@@ -132,6 +137,6 @@ class Repository @Inject constructor(
         gender: String,
         token: String
     ): UpdateResponse {
-        return apiService.workshopRegistration(workshopId, name, email, phone, age, gender, token)
+        return apiService.workshopRegistration(workshopId, name, email, phone, age, gender, "Bearer $token")
     }
 }

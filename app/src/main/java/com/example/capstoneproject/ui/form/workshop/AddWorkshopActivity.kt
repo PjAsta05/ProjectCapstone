@@ -17,19 +17,34 @@ class AddWorkshopActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddWorkshopBinding
 
     private var nameValid = false
+    private var sanggarValid = false
     private var ownerValid = false
     private var phoneValid = false
     private var emailValid = false
     private var addressValid = false
     private var descriptionValid = false
-
+    private var priceValid = false
     private var currentImageUri: Uri? = null
+    private var token: String = ""
+    private var userId: Int? = 0
+
+    private val launcherGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            currentImageUri = uri
+            showImage()
+        } else {
+            Log.d("Photo Picker", "No media selected")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddWorkshopBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        getTokenAndId()
         btnGallery()
         input()
         btnEnabled()
@@ -37,46 +52,49 @@ class AddWorkshopActivity : AppCompatActivity() {
         setupActionBar()
     }
 
+    private fun getTokenAndId() {
+        token = intent.getStringExtra("token").toString()
+        userId = intent.getIntExtra("userId", 0)
+    }
+
     private fun input() {
-        val nama = binding.etNama
-        val owner = binding.etOwner
-        val phone = binding.etPhone
-        val email = binding.etEmail
-        val address = binding.etAddress
-        val description = binding.etDescription
-
-
-        nama.addTextChangedListener {
-            nameValid = it.toString().isNotEmpty()
+        binding.etWorkshop.isValidCallback {
+            nameValid = it
             btnEnabled()
         }
-        owner.addTextChangedListener {
-            ownerValid = it.toString().isNotEmpty()
+        binding.etSanggar.isValidCallback {
+            sanggarValid = it
             btnEnabled()
         }
-        phone.addTextChangedListener {
-            phoneValid = it.toString().isNotEmpty()
+        binding.etOwner.isValidCallback {
+            ownerValid = it
             btnEnabled()
         }
-        email.addTextChangedListener {
-            emailValid = it.toString().isNotEmpty()
+        binding.etEmail.isValidCallback {
+            emailValid = it
             btnEnabled()
         }
-        address.addTextChangedListener {
-            addressValid = it.toString().isNotEmpty()
+        binding.etPhone.isValidCallback {
+            phoneValid = it
             btnEnabled()
         }
-        description.addTextChangedListener {
-            descriptionValid = it.toString().isNotEmpty()
+        binding.etAddress.isValidCallback {
+            addressValid = it
+            btnEnabled()
+        }
+        binding.etDescription.isValidCallback {
+            descriptionValid = it
+            btnEnabled()
+        }
+        binding.etPrice.isValidCallback {
+            priceValid = it
             btnEnabled()
         }
     }
 
     private fun btnEnabled() {
-        val btn = binding.btnPay
-        btn.isEnabled = nameValid && ownerValid && phoneValid && emailValid && addressValid && descriptionValid
+        binding.btnPay.isEnabled = nameValid && sanggarValid && ownerValid && phoneValid && emailValid && addressValid && descriptionValid
     }
-
 
     private fun btnPayment() {
         binding.btnPay.setOnClickListener {
@@ -95,7 +113,19 @@ class AddWorkshopActivity : AppCompatActivity() {
         dialogBuilder.setMessage("Are all the details correct?")
             .setCancelable(false)
             .setPositiveButton("Continue") { dialog, id ->
-                startActivity(Intent(this, PacketActivity::class.java))
+                val intent = Intent(this, PacketActivity::class.java)
+                intent.putExtra("photo", currentImageUri.toString())
+                intent.putExtra("workshop", binding.etWorkshop.text.toString())
+                intent.putExtra("sanggar", binding.etSanggar.text.toString())
+                intent.putExtra("owner", binding.etOwner.text.toString())
+                intent.putExtra("phone", binding.etPhone.text.toString())
+                intent.putExtra("email", binding.etEmail.text.toString())
+                intent.putExtra("address", binding.etAddress.text.toString())
+                intent.putExtra("description", binding.etDescription.text.toString())
+                intent.putExtra("price", binding.etPrice.text.toString())
+                intent.putExtra("token", token)
+                intent.putExtra("id", userId)
+                startActivity(intent)
             }
             .setNegativeButton("Back") { dialog, id ->
                 dialog.dismiss()
@@ -106,27 +136,8 @@ class AddWorkshopActivity : AppCompatActivity() {
         alert.show()
     }
 
-
-    private fun com.google.android.material.textfield.TextInputEditText.addValidation(validation: (String) -> Unit) {
-        addTextChangedListener {
-            validation(it.toString())
-            btnEnabled()
-        }
-    }
-
     private fun startGallery() {
         launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-    }
-
-    private val launcherGallery = registerForActivityResult(
-        ActivityResultContracts.PickVisualMedia()
-    ) { uri: Uri? ->
-        if (uri != null) {
-            currentImageUri = uri
-            showImage()
-        } else {
-            Log.d("Photo Picker", "No media selected")
-        }
     }
 
     private fun showImage() {

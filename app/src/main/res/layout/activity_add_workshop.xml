@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:text="AddWrokshop"
+                    android:text="Add Wrokshop"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -51,9 +51,10 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/iv_workshop"
                     android:layout_width="0dp"
-                    android:layout_height="150dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="200dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="8dp"
                     android:background="#F1F1F1"
                     android:src="@drawable/baseline_image_24"
@@ -78,7 +79,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/iv_workshop" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_nama"
+                    android:id="@+id/til_workshop"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,18 +87,43 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     app:endIconMode="clear_text"
-                    app:helperText="Enter your Title"
+                    app:helperText="Enter your Workshop Name"
                     app:helperTextEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btnadd">
 
                     <com.example.capstoneproject.customview.CustomEditText
-                        android:id="@+id/et_nama"
+                        android:id="@+id/et_workshop"
                         style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Title"
+                        android:hint="Workshop"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_sanggar"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:endIconMode="clear_text"
+                    app:helperText="Enter your Sanggar Name"
+                    app:helperTextEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/til_workshop">
+
+                    <com.example.capstoneproject.customview.CustomEditText
+                        android:id="@+id/et_sanggar"
+                        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Sanggar"
                         android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -111,18 +137,18 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     app:endIconMode="clear_text"
-                    app:helperText="Enter your Name"
+                    app:helperText="Enter the Owner Name"
                     app:helperTextEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/til_nama">
+                    app:layout_constraintTop_toBottomOf="@+id/til_sanggar">
 
                     <com.example.capstoneproject.customview.CustomEditText
                         android:id="@+id/et_owner"
                         style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Name"
+                        android:hint="Owner"
                         android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -210,11 +236,9 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="16dp"
                     app:endIconMode="clear_text"
                     app:helperText="Enter your Description"
                     app:helperTextEnabled="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/til_address">
@@ -229,6 +253,30 @@
                         android:inputType="textMultiLine"
                         android:minHeight="150dp"
                         android:scrollbars="vertical" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_price"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="16dp"
+                    app:helperText="Enter your minimum Price. Example: 10000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/til_description">
+
+                    <com.example.capstoneproject.customview.CustomEditText
+                        android:id="@+id/et_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/price"
+                        android:inputType="number" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

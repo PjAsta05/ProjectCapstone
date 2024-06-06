@@ -70,6 +70,7 @@ class ActiveFragment : Fragment() {
                     override fun onItemClicked(data: WorkshopResponse) {
                         val intent = Intent(requireContext(), DetailAdminActivity::class.java)
                         intent.putExtra(DetailAdminActivity.INTENT_PARCELABLE, data)
+                        intent.putExtra("token", token)
                         startActivity(intent)
                     }
                 })

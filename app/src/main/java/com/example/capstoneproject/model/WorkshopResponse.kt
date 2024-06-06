@@ -13,6 +13,9 @@ data class WorkshopResponse(
     @SerializedName("paketId")
     val paketId: Int,
 
+    @SerializedName("userId")
+    val userId: Int,
+
     @SerializedName("nama_workshop")
     val workshopName: String,
 

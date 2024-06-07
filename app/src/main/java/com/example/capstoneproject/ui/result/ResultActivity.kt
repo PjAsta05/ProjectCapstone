@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.capstoneproject.databinding.ActivityResultBinding
 import com.example.capstoneproject.ui.detail.tari.DetailDanceActivity
@@ -40,5 +41,13 @@ class ResultActivity : AppCompatActivity() {
     private fun moveToResult() {
         val intent = Intent(this, DetailDanceActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.example.capstoneproject.ui.account
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -111,6 +112,7 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnLogout.setOnClickListener {
             viewModel.logout()
             navigateToWelcomeActivity()
+            showToast("Logout Success")
         }
     }
     private fun editProfile() {
@@ -133,5 +135,16 @@ class ProfileActivity : AppCompatActivity() {
         val intent = Intent(this, WelcomeActivity::class.java)
         startActivity(intent)
         finish()
+    }
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

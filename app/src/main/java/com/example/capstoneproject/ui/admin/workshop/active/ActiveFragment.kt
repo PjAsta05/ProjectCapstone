@@ -46,6 +46,7 @@ class ActiveFragment : Fragment() {
     }
 
     private fun getWorkshop() {
+        showLoading(true)
         lifecycleScope.launch {
             val isSuccess = viewModel.getWorkshops("success", null, token)
             if (!isSuccess) {
@@ -53,6 +54,7 @@ class ActiveFragment : Fragment() {
             } else {
                 setupRecyclerView()
             }
+            showLoading(false)
         }
     }
 
@@ -75,6 +77,8 @@ class ActiveFragment : Fragment() {
                     }
                 })
                 binding.recyclerView.adapter = adapter
+            } else {
+                binding.emptyTextView.visibility = View.VISIBLE
             }
         }
     }
@@ -85,6 +89,14 @@ class ActiveFragment : Fragment() {
         args.putString(ARG_TOKEN, token)
         fragment.arguments = args
         return fragment
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
     companion object {

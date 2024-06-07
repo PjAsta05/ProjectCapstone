@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getTari() {
+        showLoading(true)
         lifecycleScope.launch {
             val isSuccess = viewModel.getTari(token)
             if (!isSuccess) {
@@ -53,6 +54,7 @@ class HomeFragment : Fragment() {
             } else {
                 setupRecyclerView()
             }
+            showLoading(false)
         }
     }
 
@@ -71,11 +73,21 @@ class HomeFragment : Fragment() {
                     override fun onItemClicked(data: BalineseDance) {
                         val intent = Intent(requireContext(), DetailDanceActivity::class.java)
                         intent.putExtra(DetailDanceActivity.INTENT_PARCELABLE, data)
+                        Log.d("HomeFragment", "onItemClicked: $data")
                         startActivity(intent)
                     }
                 })
                 binding.rvDanceList.adapter = adapter
+                Log.d("HomeFragment", "Data: $list")
             }
+        }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 }

@@ -1,19 +1,16 @@
 package com.example.capstoneproject.ui.form.payment
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.capstoneproject.databinding.ActivityPaymentBinding
 import com.example.capstoneproject.ui.process.ProcessAddActivity
@@ -118,6 +115,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun process() {
+        showLoading(true)
         binding.btnProcess.setOnClickListener {
             val packageIdRequestBody = packageId.toString().toRequestBody("text/plain".toMediaType())
             val userIdRequestBody = userId.toString().toRequestBody("text/plain".toMediaType())
@@ -159,7 +157,9 @@ class PaymentActivity : AppCompatActivity() {
                     val intent = Intent(this@PaymentActivity, ProcessAddActivity::class.java)
                     startActivity(intent)
                     finish()
+                    showToast("Success")
                 }
+                showLoading(false)
             }
         }
     }
@@ -171,5 +171,17 @@ class PaymentActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             super.onBackPressed()
         }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

@@ -1,6 +1,7 @@
 package com.example.capstoneproject.ui.detail.tari
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.capstoneproject.databinding.ActivityDetailTariBinding
@@ -16,10 +17,12 @@ class DetailDanceActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupActionBar()
+
         showDetailTari()
     }
 
     private fun showDetailTari() {
+        showLoading(true)
         val balineseDance = intent.getParcelableExtra<BalineseDance>(INTENT_PARCELABLE)
         balineseDance?.let {
             binding.apply {
@@ -32,6 +35,7 @@ class DetailDanceActivity : AppCompatActivity() {
                     .into(image)
             }
         }
+        showLoading(false)
     }
 
     private fun setupActionBar() {
@@ -43,7 +47,13 @@ class DetailDanceActivity : AppCompatActivity() {
         }
     }
 
-
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
 
 
     companion object {

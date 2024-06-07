@@ -2,13 +2,27 @@ package com.example.capstoneproject.ui.form.reg
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.RadioGroup
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.lifecycleScope
+import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityRegFormBinding
 import com.example.capstoneproject.ui.process.ProcessRegActivity
-
+import com.example.capstoneproject.ui.workshop.WorkshopViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+@AndroidEntryPoint
 class RegFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegFormBinding
+    private val viewModel : WorkshopViewModel by viewModels()
+    private var token: String = ""
+    private var workshopId: Int = 0
+    private var gender: String = ""
 
     private var nameValid = false
     private var genderValid = false
@@ -21,15 +35,16 @@ class RegFormActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupActionBar()
+        getTokenAndId()
+        input()
         btnEnabled()
-        process()
+       reg()
     }
 
     private fun input() {
         val name = binding.etName
         val email = binding.etEmail
         val phone = binding.etPhone
-        val gender = binding.etGender
         val age = binding.etAge
 
         name.addTextChangedListener {
@@ -44,18 +59,34 @@ class RegFormActivity : AppCompatActivity() {
             phoneValid = it.toString().isNotEmpty()
             btnEnabled()
         }
-        gender.addTextChangedListener {
-            genderValid = it.toString().isNotEmpty()
-            btnEnabled()
-        }
         age.addTextChangedListener {
             ageValid = it.toString().isNotEmpty()
             btnEnabled()
         }
+        binding.rbGender.setOnCheckedChangeListener (object : RadioGroup.OnCheckedChangeListener{
+            override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
+                genderValid = when (checkedId) {
+                    R.id.gender_pria -> {
+                        gender = "pria"
+                        btnEnabled()
+                        true
+                    }
+                    R.id.gender_wanita -> {
+                        gender = "wanita"
+                        btnEnabled()
+                        true
+                    }
+                    else -> {
+                        btnEnabled()
+                        false
+                    }
+                }
+            }
+        })
     }
 
     private fun btnEnabled() {
-        binding.btnReg.isEnabled = nameValid && emailValid && phoneValid && genderValid && ageValid
+        binding.btnReg.isEnabled = nameValid && emailValid && phoneValid && ageValid && genderValid
     }
 
     private fun setupActionBar() {
@@ -67,10 +98,46 @@ class RegFormActivity : AppCompatActivity() {
         }
     }
 
-    private fun process() {
+    private fun reg() {
         binding.btnReg.setOnClickListener {
-            val intent = Intent(this, ProcessRegActivity::class.java)
-            startActivity(intent)
+            val name = binding.etName.text.toString()
+            val email = binding.etEmail.text.toString()
+            val phone = binding.etPhone.text.toString()
+            val age = binding.etAge.text.toString().toInt()
+            showLoading(true)
+            Log.d("RegFormActivity", "Sending request with token: $token, name: $name, email: $email, phone: $phone, gender: $gender, age: $age")
+            lifecycleScope.launch {
+                val isSuccess = viewModel.workshopRegistration(workshopId, name, email, phone, age, gender, token)
+                if (isSuccess) {
+                    val intent = Intent(this@RegFormActivity, ProcessRegActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    Log.d("RegFormActivity", "Registration successful")
+                    showToast("Registration successful")
+                } else {
+                    Toast.makeText(this@RegFormActivity, "Registration failed", Toast.LENGTH_SHORT).show()
+                    Log.d("RegFormActivity", "Registration failed")
+                    showToast("Registration failed")
+                }
+                showLoading(false)
+            }
         }
+    }
+
+
+    private fun getTokenAndId() {
+        token = intent.getStringExtra("token").toString()
+        workshopId = intent.getIntExtra("workshopId", 0)
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,8 +45,10 @@ class UserFragment : Fragment() {
     }
 
     private fun getWorkshop() {
+        showLoading(true)
         lifecycleScope.launch {
             val isSuccess = viewModel.getWorkshops("success", null, token)
+            showLoading(false)
             if (!isSuccess) {
                 Log.d("PendingFragment", "Failed to get workshops")
             } else {
@@ -62,20 +65,31 @@ class UserFragment : Fragment() {
 
     private fun observeWorkshop() {
         viewModel.workshops.observe(viewLifecycleOwner) { list ->
-            if (list != null) {
+            if (list != null && list.isNotEmpty()) {
                 adapter = WorkshopAdapter(list)
                 adapter.setOnItemClickCallback(object : WorkshopAdapter.OnItemClickCallback {
                     override fun onItemClicked(data: WorkshopResponse) {
                         val intent = Intent(requireContext(), DetailWorkshopActivity::class.java)
-                        intent.putExtra(DetailAdminActivity.INTENT_PARCELABLE, data)
+                        intent.putExtra(DetailWorkshopActivity.INTENT_PARCELABLE, data)
                         intent.putExtra("token", token)
                         startActivity(intent)
                     }
                 })
                 binding.recyclerView.adapter = adapter
+            } else {
+                binding.emptyTextView.visibility = View.VISIBLE
             }
         }
     }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
+
 
     companion object {
         private const val ARG_TOKEN = "token"

@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
@@ -22,6 +24,7 @@ class PacketActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPacketBinding
     private lateinit var adapter: PackageAdapter
 
+    private var photo: Uri? = null
     private var uri: String = ""
     private var workshop: String = ""
     private var sanggar: String = ""
@@ -55,9 +58,12 @@ class PacketActivity : AppCompatActivity() {
         price = intent.getStringExtra("price").toString()
         token = intent.getStringExtra("token").toString()
         userId = intent.getIntExtra("id", 0)
+
+        Log.d("GetExtra", "$photo, $workshop, $sanggar, $owner, $email, $phone, $address, $description, $price, $token, $userId")
     }
 
     private fun getPackages(token: String) {
+        showLoading(true)
         lifecycleScope.launch {
             val isSuccess = viewModel.getPackages(token)
             if (!isSuccess) {
@@ -66,6 +72,7 @@ class PacketActivity : AppCompatActivity() {
                 setupRecyclerView()
                 Log.d("PacketActivity", "Success")
             }
+            showLoading(false)
         }
     }
 
@@ -94,10 +101,8 @@ class PacketActivity : AppCompatActivity() {
                         intent.putExtra("token", token)
                         intent.putExtra("id", userId)
                         intent.putExtra("packageId", data.id)
-                        intent.putExtra("packageName", data.packageName)
-                        intent.putExtra("packagePrice", data.price)
                         startActivity(intent)
-                        finish()
+                        Log.d("PacketActivity", "$photo, $workshop, $sanggar, $owner, $email, $phone, $address, $description, $price, $token, $userId")
                     }
                 })
                 binding.recyclerView.adapter = adapter
@@ -113,4 +118,13 @@ class PacketActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
+
 }

@@ -7,7 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.auth.login.LoginActivity">
 
+    <ImageView
+        android:layout_width="142dp"
+        android:layout_height="131dp"
+        android:src="@drawable/img_logo"
+        app:layout_constraintBottom_toTopOf="@+id/cardView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -21,6 +42,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
 
             <TextView
                 android:id="@+id/tv_login"
@@ -80,7 +102,7 @@
                     android:id="@+id/et_password"
                     style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="51dp"
                     android:hint="@string/password"
                     android:inputType="textPassword" />
 

@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -89,19 +91,25 @@ class NewPasswordActivity : AppCompatActivity() {
     }
 
     private fun changePassword() {
+
         binding.btnSave.setOnClickListener {
+            showLoading(true)
             val password = binding.etNewPassword.text.toString()
             val passwordRequestBody = password.toRequestBody("text/plain".toMediaType())
+
             lifecycleScope.launch {
                 val isSuccess = viewModel.updateUser(id, null, passwordRequestBody, null, null, token)
                 if (!isSuccess) {
                     viewModel.errorMessage.observe(this@NewPasswordActivity) { message ->
                         Log.d("Change Password", "Error: $message")
+                        showToast(message)
                     }
                 } else {
                     Log.d("Change Password", "Edit Password Success")
                     finish()
+                    showToast("Password Changed")
                 }
+                showLoading(false)
             }
         }
     }
@@ -113,5 +121,16 @@ class NewPasswordActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             super.onBackPressed()
         }
+    }
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

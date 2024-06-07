@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -97,7 +99,6 @@ class EditProfileActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val name = binding.etName.text.toString()
-
             val emailRequestBody = email.toRequestBody("text/plain".toMediaType())
             val nameRequestBody = name.toRequestBody("text/plain".toMediaType())
             var multipartBody: MultipartBody.Part? = null
@@ -110,19 +111,24 @@ class EditProfileActivity : AppCompatActivity() {
                     file
                 )
             }
+            showLoading(true)
             lifecycleScope.launch {
                 Log.d("Edit Profile", "email: $email, name: $name")
                 val isSuccess = viewModel.updateUser(id, emailRequestBody, null, nameRequestBody, multipartBody, token)
                 if (!isSuccess) {
                     viewModel.errorMessage.observe(this@EditProfileActivity) { message ->
                         Log.d("Edit Profile", "Error: $message")
+                        showToast(message)
                     }
+                    showLoading(false)
                 }else {
                     viewModel.updateResponse.observe(this@EditProfileActivity) { response ->
                         viewModel.updateSession(UserModel(response.id, response.fullName, response.email, response.photo,"", response.role))
                         val intent = Intent(this@EditProfileActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
+                        showLoading(false)
+                        showToast("Save Success")
                     }
                 }
             }
@@ -136,5 +142,17 @@ class EditProfileActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             super.onBackPressed()
         }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

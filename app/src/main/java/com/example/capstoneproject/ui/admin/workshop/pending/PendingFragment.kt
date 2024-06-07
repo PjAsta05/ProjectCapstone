@@ -46,6 +46,7 @@ class PendingFragment : Fragment() {
     }
 
     private fun getWorkshop() {
+        showLoading(true)
         lifecycleScope.launch {
             val isSuccess = viewModel.getWorkshops("pending", null, token)
             if (!isSuccess) {
@@ -53,6 +54,7 @@ class PendingFragment : Fragment() {
             } else {
                 setupRecyclerView()
             }
+            showLoading(false)
         }
     }
 
@@ -77,6 +79,8 @@ class PendingFragment : Fragment() {
                     }
                 })
                 binding.recyclerView.adapter = adapter
+            } else {
+                binding.emptyTextView.visibility = View.VISIBLE
             }
         }
     }
@@ -87,6 +91,14 @@ class PendingFragment : Fragment() {
         args.putString(ARG_TOKEN, token)
         fragment.arguments = args
         return fragment
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
     companion object {

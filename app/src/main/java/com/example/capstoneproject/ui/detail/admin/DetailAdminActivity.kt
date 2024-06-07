@@ -142,31 +142,31 @@ class DetailAdminActivity : AppCompatActivity() {
         }
     }
     private fun deleteWorkshop() {
-        binding.btnDelete.setOnClickListener {
-            lifecycleScope.launch {
-                val isSuccess = viewModel.deleteWorkshop(id, token)
-                if (!isSuccess) {
-                    Log.d("DetailAdminActivity", "Error")
-                } else {
-                    finish()
-                }
+        lifecycleScope.launch {
+            val isSuccess = viewModel.deleteWorkshop(id, token)
+            if (!isSuccess) {
+                Log.d("DetailAdminActivity", "Error")
+            } else {
+                finish()
             }
         }
     }
 
     private fun showAlert() {
-        val dialogBuilder = AlertDialog.Builder(this)
-        dialogBuilder.setMessage("Are you sure you want to delete this workshop?")
-            .setCancelable(false)
-            .setPositiveButton("Yes") { _, _ ->
-                deleteWorkshop()
-            }
-            .setNegativeButton("No") { dialog, _ ->
-                dialog.dismiss()
-            }
-        val alert = dialogBuilder.create()
-        alert.setTitle("Delete Workshop")
-        alert.show()
+        binding.btnDelete.setOnClickListener {
+            val dialogBuilder = AlertDialog.Builder(this)
+            dialogBuilder.setMessage("Are you sure you want to delete this workshop?")
+                .setCancelable(false)
+                .setPositiveButton("Yes") { _, _ ->
+                    deleteWorkshop()
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                }
+            val alert = dialogBuilder.create()
+            alert.setTitle("Delete Workshop")
+            alert.show()
+        }
     }
     private fun setupActionBar() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

@@ -4,12 +4,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.View
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import com.example.capstoneproject.databinding.ActivityAddWorkshopBinding
 import com.example.capstoneproject.ui.form.packet.PacketActivity
 
@@ -43,7 +42,6 @@ class AddWorkshopActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddWorkshopBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         getTokenAndId()
         btnGallery()
         input()
@@ -155,6 +153,10 @@ class AddWorkshopActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             super.onBackPressed()
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
 }

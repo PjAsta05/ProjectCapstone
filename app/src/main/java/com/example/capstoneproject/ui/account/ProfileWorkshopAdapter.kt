@@ -33,7 +33,6 @@ class ProfileWorkshopAdapter(private val workshop: List<WorkshopResponse>): Recy
                 tvAddress.text = workshop.address
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {

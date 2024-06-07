@@ -14,6 +14,7 @@ import com.example.capstoneproject.ui.form.packet.PacketActivity
 
 class AddWorkshopActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddWorkshopBinding
+    private val REQUEST_CODE_STORAGE_PERMISSION = 100
 
     private var nameValid = false
     private var sanggarValid = false
@@ -42,9 +43,10 @@ class AddWorkshopActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddWorkshopBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         getTokenAndId()
-        btnGallery()
         input()
+        btnGallery()
         btnEnabled()
         btnPayment()
         setupActionBar()
@@ -102,7 +104,9 @@ class AddWorkshopActivity : AppCompatActivity() {
 
     private fun btnGallery() {
         binding.btnadd.setOnClickListener {
-            startGallery()
+            launcherGallery.launch(
+                PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+            )
         }
     }
 
@@ -124,7 +128,6 @@ class AddWorkshopActivity : AppCompatActivity() {
                 intent.putExtra("token", token)
                 intent.putExtra("id", userId)
                 startActivity(intent)
-                finish()
             }
             .setNegativeButton("Back") { dialog, id ->
                 dialog.dismiss()
@@ -133,10 +136,6 @@ class AddWorkshopActivity : AppCompatActivity() {
         val alert = dialogBuilder.create()
         alert.setTitle("Confirm Details")
         alert.show()
-    }
-
-    private fun startGallery() {
-        launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 
     private fun showImage() {

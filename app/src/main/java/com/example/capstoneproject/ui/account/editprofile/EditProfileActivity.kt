@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.capstoneproject.R
 import com.example.capstoneproject.data.pref.UserModel
 import com.example.capstoneproject.databinding.ActivityEditProfileBinding
+import com.example.capstoneproject.ui.MainActivity
 import com.example.capstoneproject.ui.auth.AuthViewModel
 import com.example.capstoneproject.ui.reduceFileImage
 import com.example.capstoneproject.ui.uriToFile
@@ -119,6 +120,8 @@ class EditProfileActivity : AppCompatActivity() {
                 }else {
                     viewModel.updateResponse.observe(this@EditProfileActivity) { response ->
                         viewModel.updateSession(UserModel(response.id, response.fullName, response.email, response.photo,"", response.role))
+                        val intent = Intent(this@EditProfileActivity, MainActivity::class.java)
+                        startActivity(intent)
                         finish()
                     }
                 }

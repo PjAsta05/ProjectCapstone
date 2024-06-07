@@ -126,6 +126,7 @@ class AddWorkshopActivity : AppCompatActivity() {
                 intent.putExtra("token", token)
                 intent.putExtra("id", userId)
                 startActivity(intent)
+                finish()
             }
             .setNegativeButton("Back") { dialog, id ->
                 dialog.dismiss()

@@ -69,14 +69,12 @@ class HomeFragment : Fragment() {
                 adapter = HomeAdapter(list)
                 adapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
                     override fun onItemClicked(data: BalineseDance) {
-                        val intent = Intent(requireContext(), DetailAdminActivity::class.java)
+                        val intent = Intent(requireContext(), DetailDanceActivity::class.java)
                         intent.putExtra(DetailDanceActivity.INTENT_PARCELABLE, data)
-                        Log.d("HomeFragment", "onItemClicked: $data")
                         startActivity(intent)
                     }
                 })
                 binding.rvDanceList.adapter = adapter
-                Log.d("HomeFragment", "Data: $list")
             }
         }
     }

@@ -100,7 +100,7 @@ class WorkshopViewModel @Inject constructor(
         token: String
     ): Boolean {
         return try {
-            val response = repository.workshopRegistration(workshopId, name, email, phone, age, gender, token)
+            repository.workshopRegistration(workshopId, name, email, phone, age, gender, token)
             true
         } catch (e: HttpException) {
             Log.d("workshopRegistration", "${e.message}")

@@ -28,7 +28,6 @@ class UserFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         token = arguments?.getString(ARG_TOKEN).toString()
-        Log.d("ActiveFragment", "Token: $token")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

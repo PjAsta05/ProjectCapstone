@@ -1,5 +1,6 @@
 package com.example.capstoneproject.ui.form.payment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -20,6 +21,8 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.text.NumberFormat
+import java.util.Locale
 
 @AndroidEntryPoint
 class PaymentActivity : AppCompatActivity() {
@@ -40,12 +43,15 @@ class PaymentActivity : AppCompatActivity() {
     private var token: String = ""
     private var userId: Int = 0
     private var packageId: Int = 0
+    private var packageName: String = ""
+    private var packagePrice: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPaymentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         getArguments()
+        setupPackage()
         btnGallery()
         setupActionBar()
         process()
@@ -65,7 +71,17 @@ class PaymentActivity : AppCompatActivity() {
         token = intent.getStringExtra("token").toString()
         userId = intent.getIntExtra("id", 0)
         packageId = intent.getIntExtra("packageId", 0)
-        Log.d("PaymentActivity", "$photo, $workshop, $sanggar, $owner, $email, $phone, $address, $description, $price, $token, $userId, $packageId")
+        packageName = intent.getStringExtra("packageName").toString()
+        packagePrice = intent.getIntExtra("packagePrice", 0)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setupPackage() {
+        binding.tvItemId.text = packageId.toString()
+        binding.tvItemNamapaket.text = packageName
+        val formatter = NumberFormat.getNumberInstance(Locale("in", "ID"))
+        val formatterPrice = formatter.format(packagePrice)
+        binding.tvItemHargapaket.text = "Rp.$formatterPrice"
     }
 
     private fun btnGallery() {
@@ -137,6 +153,7 @@ class PaymentActivity : AppCompatActivity() {
                 } else {
                     val intent = Intent(this@PaymentActivity, ProcessAddActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
             }
         }

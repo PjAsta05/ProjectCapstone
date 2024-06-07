@@ -1,10 +1,15 @@
 package com.example.capstoneproject.ui
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.capstoneproject.R
@@ -14,6 +19,7 @@ import com.example.capstoneproject.ui.auth.AuthViewModel
 import com.example.capstoneproject.ui.history.HistoryActivity
 import com.example.capstoneproject.ui.home.HomeFragment
 import com.example.capstoneproject.ui.admin.workshop.WorkshopFragment
+import com.example.capstoneproject.ui.camera.CameraActivity
 import com.example.capstoneproject.ui.workshop.UserFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -25,15 +31,28 @@ class MainActivity : AppCompatActivity() {
     private var token: String = ""
     private var role: String = ""
 
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                showToast("Permission request granted")
+            } else {
+                showToast("Permission request denied")
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.bottomNavigation.background = null
         binding.toolbarLayout.background = null
+
         observeSession()
         changeFragment()
         changeActivity()
+        navigateToCameraActivity()
     }
 
     private fun observeSession(){
@@ -92,6 +111,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun navigateToCameraActivity() {
+        binding.scanButton.setOnClickListener {
+            if (!allPermissionsGranted()) {
+                requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+            } else {
+                val intent = Intent(this@MainActivity, CameraActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+
     private fun loadFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame_layout, fragment)
@@ -106,6 +136,20 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this@MainActivity, WelcomeActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun allPermissionsGranted() =
+        ContextCompat.checkSelfPermission(
+            this,
+            REQUIRED_PERMISSION
+        ) == PackageManager.PERMISSION_GRANTED
+
+    companion object {
+        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
 
 }

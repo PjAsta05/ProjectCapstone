@@ -22,7 +22,6 @@ class PacketActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPacketBinding
     private lateinit var adapter: PackageAdapter
 
-    private var photo: Uri? = null
     private var uri: String = ""
     private var workshop: String = ""
     private var sanggar: String = ""
@@ -56,8 +55,6 @@ class PacketActivity : AppCompatActivity() {
         price = intent.getStringExtra("price").toString()
         token = intent.getStringExtra("token").toString()
         userId = intent.getIntExtra("id", 0)
-
-        Log.d("GetExtra", "$photo, $workshop, $sanggar, $owner, $email, $phone, $address, $description, $price, $token, $userId")
     }
 
     private fun getPackages(token: String) {
@@ -97,8 +94,10 @@ class PacketActivity : AppCompatActivity() {
                         intent.putExtra("token", token)
                         intent.putExtra("id", userId)
                         intent.putExtra("packageId", data.id)
+                        intent.putExtra("packageName", data.packageName)
+                        intent.putExtra("packagePrice", data.price)
                         startActivity(intent)
-                        Log.d("PacketActivity", "$photo, $workshop, $sanggar, $owner, $email, $phone, $address, $description, $price, $token, $userId")
+                        finish()
                     }
                 })
                 binding.recyclerView.adapter = adapter

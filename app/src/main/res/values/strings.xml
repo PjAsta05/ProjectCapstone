@@ -41,7 +41,7 @@
     <string name="owner">Owner</string>
     <string name="extend">Extend</string>
     <string name="status">Status :</string>
-    <string name="process">process</string>
+    <string name="process">Process</string>
     <string name="detail">Detail</string>
     <string name="sanggar">sanggar</string>
     <string name="phone">Phone</string>
@@ -65,5 +65,9 @@
     <string name="pending">Pending</string>
     <string name="inactive">Inactive</string>
     <string name="delete">Delete</string>
+    <string name="package_name">Package</string>
+    <string name="after_payment">*After payment, please send proof of payment</string>
+    <string name="bank_account_number">Bank Account Number</string>
+    <string name="watch_the_video_on_youtube">Watch the video on YouTube</string>
 
 </resources>

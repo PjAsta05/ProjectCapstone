@@ -3,11 +3,13 @@ package com.example.capstoneproject.ui.detail.admin
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.RadioGroup
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityDetailAdminBinding
 import com.example.capstoneproject.model.WorkshopResponse
 import com.example.capstoneproject.ui.workshop.WorkshopViewModel
@@ -25,6 +27,7 @@ class DetailAdminActivity : AppCompatActivity() {
     private var packageId = 0
     private var userId = 0
     private var token: String = ""
+    private var status: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,7 @@ class DetailAdminActivity : AppCompatActivity() {
         setupActionBar()
         showDetailWorkshop()
         showProof()
+        radioGroup()
         editWorkshop()
         deleteAction()
     }
@@ -49,13 +53,17 @@ class DetailAdminActivity : AppCompatActivity() {
                 packageId = it.paketId
                 userId = it.userId
                 textView2.text = it.workshopName
-                etWorkshop.setText(it.sanggarName)
+                etWorkshop.setText(it.workshopName)
+                etSanggar.setText(it.sanggarName)
                 etOwner.setText(it.owner)
                 etPhone.setText(it.phone)
                 etEmail.setText(it.email)
                 etAddress.setText(it.address)
                 etDescription.setText(it.description)
                 etPrice.setText(it.price.toString())
+                tvItemId.text = it.paketId.toString()
+                tvPacketName.text = it.paket.packageName
+                tvPrice.text = it.paket.price.toString()
                 when(it.status) {
                     "success" -> binding.activeStatus.isChecked = true
                     "done" -> binding.inactiveStatus.isChecked = true
@@ -63,6 +71,24 @@ class DetailAdminActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun radioGroup() {
+        binding.status.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener{
+            override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
+                when (checkedId) {
+                    R.id.active_status -> {
+                        status = "success"
+                    }
+                    R.id.inactive_status -> {
+                        status = "done"
+                    }
+                    R.id.pending_status -> {
+                        status = "pending"
+                    }
+                }
+            }
+        })
     }
 
     private fun showProof() {
@@ -77,22 +103,28 @@ class DetailAdminActivity : AppCompatActivity() {
     }
 
     private fun editWorkshop() {
-        val packageIdRequestBody = packageId.toString().toRequestBody("text/plain".toMediaType())
-        val userIdRequestBody = userId.toString().toRequestBody("text/plain".toMediaType())
-        val workshopRequestBody = binding.etWorkshop.text.toString().toRequestBody("text/plain".toMediaType())
-        val sanggarRequestBody = binding.etOwner.text.toString().toRequestBody("text/plain".toMediaType())
-        val addressRequestBody = binding.etAddress.text.toString().toRequestBody("text/plain".toMediaType())
-        val emailRequestBody = binding.etEmail.text.toString().toRequestBody("text/plain".toMediaType())
-        val phoneRequestBody = binding.etPhone.text.toString().toRequestBody("text/plain".toMediaType())
-        val ownerRequestBody = binding.etOwner.text.toString().toRequestBody("text/plain".toMediaType())
-        val descriptionRequestBody = binding.etDescription.text.toString().toRequestBody("text/plain".toMediaType())
-        val priceRequestBody = binding.etPrice.text.toString().toRequestBody("text/plain".toMediaType())
-        val statusRequestBody = when {
-            binding.activeStatus.isChecked -> "success"
-            binding.inactiveStatus.isChecked -> "done"
-            else -> "pending"
-        }.toRequestBody("text/plain".toMediaType())
         binding.btnConfirm.setOnClickListener {
+            val workshop = binding.etWorkshop.text.toString()
+            val sanggar = binding.etSanggar.text.toString()
+            val address = binding.etAddress.text.toString()
+            val email = binding.etEmail.text.toString()
+            val phone = binding.etPhone.text.toString()
+            val owner = binding.etOwner.text.toString()
+            val description = binding.etDescription.text.toString()
+            val price = binding.etPrice.text.toString()
+
+            val packageIdRequestBody = packageId.toString().toRequestBody("text/plain".toMediaType())
+            val userIdRequestBody = userId.toString().toRequestBody("text/plain".toMediaType())
+            val workshopRequestBody = workshop.toRequestBody("text/plain".toMediaType())
+            val sanggarRequestBody = sanggar.toRequestBody("text/plain".toMediaType())
+            val addressRequestBody = address.toRequestBody("text/plain".toMediaType())
+            val emailRequestBody = email.toRequestBody("text/plain".toMediaType())
+            val phoneRequestBody = phone.toRequestBody("text/plain".toMediaType())
+            val ownerRequestBody = owner.toRequestBody("text/plain".toMediaType())
+            val descriptionRequestBody = description.toRequestBody("text/plain".toMediaType())
+            val priceRequestBody = price.toRequestBody("text/plain".toMediaType())
+            val statusRequestBody = status.toRequestBody("text/plain".toMediaType())
+            Log.d("Update Workshop","$id, $packageId, $userId, $workshop, $sanggar, $address, $email, $phone, $owner, $description, $price, $status, $token")
             lifecycleScope.launch {
                 val isSuccess = viewModel.updateWorkshop(id, packageIdRequestBody, userIdRequestBody, workshopRequestBody, sanggarRequestBody, addressRequestBody, emailRequestBody, phoneRequestBody, ownerRequestBody, descriptionRequestBody, priceRequestBody, statusRequestBody, null, null, token)
                 if (!isSuccess) {
@@ -126,10 +158,10 @@ class DetailAdminActivity : AppCompatActivity() {
         val dialogBuilder = AlertDialog.Builder(this)
         dialogBuilder.setMessage("Are you sure you want to delete this workshop?")
             .setCancelable(false)
-            .setPositiveButton("Yes") { dialog, id ->
+            .setPositiveButton("Yes") { _, _ ->
                 deleteWorkshop()
             }
-            .setNegativeButton("No") { dialog, id ->
+            .setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()
             }
         val alert = dialogBuilder.create()

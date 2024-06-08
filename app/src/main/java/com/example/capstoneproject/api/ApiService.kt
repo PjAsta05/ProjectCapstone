@@ -128,6 +128,12 @@ interface ApiService {
         @Header("Authorization") token: String
     ): UpdateResponse
 
+    @GET("workshop/{id}")
+    suspend fun getWorkshopById(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String
+    ): WorkshopResponse
+
     @FormUrlEncoded
     @POST("pendaftaran-workshop")
     suspend fun workshopRegistration(

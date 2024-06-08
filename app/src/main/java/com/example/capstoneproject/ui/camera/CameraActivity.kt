@@ -2,7 +2,6 @@ package com.example.capstoneproject.ui.camera
 
 import android.content.ContentValues
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -20,15 +19,14 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.example.capstoneproject.databinding.ActivityCameraBinding
-import com.example.capstoneproject.ml.AgemanModelWithMetadata
+import com.example.capstoneproject.helper.ImageClassifierHelper
 import com.example.capstoneproject.ui.result.ResultActivity
-import com.example.capstoneproject.ui.uriToBitmap
 import com.google.common.util.concurrent.ListenableFuture
-import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.support.label.Category
+import org.tensorflow.lite.task.vision.classifier.Classifications
 
 class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
     private lateinit var binding: ActivityCameraBinding
+    private lateinit var imageClassifierHelper: ImageClassifierHelper
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private lateinit var camera: Camera
     private lateinit var imageCapture: ImageCapture
@@ -40,18 +38,15 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
     }
     private var currentImageUri: Uri? = null
     private var token: String = ""
+    private var label: String = ""
+    private var score: Int = 0
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
-            val bitmap = uriToBitmap(this, currentImageUri!!)
-            if (bitmap != null) {
-                analyzeImage(bitmap)
-            } else {
-                Toast.makeText(this, "Gagal memuat gambar", Toast.LENGTH_SHORT).show()
-            }
+            analyzeImage()
         } else {
             Log.d("Photo Picker", "No media selected")
         }
@@ -124,25 +119,35 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
         ).build()
     }
 
-    private fun analyzeImage(bitmap: Bitmap) {
-        val model = AgemanModelWithMetadata.newInstance(applicationContext)
-        val image = TensorImage.fromBitmap(bitmap)
-        val outputs = model.process(image)
-        val probability = outputs.probabilityAsCategoryList.maxByOrNull { it.score }
-        if (probability == null) {
-            Log.d("CLASSIFICATION", "No result")
-        } else {
-            navigateToResult(probability)
-        }
-        model.close()
-        Log.d("CLASSIFICATION", probability.toString())
+    private fun analyzeImage() {
+        currentImageUri?.let {
+            imageClassifierHelper = ImageClassifierHelper(
+                context = this,
+                classifierListener = object : ImageClassifierHelper.ClassifierListener {
+                    override fun onError(error: String) {
+                        showToast("Error: $error")
+                    }
+
+                    override fun onResult(result: List<Classifications>?) {
+                        result?.forEach { classifications ->
+                            classifications.categories.forEach { category ->
+                                label = category.label
+                                score = (category.score * 100).toInt()
+                            }
+                        }
+                        navigateToResult(label, score)
+                    }
+                }
+            )
+            imageClassifierHelper.classifyStaticImage(it)
+        }?: showToast("No Image Selected")
     }
 
-    private fun navigateToResult(probability: Category) {
+    private fun navigateToResult(label: String, score: Int) {
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra(EXTRA_IMAGE, currentImageUri.toString())
-        intent.putExtra(EXTRA_LABEL, probability.label)
-        intent.putExtra(EXTRA_SCORE, probability.score)
+        intent.putExtra(EXTRA_LABEL, label)
+        intent.putExtra(EXTRA_SCORE, score)
         intent.putExtra("token", token)
         startActivity(intent)
         finish()
@@ -159,16 +164,15 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
 
     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
         currentImageUri = outputFileResults.savedUri
-        val bitmap = uriToBitmap(this, currentImageUri!!)
-        if (bitmap != null) {
-            analyzeImage(bitmap)
-        } else {
-            Toast.makeText(this, "Gagal memuat gambar", Toast.LENGTH_SHORT).show()
-        }
+        analyzeImage()
     }
 
     override fun onError(exception: ImageCaptureException) {
         exception.printStackTrace()
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

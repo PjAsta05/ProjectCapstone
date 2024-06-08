@@ -7,6 +7,8 @@ import com.example.capstoneproject.BuildConfig
 import com.example.capstoneproject.api.ApiService
 import com.example.capstoneproject.data.pref.UserPreference
 import com.example.capstoneproject.data.pref.dataStore
+import com.example.capstoneproject.database.HistoryDao
+import com.example.capstoneproject.database.HistoryRoomDb
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,10 +62,23 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideHistoryRoomDb(@ApplicationContext context: Context): HistoryRoomDb {
+        return HistoryRoomDb.getDatabase(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideHistoryDao(historyRoomDb: HistoryRoomDb): HistoryDao {
+        return historyRoomDb.historyDao()
+    }
+
+    @Provides
+    @Singleton
     fun provideRepository(
         userPreference: UserPreference,
-        apiService: ApiService
+        apiService: ApiService,
+        historyDao: HistoryDao
     ): Repository {
-        return Repository(userPreference, apiService)
+        return Repository(userPreference, apiService, historyDao)
     }
 }

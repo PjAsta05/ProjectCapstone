@@ -103,6 +103,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.history -> {
                     val intent = Intent(this, HistoryActivity::class.java)
+                    intent.putExtra("token", token)
                     startActivity(intent)
                     true
                 }

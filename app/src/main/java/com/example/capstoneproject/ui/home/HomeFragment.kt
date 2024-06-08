@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstoneproject.databinding.FragmentHomeBinding
 import com.example.capstoneproject.model.BalineseDance
-import com.example.capstoneproject.ui.detail.admin.DetailAdminActivity
 import com.example.capstoneproject.ui.detail.tari.DetailDanceActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -59,7 +58,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        Log.d("HomeFragment", "Setup RecyclerView")
         binding.rvDanceList.layoutManager = LinearLayoutManager(context)
         binding.rvDanceList.setHasFixedSize(true)
         observeViewModel()
@@ -77,7 +75,6 @@ class HomeFragment : Fragment() {
                     }
                 })
                 binding.rvDanceList.adapter = adapter
-                Log.d("HomeFragment", "Data: $list")
             }
         }
     }

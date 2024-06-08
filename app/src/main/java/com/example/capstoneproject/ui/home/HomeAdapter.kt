@@ -9,7 +9,6 @@ import com.example.capstoneproject.databinding.ItemRowTariBinding
 import com.example.capstoneproject.model.BalineseDance
 
 class HomeAdapter(private val dance: List<BalineseDance>) : RecyclerView.Adapter<HomeAdapter.TariViewHolder>() {
-
     private var onItemClickCallback: OnItemClickCallback? = null
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {

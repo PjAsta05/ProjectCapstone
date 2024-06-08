@@ -22,7 +22,7 @@ class ResultActivity : AppCompatActivity() {
 
     private var currentImageUri: Uri? = null
     private var label: String? = null
-    private var score: Float? = null
+    private var score: Int? = null
     private var token: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class ResultActivity : AppCompatActivity() {
         currentImageUri = Uri.parse(image)
         token = intent.getStringExtra("token").toString()
         label = intent.getStringExtra("Label")
-        score = intent.getFloatExtra("Score", 0.0f)
+        score = intent.getIntExtra("Score", 0)
         getDanceData()
     }
 
@@ -86,8 +86,7 @@ class ResultActivity : AppCompatActivity() {
         viewModel.balineseDance.observe(this) { dance ->
             if (dance != null) {
                 binding.tvNameTari.text = dance.namaTari
-                val percentage = (score!! * 100).toInt()
-                binding.tvPrecentace.text = "${percentage}%"
+                binding.tvPrecentace.text = "$score%"
                 binding.descrtiption.text = dance.deskripsi
                 binding.btnResult.setOnClickListener {
                     val intent = Intent(this, DetailDanceActivity::class.java)

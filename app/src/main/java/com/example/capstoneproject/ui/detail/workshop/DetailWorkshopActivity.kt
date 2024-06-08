@@ -4,19 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
-import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityDetailWorkshopBinding
 import com.example.capstoneproject.model.WorkshopResponse
 import com.example.capstoneproject.ui.form.reg.RegFormActivity
 
 class DetailWorkshopActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailWorkshopBinding
-    private lateinit var workshop: WorkshopResponse
     private var token: String = ""
     private var workshopId: Int = 0
 
@@ -57,6 +52,7 @@ class DetailWorkshopActivity : AppCompatActivity() {
             val intent = Intent(this, RegFormActivity::class.java)
             intent.putExtra("token", token)
             intent.putExtra("workshopId", workshopId)
+            intent.putExtra("workshopName", workshop.workshopName)
             Log.d("token&workshopId", "$token $workshopId")
             startActivity(intent)
         }

@@ -1,8 +1,11 @@
 package com.example.capstoneproject.data
 
+import androidx.lifecycle.LiveData
 import com.example.capstoneproject.api.ApiService
 import com.example.capstoneproject.data.pref.UserModel
 import com.example.capstoneproject.data.pref.UserPreference
+import com.example.capstoneproject.database.History
+import com.example.capstoneproject.database.HistoryDao
 import com.example.capstoneproject.model.AuthResponse
 import com.example.capstoneproject.model.BalineseDance
 import com.example.capstoneproject.model.PackageResponse
@@ -16,7 +19,8 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(
     private val userPreference: UserPreference,
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val historyDao: HistoryDao
 ) {
     suspend fun saveSession(user: UserModel) {
         userPreference.saveSession(user)
@@ -137,6 +141,10 @@ class Repository @Inject constructor(
         return apiService.extendWorkshop(id, packageId, proof, "Bearer $token")
     }
 
+    suspend fun getWorkshopById(id: Int, token: String): WorkshopResponse {
+        return apiService.getWorkshopById(id, "Bearer $token")
+    }
+
     suspend fun workshopRegistration(
         workshopId: Int,
         name: String,
@@ -148,4 +156,13 @@ class Repository @Inject constructor(
     ): UpdateResponse {
         return apiService.workshopRegistration(workshopId, name, email, phone, age, gender, "Bearer $token")
     }
+
+    suspend fun addHistory(history: History) {
+        historyDao.addHistory(history)
+    }
+
+    fun getHistory(): LiveData<List<History>> {
+        return historyDao.getHistory()
+    }
+
 }

@@ -49,18 +49,3 @@ fun createCustomTempFile(context: Context): File {
     val filesDir = context.externalCacheDir
     return File.createTempFile(timeStamp, ".jpg", filesDir)
 }
-
-fun uriToBitmap(context: Context, imageUri: Uri): Bitmap? {
-    try {
-        val contentResolver = context.contentResolver
-        val inputStream = contentResolver.openInputStream(imageUri) ?: return null
-        return inputStream.use {
-            val bitmap = BitmapFactory.decodeStream(inputStream)
-            val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 150, 150, false)
-            resizedBitmap
-        }
-    } catch (e: Exception) {
-        Log.e("ImageLoadingError", "Failed to load image from URI: $imageUri", e)
-        return null
-    }
-}

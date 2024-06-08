@@ -11,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.example.capstoneproject.R
+import com.example.capstoneproject.database.History
 import com.example.capstoneproject.databinding.ActivityRegFormBinding
+import com.example.capstoneproject.ui.history.HistoryViewModel
 import com.example.capstoneproject.ui.process.ProcessRegActivity
 import com.example.capstoneproject.ui.workshop.WorkshopViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,8 +22,10 @@ import kotlinx.coroutines.launch
 class RegFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegFormBinding
     private val viewModel : WorkshopViewModel by viewModels()
+    private val viewModel2 : HistoryViewModel by viewModels()
     private var token: String = ""
     private var workshopId: Int = 0
+    private var workshopName: String = ""
     private var gender: String = ""
 
     private var nameValid = false
@@ -109,6 +113,7 @@ class RegFormActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 val isSuccess = viewModel.workshopRegistration(workshopId, name, email, phone, age, gender, token)
                 if (isSuccess) {
+                    viewModel2.addHistory(workshopId, workshopName)
                     val intent = Intent(this@RegFormActivity, ProcessRegActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -128,6 +133,7 @@ class RegFormActivity : AppCompatActivity() {
     private fun getTokenAndId() {
         token = intent.getStringExtra("token").toString()
         workshopId = intent.getIntExtra("workshopId", 0)
+        workshopName = intent.getStringExtra("workshopName").toString()
     }
 
     private fun showLoading(state: Boolean) {

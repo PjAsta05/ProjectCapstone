@@ -24,7 +24,6 @@ class WelcomeActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            showToast("Login")
         }
     }
 
@@ -32,18 +31,6 @@ class WelcomeActivity : AppCompatActivity() {
         binding.btnSignIn.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
-            showToast("Sign Up")
         }
-    }
-
-    private fun showLoading(state: Boolean) {
-        if (state) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
-    }
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

@@ -62,7 +62,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
-                android:text="Workshop creation is in progress, please wait a while"
+                android:text="@string/progress_workshop"
                 android:textSize="16sp"
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"

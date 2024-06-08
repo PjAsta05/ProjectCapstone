@@ -73,5 +73,8 @@
     <string name="empty_list">No items found</string>
     <string name="man">Man</string>
     <string name="woman">Woman</string>
+    <string name="add_wrokshop">Add Wrokshop</string>
+    <string name="packet">packet</string>
+    <string name="progress_workshop">Workshop creation is in progress, please wait a while</string>
 
 </resources>

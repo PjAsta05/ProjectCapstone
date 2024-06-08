@@ -136,7 +136,7 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="paket" />
+                    android:text="@string/packet" />
 
                 <TextView
                     android:id="@+id/tv_item_id"

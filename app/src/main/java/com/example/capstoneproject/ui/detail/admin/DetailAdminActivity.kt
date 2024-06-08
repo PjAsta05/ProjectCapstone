@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -131,8 +132,10 @@ class DetailAdminActivity : AppCompatActivity() {
                 val isSuccess = viewModel.updateWorkshop(id, packageIdRequestBody, userIdRequestBody, workshopRequestBody, sanggarRequestBody, addressRequestBody, emailRequestBody, phoneRequestBody, ownerRequestBody, descriptionRequestBody, priceRequestBody, statusRequestBody, null, null, token)
                 if (!isSuccess) {
                     Log.d("DetailAdminActivity", "Error")
+                    showToast("Failed to update workshop")
                 } else {
                     finish()
+                    showToast("Workshop updated")
                 }
                 showLoading(false)
             }
@@ -150,8 +153,10 @@ class DetailAdminActivity : AppCompatActivity() {
             val isSuccess = viewModel.deleteWorkshop(id, token)
             if (!isSuccess) {
                 Log.d("DetailAdminActivity", "Error")
+                showToast("Failed to delete workshop")
             } else {
                 finish()
+                showToast("Workshop deleted")
             }
             showLoading(false)
         }
@@ -186,6 +191,10 @@ class DetailAdminActivity : AppCompatActivity() {
         } else {
             binding.progressBar.visibility = View.GONE
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

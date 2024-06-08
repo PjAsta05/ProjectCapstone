@@ -5,12 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary"
     tools:context=".ui.auth.login.LoginActivity">
 
     <ImageView
         android:layout_width="142dp"
         android:layout_height="131dp"
-        android:src="@drawable/img_logo"
+        android:src="@drawable/img_logo2"
         app:layout_constraintBottom_toTopOf="@+id/cardView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

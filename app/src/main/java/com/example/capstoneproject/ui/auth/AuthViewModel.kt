@@ -12,14 +12,12 @@ import com.example.capstoneproject.model.AuthResponse
 import com.example.capstoneproject.model.ErrorResponse
 import com.example.capstoneproject.model.User
 import com.google.gson.Gson
-import com.google.gson.JsonParser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.HttpException
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(

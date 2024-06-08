@@ -7,13 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstoneproject.databinding.FragmentUserBinding
 import com.example.capstoneproject.model.WorkshopResponse
-import com.example.capstoneproject.ui.detail.admin.DetailAdminActivity
 import com.example.capstoneproject.ui.detail.workshop.DetailWorkshopActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -42,6 +40,11 @@ class UserFragment : Fragment() {
     ): View {
         _binding = FragmentUserBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getWorkshop()
     }
 
     private fun getWorkshop() {

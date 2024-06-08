@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.example.capstoneproject.R
-import com.example.capstoneproject.database.History
 import com.example.capstoneproject.databinding.ActivityRegFormBinding
 import com.example.capstoneproject.ui.history.HistoryViewModel
 import com.example.capstoneproject.ui.process.ProcessRegActivity
@@ -67,27 +66,19 @@ class RegFormActivity : AppCompatActivity() {
             ageValid = it.toString().isNotEmpty()
             btnEnabled()
         }
+
         binding.rbGender.setOnCheckedChangeListener (object : RadioGroup.OnCheckedChangeListener{
             override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
-                genderValid = when (checkedId) {
-                    R.id.gender_pria -> {
-                        gender = "pria"
-                        btnEnabled()
-                        true
-                    }
-                    R.id.gender_wanita -> {
-                        gender = "wanita"
-                        btnEnabled()
-                        true
-                    }
-                    else -> {
-                        btnEnabled()
-                        false
-                    }
+                genderValid = checkedId == R.id.gender_pria || checkedId == R.id.gender_wanita
+                when (checkedId) {
+                    R.id.gender_pria -> gender = "pria"
+                    R.id.gender_wanita -> gender = "wanita"
                 }
+                btnEnabled()
             }
         })
     }
+
 
     private fun btnEnabled() {
         binding.btnReg.isEnabled = nameValid && emailValid && phoneValid && ageValid && genderValid

@@ -5,13 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
 import com.example.capstoneproject.databinding.FragmentWorkshopBinding
-import com.example.capstoneproject.ui.admin.workshop.active.ActiveFragment
-import com.example.capstoneproject.ui.auth.AuthViewModel
 import com.google.android.material.tabs.TabLayoutMediator
-import dagger.hilt.android.AndroidEntryPoint
 
 class WorkshopFragment : Fragment() {
     private var _binding: FragmentWorkshopBinding? = null

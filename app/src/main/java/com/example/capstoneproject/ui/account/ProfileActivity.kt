@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityProfileBinding
-import com.example.capstoneproject.model.WorkshopResponse
 import com.example.capstoneproject.ui.WelcomeActivity
 import com.example.capstoneproject.ui.account.editprofile.EditProfileActivity
 import com.example.capstoneproject.ui.auth.AuthViewModel

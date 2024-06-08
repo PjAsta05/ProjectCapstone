@@ -2,11 +2,9 @@ package com.example.capstoneproject.ui.process
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.capstoneproject.databinding.ActivityProcessRegBinding
 import com.example.capstoneproject.ui.MainActivity
-import com.example.capstoneproject.ui.detail.workshop.DetailWorkshopActivity
 
 class ProcessRegActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProcessRegBinding

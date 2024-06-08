@@ -4,14 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityPacketBinding
 import com.example.capstoneproject.model.PackageResponse
 import com.example.capstoneproject.ui.form.payment.ExtendPaymentActivity

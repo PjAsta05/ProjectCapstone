@@ -31,6 +31,7 @@ class HistoryActivity : AppCompatActivity() {
 
         getHistory()
         getToken()
+        setupActionBar()
     }
 
     private fun getToken() {
@@ -83,6 +84,15 @@ class HistoryActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.VISIBLE
         } else {
             binding.progressBar.visibility = View.GONE
+        }
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        binding.toolbar.setNavigationOnClickListener {
+            super.onBackPressed()
         }
     }
 }

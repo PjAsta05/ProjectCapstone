@@ -1,7 +1,6 @@
 package com.example.capstoneproject.ui.detail.admin
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.capstoneproject.databinding.ActivityProofBinding

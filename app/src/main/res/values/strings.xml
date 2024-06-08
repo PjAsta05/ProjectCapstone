@@ -3,12 +3,7 @@
     <string name="home">Home</string>
     <string name="workshop">Workshop</string>
     <string name="scan_activity_for_classification">Scan Activity for Classification</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="home_fragment">Home Fragment</string>
-    <string name="workshop_fragment">Workshop Fragment</string>
     <string name="profile">Profile</string>
-    <string name="more">More</string>
-    <string name="language">Language</string>
     <string name="history">History</string>
     <string name="email">Email</string>
     <string name="login">Log In</string>
@@ -21,7 +16,6 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="add">Add</string>
     <string name="save">Save</string>
-    <string name="paket">Paket</string>
     <string name="noRek">123-345-678-1011</string>
     <string name="email_error">Invalid email format</string>
     <string name="password_error">Password must not be less than 8 characters</string>
@@ -47,7 +41,6 @@
     <string name="phone">Phone</string>
     <string name="register">Register</string>
     <string name="register_for_workshop">Register for Workshop</string>
-    <string name="nama">Nama</string>
     <string name="gender">Gender</string>
     <string name="back">Back</string>
     <string name="process_reg">registration is being processed, please wait for a while</string>
@@ -60,7 +53,6 @@
     <string name="scroll_item_will_be_here">Scroll item will be here</string>
     <string name="tabs_for_admin">Tabs for admin</string>
     <string name="price">Price</string>
-    <string name="_10000">10000</string>
     <string name="active">Active</string>
     <string name="pending">Pending</string>
     <string name="inactive">Inactive</string>

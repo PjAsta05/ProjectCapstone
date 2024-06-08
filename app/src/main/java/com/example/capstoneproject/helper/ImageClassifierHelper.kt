@@ -62,7 +62,7 @@ class ImageClassifierHelper(
         }
 
         val imageProcessor = ImageProcessor.Builder()
-            .add(ResizeOp(115, 115, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR))
+            .add(ResizeOp(150, 150, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR))
             .add(CastOp(DataType.FLOAT32))
             .build()
 

@@ -1,5 +1,7 @@
 package com.example.capstoneproject.ui.detail.tari
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +35,12 @@ class DetailDanceActivity : AppCompatActivity() {
                 Glide.with(this@DetailDanceActivity)
                     .load(it.urlGambar)
                     .into(image)
+            }
+            val link = it.urlVideo
+            binding.playButton.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(link)
+                startActivity(intent)
             }
         }
         showLoading(false)

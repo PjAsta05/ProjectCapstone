@@ -105,6 +105,7 @@ class DetailAdminActivity : AppCompatActivity() {
 
     private fun editWorkshop() {
         binding.btnConfirm.setOnClickListener {
+            showLoading(true)
             val workshop = binding.etWorkshop.text.toString()
             val sanggar = binding.etSanggar.text.toString()
             val address = binding.etAddress.text.toString()
@@ -125,8 +126,7 @@ class DetailAdminActivity : AppCompatActivity() {
             val descriptionRequestBody = description.toRequestBody("text/plain".toMediaType())
             val priceRequestBody = price.toRequestBody("text/plain".toMediaType())
             val statusRequestBody = status.toRequestBody("text/plain".toMediaType())
-            showLoading(true)
-            Log.d("Update Workshop","$id, $packageId, $userId, $workshop, $sanggar, $address, $email, $phone, $owner, $description, $price, $status, $token")
+
             lifecycleScope.launch {
                 val isSuccess = viewModel.updateWorkshop(id, packageIdRequestBody, userIdRequestBody, workshopRequestBody, sanggarRequestBody, addressRequestBody, emailRequestBody, phoneRequestBody, ownerRequestBody, descriptionRequestBody, priceRequestBody, statusRequestBody, null, null, token)
                 if (!isSuccess) {
@@ -145,17 +145,15 @@ class DetailAdminActivity : AppCompatActivity() {
         }
     }
     private fun deleteWorkshop() {
-        binding.btnDelete.setOnClickListener {
-            showLoading(true)
-            lifecycleScope.launch {
-                val isSuccess = viewModel.deleteWorkshop(id, token)
-                if (!isSuccess) {
-                    Log.d("DetailAdminActivity", "Error")
-                } else {
-                    finish()
-                }
-                showLoading(false)
+        showLoading(true)
+        lifecycleScope.launch {
+            val isSuccess = viewModel.deleteWorkshop(id, token)
+            if (!isSuccess) {
+                Log.d("DetailAdminActivity", "Error")
+            } else {
+                finish()
             }
+            showLoading(false)
         }
     }
 

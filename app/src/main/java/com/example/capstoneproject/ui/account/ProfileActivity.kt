@@ -102,7 +102,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun observeWorkshop() {
         viewModel2.workshops.observe(this) { list ->
             if (list != null) {
-                adapter = ProfileWorkshopAdapter(list)
+                adapter = ProfileWorkshopAdapter(list, token)
                 binding.recyclerView.adapter = adapter
             }
         }

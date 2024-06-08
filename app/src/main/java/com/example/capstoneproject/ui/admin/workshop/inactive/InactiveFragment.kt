@@ -45,6 +45,11 @@ class InactiveFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        getWorkshop()
+    }
+
     private fun getWorkshop() {
         showLoading(true)
         lifecycleScope.launch {

@@ -7,8 +7,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:name=".MyApplication"
@@ -21,6 +20,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CapstoneProject"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.form.payment.ExtendPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.form.packet.ExtendPackageActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.camera.CameraActivity"
             android:exported="false" />

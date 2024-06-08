@@ -71,7 +71,7 @@ class Repository @Inject constructor(
     }
 
     suspend fun findTari(dance: String, token: String): BalineseDance {
-        return apiService.findTari(dance, token)
+        return apiService.findTari(dance, "Bearer $token")
     }
 
     suspend fun getListPackage(token: String): List<PackageResponse> {
@@ -126,6 +126,15 @@ class Repository @Inject constructor(
 
     suspend fun deleteWorkshop(id: Int, token: String): UpdateResponse {
         return apiService.deleteWorkshop(id, "Bearer $token")
+    }
+
+    suspend fun extendWorkshop(
+        id: Int,
+        packageId: RequestBody,
+        proof: MultipartBody.Part? = null,
+        token: String
+    ): UpdateResponse {
+        return apiService.extendWorkshop(id, packageId, proof, "Bearer $token")
     }
 
     suspend fun workshopRegistration(

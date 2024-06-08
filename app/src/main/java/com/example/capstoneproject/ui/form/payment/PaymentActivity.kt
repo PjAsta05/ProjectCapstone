@@ -52,14 +52,14 @@ class PaymentActivity : AppCompatActivity() {
         binding = ActivityPaymentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getArguments()
+        getExtra()
         setupPackage()
         btnGallery()
         setupActionBar()
         process()
     }
 
-    private fun getArguments(){
+    private fun getExtra() {
         uri = intent.extras?.getString("photo").toString()
         photo = uri.let { Uri.parse(it) }
         workshop = intent.getStringExtra("workshop").toString()
@@ -115,8 +115,8 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun process() {
-        showLoading(true)
         binding.btnProcess.setOnClickListener {
+            showLoading(true)
             val packageIdRequestBody = packageId.toString().toRequestBody("text/plain".toMediaType())
             val userIdRequestBody = userId.toString().toRequestBody("text/plain".toMediaType())
             val workshopRequestBody = workshop.toRequestBody("text/plain".toMediaType())
@@ -148,7 +148,6 @@ class PaymentActivity : AppCompatActivity() {
                     file
                 )
             }
-            Log.d("PaymentActivity","$packageId, $userId, $workshop, $sanggar, $address, $email, $phone, $owner, $description, $price, $multipartBody1, $multipartBody2")
             lifecycleScope.launch {
                 val isSuccess = viewModel.addWorkshop(packageIdRequestBody, userIdRequestBody, workshopRequestBody, sanggarRequestBody, addressRequestBody, emailRequestBody, phoneRequestBody, ownerRequestBody, descriptionRequestBody, priceRequestBody, multipartBody1, multipartBody2, token)
                 if (!isSuccess) {

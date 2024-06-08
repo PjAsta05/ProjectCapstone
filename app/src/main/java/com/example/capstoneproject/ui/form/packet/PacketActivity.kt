@@ -46,7 +46,7 @@ class PacketActivity : AppCompatActivity() {
         getPackages(token)
     }
 
-    private fun getArguments(){
+    private fun getArguments() {
         uri = intent.getStringExtra("photo").toString()
         workshop = intent.getStringExtra("workshop").toString()
         sanggar = intent.getStringExtra("sanggar").toString()
@@ -101,8 +101,9 @@ class PacketActivity : AppCompatActivity() {
                         intent.putExtra("token", token)
                         intent.putExtra("id", userId)
                         intent.putExtra("packageId", data.id)
+                        intent.putExtra("packageName", data.packageName)
+                        intent.putExtra("packagePrice", data.price)
                         startActivity(intent)
-                        Log.d("PacketActivity", "$photo, $workshop, $sanggar, $owner, $email, $phone, $address, $description, $price, $token, $userId")
                     }
                 })
                 binding.recyclerView.adapter = adapter

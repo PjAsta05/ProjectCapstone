@@ -30,8 +30,6 @@
             app:title="Payment"
             app:titleCentered="true"/>
 
-
-
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
@@ -90,15 +88,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView7" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_payment"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:minHeight="300dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/btn_background1"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:background="#F1F1F1"
+
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
             app:layout_constraintBottom_toTopOf="@+id/card_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -27,7 +27,7 @@
     <string name="password_error">Password must not be less than 8 characters</string>
     <string name="payment">Payment</string>
     <string name="welcome">Welcome</string>
-    <string name="welcome_text">Welcome text</string>
+    <string name="welcome_text">Lets explore the enchanting world of Balinese dance together!</string>
     <string name="detaildescription">Lorem ipsum dolor sit amet consectetur. Ut nisl mi porta iaculis lectus porttitor massa mauris laoreet. Sed faucibus viverra vitae id ac. Neque sit in sed at id hendrerit. Id facilisis egestas pulvinar imperdiet lorem odio diam porttitor orci. Nisl hac sit semper volutpat felis cursus dignissim odio id. Turpis.</string>
     <string name="confirm">Confirm</string>
     <string name="wrokshop">Wrokshop</string>
@@ -65,11 +65,10 @@
     <string name="pending">Pending</string>
     <string name="inactive">Inactive</string>
     <string name="delete">Delete</string>
-
     <string name="package_name">Package Name</string>
     <string name="watch_the_video_on_youtube">Watch the video on YouTube</string>
     <string name="bank_account_number">Bank Account Number</string>
-    <string name="after_payment">After Payment</string>
+    <string name="after_payment">Proof of transfer is required for payment verification.</string>
     <string name="age">Age</string>
     <string name="empty_list">No items found</string>
     <string name="man">Man</string>

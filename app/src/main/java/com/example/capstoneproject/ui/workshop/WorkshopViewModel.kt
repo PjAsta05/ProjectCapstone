@@ -90,6 +90,21 @@ class WorkshopViewModel @Inject constructor(
         }
     }
 
+    suspend fun extendWorkshop(
+        id: Int,
+        packageId: RequestBody,
+        proof: MultipartBody.Part? = null,
+        token: String
+    ): Boolean {
+        return try {
+            repository.extendWorkshop(id, packageId, proof, token)
+            true
+        } catch (e: HttpException) {
+            Log.d("extendWorkshop", "${e.message}")
+            false
+        }
+    }
+
     suspend fun workshopRegistration(
         workshopId: Int,
         name: String,

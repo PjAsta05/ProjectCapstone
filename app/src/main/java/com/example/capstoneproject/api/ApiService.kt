@@ -55,6 +55,8 @@ interface ApiService {
         @Query("asal_tari") origin: String
     ): List<BalineseDance>
 
+
+
     @GET("tari/{tari}")
     suspend fun findTari(
         @Path("tari") tari: String,
@@ -107,6 +109,15 @@ interface ApiService {
         @Part("price") price: RequestBody? = null,
         @Part("status") status: RequestBody? = null,
         @Part photo: MultipartBody.Part? = null,
+        @Part proof: MultipartBody.Part? = null,
+        @Header("Authorization") token: String
+    ): UpdateResponse
+
+    @Multipart
+    @PUT("workshop/extend/{id}")
+    suspend fun extendWorkshop(
+        @Path("id") id: Int,
+        @Part("paketId") packageId: RequestBody,
         @Part proof: MultipartBody.Part? = null,
         @Header("Authorization") token: String
     ): UpdateResponse

@@ -39,6 +39,7 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
         getCameraSelector(CameraSelector.LENS_FACING_FRONT)
     }
     private var currentImageUri: Uri? = null
+    private var token: String = ""
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
@@ -61,9 +62,15 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        getToken()
+        setupActionBar()
         startCamera()
         startGallery()
         takePicture()
+    }
+
+    private fun getToken() {
+        token = intent.getStringExtra("token").toString()
     }
 
     private fun getCameraSelector(lensFacing: Int) = CameraSelector.Builder().requireLensFacing(lensFacing).build()
@@ -136,7 +143,18 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
         intent.putExtra(EXTRA_IMAGE, currentImageUri.toString())
         intent.putExtra(EXTRA_LABEL, probability.label)
         intent.putExtra(EXTRA_SCORE, probability.score)
+        intent.putExtra("token", token)
         startActivity(intent)
+        finish()
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        binding.toolbar.setNavigationOnClickListener {
+            super.onBackPressed()
+        }
     }
 
     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {

@@ -117,6 +117,7 @@ class MainActivity : AppCompatActivity() {
                 requestPermissionLauncher.launch(REQUIRED_PERMISSION)
             } else {
                 val intent = Intent(this@MainActivity, CameraActivity::class.java)
+                intent.putExtra("token", token)
                 startActivity(intent)
             }
         }

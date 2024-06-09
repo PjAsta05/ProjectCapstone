@@ -68,5 +68,6 @@
     <string name="add_wrokshop">Add Wrokshop</string>
     <string name="progress_workshop">Workshop creation is in progress, please wait a while</string>
     <string name="being_processed">Being Processed</string>
+    <string name="capture_image">Capture Image</string>
 
 </resources>

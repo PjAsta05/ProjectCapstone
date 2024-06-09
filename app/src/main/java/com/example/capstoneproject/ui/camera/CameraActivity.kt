@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -120,6 +121,7 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
     }
 
     private fun analyzeImage() {
+        showLoading(true)
         currentImageUri?.let {
             imageClassifierHelper = ImageClassifierHelper(
                 context = this,
@@ -140,6 +142,7 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
                 }
             )
             imageClassifierHelper.classifyStaticImage(it)
+            showLoading(false)
         }?: showToast("No Image Selected")
     }
 
@@ -159,6 +162,14 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
 
         binding.toolbar.setNavigationOnClickListener {
             super.onBackPressed()
+        }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 

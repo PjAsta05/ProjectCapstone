@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CapstoneProject</string>
+    <string name="app_name">AGEMAN</string>
     <string name="home">Home</string>
     <string name="workshop">Workshop</string>
     <string name="scan_activity_for_classification">Scan Activity for Classification</string>
@@ -37,14 +37,14 @@
     <string name="status">Status :</string>
     <string name="process">process</string>
     <string name="detail">Detail</string>
-    <string name="sanggar">sanggar</string>
+    <string name="sanggar">Sanggar</string>
     <string name="phone">Phone</string>
     <string name="register">Register</string>
     <string name="register_for_workshop">Register for Workshop</string>
     <string name="gender">Gender</string>
     <string name="back">Back</string>
-    <string name="process_reg">registration is being processed, please wait for a while</string>
-    <string name="percentage">percentage :</string>
+    <string name="process_reg">Registration is being processed, Please wait for a while</string>
+    <string name="percentage">Percentage :</string>
     <string name="more_detail">More Detail</string>
     <string name="create_new_password">Create New Password</string>
     <string name="new_password">New Password</string>

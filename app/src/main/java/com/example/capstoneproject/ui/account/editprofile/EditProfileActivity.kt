@@ -40,7 +40,6 @@ class EditProfileActivity : AppCompatActivity() {
         if (uri != null) {
             currentImageUri = uri
             showImage()
-            showToast(uri.toString())
         } else {
             Log.d("Photo Picker", "No media selected")
             showToast("No media selected")

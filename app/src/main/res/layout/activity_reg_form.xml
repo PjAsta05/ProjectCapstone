@@ -59,7 +59,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_name"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -135,7 +134,6 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_age"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -200,7 +198,6 @@
                         android:text="@string/woman"
                         android:textSize="16sp" />
 
-
                 </RadioGroup>
 
                 <com.google.android.material.button.MaterialButton
@@ -219,9 +216,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rb_gender" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.cardview.widget.CardView>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

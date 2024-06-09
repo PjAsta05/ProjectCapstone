@@ -41,7 +41,7 @@ class RegFormActivity : AppCompatActivity() {
         getTokenAndId()
         input()
         btnEnabled()
-       reg()
+        reg()
     }
 
     private fun input() {

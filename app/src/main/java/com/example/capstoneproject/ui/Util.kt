@@ -48,3 +48,18 @@ fun createCustomTempFile(context: Context): File {
     val filesDir = context.externalCacheDir
     return File.createTempFile(timeStamp, ".jpg", filesDir)
 }
+
+fun uriToBitmap(context: Context, imageUri: Uri): Bitmap? {
+    try {
+        val contentResolver = context.contentResolver
+        val inputStream = contentResolver.openInputStream(imageUri) ?: return null
+
+        val bitmap = BitmapFactory.decodeStream(inputStream)
+        inputStream.close()
+
+        return bitmap
+    } catch (e: Exception) {
+        e.printStackTrace()
+        return null
+    }
+}

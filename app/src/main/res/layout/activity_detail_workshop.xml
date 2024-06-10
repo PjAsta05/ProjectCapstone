@@ -265,6 +265,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:textSize="16sp"
+                android:justificationMode="inter_word"
+                tools:targetApi="o"
                 tools:text="@string/detaildescription" />
         </androidx.cardview.widget.CardView>
 

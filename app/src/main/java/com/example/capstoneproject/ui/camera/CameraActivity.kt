@@ -2,7 +2,10 @@ package com.example.capstoneproject.ui.camera
 
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -22,7 +25,13 @@ import androidx.lifecycle.LifecycleOwner
 import com.example.capstoneproject.databinding.ActivityCameraBinding
 import com.example.capstoneproject.helper.ImageClassifierHelper
 import com.example.capstoneproject.ui.result.ResultActivity
+import com.example.capstoneproject.ui.uriToBitmap
 import com.google.common.util.concurrent.ListenableFuture
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.common.ops.CastOp
+import org.tensorflow.lite.support.image.ImageProcessor
+import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.task.vision.classifier.Classifications
 
 class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
@@ -46,8 +55,10 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
         ActivityResultContracts.PickVisualMedia()
     ) { uri: Uri? ->
         if (uri != null) {
+            showLoading(true)
             currentImageUri = uri
             analyzeImage()
+            //analyzeImage2(currentImageUri!!)
         } else {
             Log.d("Photo Picker", "No media selected")
         }
@@ -100,6 +111,7 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
 
     private fun takePicture() {
         binding.buttonCapture.setOnClickListener {
+            showLoading(true)
             imageCapture.takePicture(
                 getImageOutputOptions(),
                 ContextCompat.getMainExecutor(this),
@@ -120,8 +132,19 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
         ).build()
     }
 
+//    private fun analyzeImage2() {
+//        val model = AgemanModelWithMetadata250.newInstance(this)
+//        val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, currentImageUri)
+//        val img = Bitmap.createScaledBitmap(bitmap, 250, 250, true)
+//        val image = TensorImage.fromBitmap(img)
+//        val outputs = model.process(image)
+//        val probability = outputs.probabilityAsCategoryList
+//        Log.d("ImageClassifierHelper", "Result: $probability")
+//
+//        model.close()
+//    }
+
     private fun analyzeImage() {
-        showLoading(true)
         currentImageUri?.let {
             imageClassifierHelper = ImageClassifierHelper(
                 context = this,
@@ -135,6 +158,8 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
                             classifications.categories.forEach { category ->
                                 label = category.label
                                 score = (category.score * 100).toInt()
+                                Log.d("Label", label)
+                                Log.d("Score", score.toString())
                             }
                         }
                         navigateToResult(label, score)
@@ -142,8 +167,8 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
                 }
             )
             imageClassifierHelper.classifyStaticImage(it)
-            showLoading(false)
         }?: showToast("No Image Selected")
+        showLoading(false)
     }
 
     private fun navigateToResult(label: String, score: Int) {
@@ -176,6 +201,7 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
         currentImageUri = outputFileResults.savedUri
         analyzeImage()
+        //analyzeImage2(currentImageUri!!)
     }
 
     override fun onError(exception: ImageCaptureException) {

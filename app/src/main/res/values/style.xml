@@ -14,4 +14,10 @@
         <item name="backgroundTint">@color/white</item>
         <item name="rippleColor">@color/gray</item>
     </style>
+
+    <style name="IconButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/transparent</item>
+        <item name="rippleColor">@color/gray</item>
+    </style>
+
 </resources>

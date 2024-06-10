@@ -96,7 +96,7 @@
                 android:id="@+id/btn_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
                 android:paddingHorizontal="75dp"
                 android:paddingVertical="10dp"

@@ -65,6 +65,11 @@ class ResultActivity : AppCompatActivity() {
             "Rejang_Sari" -> {
                 findDance("tari-rejang-sari")
             }
+            else -> {
+                binding.tvNameTari.text = label
+                binding.tvPrecentace.text = "$score%"
+                binding.btnResult.isEnabled = false
+            }
         }
     }
 

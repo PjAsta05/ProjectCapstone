@@ -19,7 +19,7 @@ import org.tensorflow.lite.task.vision.classifier.ImageClassifier
 class ImageClassifierHelper(
     private var threshold: Float = 0.5f,
     private var maxResults: Int = 1,
-    private val modelName: String = "ageman_model_with_metadata.tflite",
+    private val modelName: String = "ageman_model_with_metadata(lama).tflite",
     val context: Context,
     val classifierListener: ClassifierListener?
 ) {
@@ -43,7 +43,6 @@ class ImageClassifierHelper(
         val baseOptionsBuilder = BaseOptions.builder()
             .setNumThreads(4)
         optionBuilder.setBaseOptions(baseOptionsBuilder.build())
-
         try {
             imageClassifier = ImageClassifier.createFromFileAndOptions(
                 context,
@@ -62,7 +61,7 @@ class ImageClassifierHelper(
         }
 
         val imageProcessor = ImageProcessor.Builder()
-            .add(ResizeOp(150, 150, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR))
+            .add(ResizeOp(224, 224, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR))
             .add(CastOp(DataType.FLOAT32))
             .build()
 
@@ -74,6 +73,7 @@ class ImageClassifierHelper(
         }.copy(Bitmap.Config.ARGB_8888, true).let { bitmap ->
             val tensorImage = imageProcessor.process(TensorImage.fromBitmap(bitmap))
             val result = imageClassifier?.classify(tensorImage)
+            Log.d("ImageClassifierHelper", "Result: $result")
             classifierListener?.onResult(result)
         }
     }

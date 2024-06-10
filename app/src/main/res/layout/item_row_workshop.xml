@@ -61,6 +61,8 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/img_item_photo"
             android:textSize="16sp"
+            android:justificationMode="inter_word"
+            tools:targetApi="o"
             card_view:layout_constraintEnd_toEndOf="@+id/tv_item_address"
             card_view:layout_constraintStart_toStartOf="@+id/tv_item_address"
             card_view:layout_constraintTop_toBottomOf="@+id/tv_item_address"

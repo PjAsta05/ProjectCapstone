@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CircleImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="RoundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="CaptureButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/white</item>
+        <item name="rippleColor">@color/gray</item>
+    </style>
+
+    <style name="IconButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/transparent</item>
+        <item name="rippleColor">@color/gray</item>
+    </style>
+
+</resources>

@@ -167,9 +167,8 @@ class Repository @Inject constructor(
     }
 
     suspend fun imageClassification(
-        image: MultipartBody.Part,
-        token: String
+        image: MultipartBody.Part
     ): ClassificationResponse {
-        return apiService.imageClassification(image, "Bearer $token")
+        return apiService.imageClassification(image)
     }
 }

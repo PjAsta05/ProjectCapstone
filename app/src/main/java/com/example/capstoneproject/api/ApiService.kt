@@ -150,7 +150,6 @@ interface ApiService {
     @Multipart
     @POST("predict")
     suspend fun imageClassification(
-        @Part image: MultipartBody.Part,
-        @Header("Authorization") token: String
+        @Part image: MultipartBody.Part
     ): ClassificationResponse
 }

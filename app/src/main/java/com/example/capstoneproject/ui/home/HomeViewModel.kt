@@ -42,9 +42,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    suspend fun classifyTari(image: MultipartBody.Part, token: String): Boolean {
+    suspend fun classifyTari(image: MultipartBody.Part): Boolean {
         return try {
-            val response = repository.imageClassification(image, token)
+            val response = repository.imageClassification(image)
             classification.postValue(response)
             true
         } catch (e: HttpException) {

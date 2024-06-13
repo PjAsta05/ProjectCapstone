@@ -2,6 +2,7 @@ package com.example.capstoneproject.api
 
 import com.example.capstoneproject.model.AuthResponse
 import com.example.capstoneproject.model.BalineseDance
+import com.example.capstoneproject.model.ClassificationResponse
 import com.example.capstoneproject.model.PackageResponse
 import com.example.capstoneproject.model.UpdateResponse
 import com.example.capstoneproject.model.User
@@ -145,4 +146,11 @@ interface ApiService {
         @Field("jenis_kelamin") gender: String,
         @Header("Authorization") token: String
     ): UpdateResponse
+
+    @Multipart
+    @POST("predict")
+    suspend fun imageClassification(
+        @Part image: MultipartBody.Part,
+        @Header("Authorization") token: String
+    ): ClassificationResponse
 }

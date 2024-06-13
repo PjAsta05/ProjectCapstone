@@ -8,6 +8,7 @@ import com.example.capstoneproject.database.History
 import com.example.capstoneproject.database.HistoryDao
 import com.example.capstoneproject.model.AuthResponse
 import com.example.capstoneproject.model.BalineseDance
+import com.example.capstoneproject.model.ClassificationResponse
 import com.example.capstoneproject.model.PackageResponse
 import com.example.capstoneproject.model.UpdateResponse
 import com.example.capstoneproject.model.User
@@ -165,4 +166,10 @@ class Repository @Inject constructor(
         return historyDao.getHistory()
     }
 
+    suspend fun imageClassification(
+        image: MultipartBody.Part,
+        token: String
+    ): ClassificationResponse {
+        return apiService.imageClassification(image, "Bearer $token")
+    }
 }

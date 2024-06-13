@@ -6,8 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -20,14 +18,11 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.example.capstoneproject.databinding.ActivityCameraBinding
-import com.example.capstoneproject.helper.ImageClassifierHelper
 import com.example.capstoneproject.ui.result.ResultActivity
 import com.google.common.util.concurrent.ListenableFuture
-import org.tensorflow.lite.task.vision.classifier.Classifications
 
 class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
     private lateinit var binding: ActivityCameraBinding
-    private lateinit var imageClassifierHelper: ImageClassifierHelper
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private lateinit var camera: Camera
     private lateinit var imageCapture: ImageCapture
@@ -39,16 +34,13 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
     }
     private var currentImageUri: Uri? = null
     private var token: String = ""
-    private var label: String = ""
-    private var score: Int = 0
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
     ) { uri: Uri? ->
         if (uri != null) {
-            showLoading(true)
             currentImageUri = uri
-            analyzeImage()
+            navigateToResultActivity()
         } else {
             Log.d("Photo Picker", "No media selected")
         }
@@ -101,7 +93,6 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
 
     private fun takePicture() {
         binding.buttonCapture.setOnClickListener {
-            showLoading(true)
             imageCapture.takePicture(
                 getImageOutputOptions(),
                 ContextCompat.getMainExecutor(this),
@@ -122,41 +113,11 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
         ).build()
     }
 
-    private fun analyzeImage() {
-        currentImageUri?.let {
-            imageClassifierHelper = ImageClassifierHelper(
-                context = this,
-                classifierListener = object : ImageClassifierHelper.ClassifierListener {
-                    override fun onError(error: String) {
-                        showToast("Error: $error")
-                    }
-
-                    override fun onResult(result: List<Classifications>?) {
-                        result?.forEach { classifications ->
-                            classifications.categories.forEach { category ->
-                                label = category.label
-                                score = (category.score * 100).toInt()
-                                Log.d("Label", label)
-                                Log.d("Score", score.toString())
-                            }
-                        }
-                        navigateToResult(label, score)
-                    }
-                }
-            )
-            imageClassifierHelper.classifyStaticImage(it)
-        }?: showToast("No Image Selected")
-        showLoading(false)
-    }
-
-    private fun navigateToResult(label: String, score: Int) {
+    private fun navigateToResultActivity() {
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra(EXTRA_IMAGE, currentImageUri.toString())
-        intent.putExtra(EXTRA_LABEL, label)
-        intent.putExtra(EXTRA_SCORE, score)
-        intent.putExtra("token", token)
+        intent.putExtra(EXTRA_TOKEN, token)
         startActivity(intent)
-        finish()
     }
 
     private fun setupActionBar() {
@@ -168,30 +129,17 @@ class CameraActivity : AppCompatActivity(), ImageCapture.OnImageSavedCallback {
         }
     }
 
-    private fun showLoading(state: Boolean) {
-        if (state) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
-    }
-
     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
         currentImageUri = outputFileResults.savedUri
-        analyzeImage()
+        navigateToResultActivity()
     }
 
     override fun onError(exception: ImageCaptureException) {
         exception.printStackTrace()
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
     companion object {
         const val EXTRA_IMAGE = "Image"
-        const val EXTRA_LABEL = "Label"
-        const val EXTRA_SCORE = "Score"
+        const val EXTRA_TOKEN = "Token"
     }
 }

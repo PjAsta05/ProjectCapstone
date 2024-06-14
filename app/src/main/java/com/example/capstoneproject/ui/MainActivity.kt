@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
     private var token: String = ""
     private var role: String = ""
+    private var isHome: Boolean = true
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -63,8 +64,13 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     token = user.token
                     role = user.role
-                    binding.toolbar.title = "Home"
-                    loadFragment(HomeFragment())
+                    if (isHome) {
+                        binding.toolbar.title = "Home"
+                        loadFragmentHome()
+                    } else {
+                        binding.toolbar.title = "Workshop"
+                        loadFragmentWorkshop()
+                    }
                 }
             }
         }
@@ -74,22 +80,31 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
-                    binding.toolbar.title = "Home"
-                    loadFragment(HomeFragment())
+                    loadFragmentHome()
                     true
                 }
                 R.id.workshop -> {
-                    binding.toolbar.title = "Workshop"
-                    if (role == "admin") {
-                        loadFragment(WorkshopFragment())
-                    }else {
-                        loadFragment(UserFragment())
-                    }
-
+                    loadFragmentWorkshop()
                     true
                 }
                 else -> false
             }
+        }
+    }
+
+    private fun loadFragmentHome() {
+        binding.toolbar.title = "Home"
+        isHome = true
+        loadFragment(HomeFragment())
+    }
+
+    private fun loadFragmentWorkshop() {
+        binding.toolbar.title = "Workshop"
+        isHome = false
+        if (role == "admin") {
+            loadFragment(WorkshopFragment())
+        }else {
+            loadFragment(UserFragment())
         }
     }
 

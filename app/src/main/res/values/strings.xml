@@ -74,5 +74,6 @@
     <string name="unknown_classification">Image classified as \"Unknown\" due to insufficient information.</string>
     <string name="error_classification">An error has occurred. Please try again.</string>
     <string name="error">Something went wrong</string>
+    <string name="bank">BANK BCA</string>
 
 </resources>

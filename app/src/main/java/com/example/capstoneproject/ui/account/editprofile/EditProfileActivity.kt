@@ -76,8 +76,12 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private fun showImage() {
-        currentImageUri?.let {
-            binding.imgProfile.setImageURI(it)
+        currentImageUri?.let { uri ->
+            binding.apply {
+                Glide.with(binding.root)
+                    .load(uri)
+                    .into(imgProfile)
+            }
         }
     }
 

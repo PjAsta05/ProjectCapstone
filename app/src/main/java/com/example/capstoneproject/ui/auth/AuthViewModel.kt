@@ -26,6 +26,8 @@ class AuthViewModel @Inject constructor(
     val successResponse = MutableLiveData<AuthResponse>()
     val updateResponse = MutableLiveData<User>()
     val errorMessage = MutableLiveData<String>()
+    private val _isHome = MutableLiveData<Boolean>().apply { value = true }
+    val isHome: LiveData<Boolean> get() = _isHome
 
     fun saveSession(user: UserModel) {
         viewModelScope.launch {
@@ -41,6 +43,10 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             repository.updateSession(user)
         }
+    }
+
+    fun updateMenuPosition(isHome: Boolean) {
+        _isHome.postValue(isHome)
     }
 
     suspend fun updateUser(

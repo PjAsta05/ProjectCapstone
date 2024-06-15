@@ -1,5 +1,6 @@
 package com.example.capstoneproject.ui.detail.admin
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.text.NumberFormat
+import java.util.Locale
 
 @AndroidEntryPoint
 class DetailAdminActivity : AppCompatActivity() {
@@ -44,6 +47,7 @@ class DetailAdminActivity : AppCompatActivity() {
         deleteAction()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showDetailWorkshop() {
         val workshop = intent.getParcelableExtra<WorkshopResponse>(INTENT_PARCELABLE)
         workshop?.let {
@@ -65,7 +69,9 @@ class DetailAdminActivity : AppCompatActivity() {
                 etPrice.setText(it.price.toString())
                 tvItemId.text = it.paketId.toString()
                 tvPacketName.text = it.paket.packageName
-                tvPrice.text = it.paket.price.toString()
+                val formatter = NumberFormat.getNumberInstance(Locale("in", "ID"))
+                val formattedPrice = formatter.format(it.paket.price)
+                binding.tvPrice.text = "Rp ${formattedPrice}"
                 when(it.status) {
                     "success" -> binding.activeStatus.isChecked = true
                     "done" -> binding.inactiveStatus.isChecked = true

@@ -24,7 +24,7 @@
             android:name=".ui.form.payment.ExtendPaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.form.packet.ExtendPackageActivity"
+            android:name=".ui.form.packageList.ExtendPackageActivity"
             android:exported="false" />
         <activity
             android:name=".ui.camera.CameraActivity"
@@ -75,7 +75,7 @@
             android:name=".ui.process.ProcessAddActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.form.packet.PacketActivity"
+            android:name=".ui.form.packageList.PackageActivity"
             android:exported="false" />
         <activity
             android:name=".ui.account.editprofile.EditProfileActivity"

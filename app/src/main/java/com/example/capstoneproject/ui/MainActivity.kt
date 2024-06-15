@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityMainBinding
@@ -30,7 +31,6 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
     private var token: String = ""
     private var role: String = ""
-    private var isHome: Boolean = true
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -64,13 +64,16 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     token = user.token
                     role = user.role
-                    if (isHome) {
-                        binding.toolbar.title = "Home"
-                        loadFragmentHome()
-                    } else {
-                        binding.toolbar.title = "Workshop"
-                        loadFragmentWorkshop()
+                    viewModel.isHome.observe(this@MainActivity) { isHome ->
+                        if (isHome) {
+                            binding.toolbar.title = "Home"
+                            loadFragmentHome()
+                        } else {
+                            binding.toolbar.title = "Workshop"
+                            loadFragmentWorkshop()
+                        }
                     }
+
                 }
             }
         }
@@ -81,10 +84,12 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.home -> {
                     loadFragmentHome()
+                    viewModel.updateMenuPosition(true)
                     true
                 }
                 R.id.workshop -> {
                     loadFragmentWorkshop()
+                    viewModel.updateMenuPosition(false)
                     true
                 }
                 else -> false
@@ -94,13 +99,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadFragmentHome() {
         binding.toolbar.title = "Home"
-        isHome = true
         loadFragment(HomeFragment())
     }
 
     private fun loadFragmentWorkshop() {
         binding.toolbar.title = "Workshop"
-        isHome = false
         if (role == "admin") {
             loadFragment(WorkshopFragment())
         }else {

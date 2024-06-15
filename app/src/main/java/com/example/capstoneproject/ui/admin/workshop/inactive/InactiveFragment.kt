@@ -71,7 +71,7 @@ class InactiveFragment : Fragment() {
 
     private fun observeWorkshop() {
         viewModel.workshops.observe(viewLifecycleOwner) { list ->
-            if (list != null) {
+            if (list != null && list.isNotEmpty()) {
                 adapter = WorkshopAdapter(list)
                 adapter.setOnItemClickCallback(object : WorkshopAdapter.OnItemClickCallback {
                     override fun onItemClicked(data: WorkshopResponse) {

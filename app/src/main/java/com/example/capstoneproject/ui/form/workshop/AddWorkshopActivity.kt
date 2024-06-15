@@ -11,7 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.capstoneproject.databinding.ActivityAddWorkshopBinding
-import com.example.capstoneproject.ui.form.packet.PacketActivity
+import com.example.capstoneproject.ui.form.packageList.PackageActivity
 
 class AddWorkshopActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddWorkshopBinding
@@ -117,7 +117,7 @@ class AddWorkshopActivity : AppCompatActivity() {
         dialogBuilder.setMessage("Are all the details correct?")
             .setCancelable(false)
             .setPositiveButton("Continue") { dialog, id ->
-                val intent = Intent(this, PacketActivity::class.java)
+                val intent = Intent(this, PackageActivity::class.java)
                 intent.putExtra("photo", currentImageUri.toString())
                 intent.putExtra("workshop", binding.etWorkshop.text.toString())
                 intent.putExtra("sanggar", binding.etSanggar.text.toString())

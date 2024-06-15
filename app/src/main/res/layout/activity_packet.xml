@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.form.packet.PacketActivity">
+    tools:context=".ui.form.packageList.PackageActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_arrowback"
-        app:title="Packet"
+        app:title="Package"
         app:titleCentered="true"/>
 
 

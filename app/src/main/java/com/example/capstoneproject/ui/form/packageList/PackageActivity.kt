@@ -1,6 +1,7 @@
-package com.example.capstoneproject.ui.form.packet
+package com.example.capstoneproject.ui.form.packageList
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,43 +11,64 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstoneproject.databinding.ActivityPacketBinding
 import com.example.capstoneproject.model.PackageResponse
-import com.example.capstoneproject.ui.form.payment.ExtendPaymentActivity
+import com.example.capstoneproject.ui.form.payment.PaymentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+
 @AndroidEntryPoint
-class ExtendPackageActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityPacketBinding
+class PackageActivity : AppCompatActivity() {
     private val viewModel: PackageViewModel by viewModels()
+    private lateinit var binding: ActivityPacketBinding
     private lateinit var adapter: PackageAdapter
 
-    private var workshopId: Int = 0
+    private var photo: Uri? = null
+    private var uri: String = ""
+    private var workshop: String = ""
+    private var sanggar: String = ""
+    private var owner: String = ""
+    private var email: String = ""
+    private var phone: String = ""
+    private var address: String = ""
+    private var description: String = ""
+    private var price: String = ""
     private var token: String = ""
-
+    private var userId: Int? = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPacketBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setupActionBar()
-        getExtra()
-        getPackages()
+
+        getArguments()
+        getPackages(token)
     }
 
-    private fun getExtra() {
-        workshopId = intent.getIntExtra("workshopId", 0)
+    private fun getArguments() {
+        uri = intent.getStringExtra("photo").toString()
+        workshop = intent.getStringExtra("workshop").toString()
+        sanggar = intent.getStringExtra("sanggar").toString()
+        owner = intent.getStringExtra("owner").toString()
+        email = intent.getStringExtra("email").toString()
+        phone = intent.getStringExtra("phone").toString()
+        address = intent.getStringExtra("address").toString()
+        description = intent.getStringExtra("description").toString()
+        price = intent.getStringExtra("price").toString()
         token = intent.getStringExtra("token").toString()
+        userId = intent.getIntExtra("id", 0)
+
+        Log.d("GetExtra", "$photo, $workshop, $sanggar, $owner, $email, $phone, $address, $description, $price, $token, $userId")
     }
 
-    private fun getPackages() {
+    private fun getPackages(token: String) {
         showLoading(true)
         lifecycleScope.launch {
             val isSuccess = viewModel.getPackages(token)
             if (!isSuccess) {
-                Log.d("ExtendPackageActivity", "getPackages: Failed")
+                Log.d("PacketActivity", "Failed")
             } else {
                 setupRecyclerView()
-                Log.d("ExtendPackageActivity", "getPackages: Success")
+                Log.d("PacketActivity", "Success")
             }
             showLoading(false)
         }
@@ -64,9 +86,18 @@ class ExtendPackageActivity : AppCompatActivity() {
                 adapter = PackageAdapter(list)
                 adapter.setOnItemClickCallback(object: PackageAdapter.OnItemClickCallback{
                     override fun onItemClicked(data: PackageResponse) {
-                        val intent = Intent(this@ExtendPackageActivity, ExtendPaymentActivity::class.java)
-                        intent.putExtra("workshopId", workshopId)
+                        val intent = Intent(this@PackageActivity, PaymentActivity::class.java)
+                        intent.putExtra("photo", uri)
+                        intent.putExtra("workshop", workshop)
+                        intent.putExtra("sanggar", sanggar)
+                        intent.putExtra("owner", owner)
+                        intent.putExtra("phone", phone)
+                        intent.putExtra("email", email)
+                        intent.putExtra("address", address)
+                        intent.putExtra("description", description)
+                        intent.putExtra("price", price)
                         intent.putExtra("token", token)
+                        intent.putExtra("id", userId)
                         intent.putExtra("packageId", data.id)
                         intent.putExtra("packageName", data.packageName)
                         intent.putExtra("packagePrice", data.price)
@@ -94,4 +125,5 @@ class ExtendPackageActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.GONE
         }
     }
+
 }

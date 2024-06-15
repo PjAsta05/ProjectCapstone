@@ -1,4 +1,4 @@
-package com.example.capstoneproject.ui.form.packet
+package com.example.capstoneproject.ui.form.packageList
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

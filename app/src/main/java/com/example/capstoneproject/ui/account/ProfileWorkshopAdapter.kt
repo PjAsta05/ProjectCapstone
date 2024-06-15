@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstoneproject.databinding.ItemRowProfileWorkshopBinding
 import com.example.capstoneproject.model.WorkshopResponse
-import com.example.capstoneproject.ui.form.packet.ExtendPackageActivity
+import com.example.capstoneproject.ui.form.packageList.ExtendPackageActivity
 
 class ProfileWorkshopAdapter(private val workshop: List<WorkshopResponse>, private val token: String): RecyclerView.Adapter<ProfileWorkshopAdapter.ProfileViewHolder>() {
 

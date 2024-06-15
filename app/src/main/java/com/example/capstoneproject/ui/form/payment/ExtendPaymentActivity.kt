@@ -64,7 +64,7 @@ class ExtendPaymentActivity : AppCompatActivity() {
         binding.tvItemNamapaket.text = packageName
         val formatter = NumberFormat.getNumberInstance(Locale("in", "ID"))
         val formatterPrice = formatter.format(packagePrice)
-        binding.tvItemHargapaket.text = "Rp.$formatterPrice"
+        binding.tvItemHargapaket.text = "Rp $formatterPrice"
     }
 
 

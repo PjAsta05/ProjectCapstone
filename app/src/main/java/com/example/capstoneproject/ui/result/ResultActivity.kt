@@ -58,20 +58,21 @@ class ResultActivity : AppCompatActivity() {
             )
         }
         lifecycleScope.launch {
-            val isSuccess = viewModel.classifyTari(multipartBody!!)
-            if (!isSuccess) {
-                Log.d("ResultActivity", "classifyImage: $isSuccess")
-                binding.tvNameTari.text = getString(R.string.error)
-                binding.descrtiption.text = getString(R.string.error_classification)
-                binding.tvPercentage.visibility = View.GONE
-                binding.btnResult.text = getString(R.string.try_again)
-                binding.btnResult.setOnClickListener {
-                    classifyImage()
+            val isSuccess = multipartBody?.let { viewModel.classifyTari(it) }
+            isSuccess?.let {
+                if (!isSuccess) {
+                    binding.tvNameTari.text = getString(R.string.error)
+                    binding.descrtiption.text = getString(R.string.error_classification)
+                    binding.tvPercentage.visibility = View.GONE
+                    binding.btnResult.text = getString(R.string.try_again)
+                    binding.btnResult.setOnClickListener {
+                        classifyImage()
+                    }
+                } else {
+                    observeResult()
                 }
-            } else {
-                observeResult()
+                showLoading(false)
             }
-            showLoading(false)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.capstoneproject.ui.detail.workshop
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.example.capstoneproject.databinding.ActivityDetailWorkshopBinding
 import com.example.capstoneproject.model.WorkshopResponse
 import com.example.capstoneproject.ui.form.reg.RegFormActivity
+import java.text.NumberFormat
+import java.util.Locale
 
 class DetailWorkshopActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailWorkshopBinding
@@ -26,6 +29,7 @@ class DetailWorkshopActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun detail() {
         val workshop = intent.getParcelableExtra<WorkshopResponse>(INTENT_PARCELABLE)!!
         token = intent.getStringExtra("token") ?: ""
@@ -39,7 +43,9 @@ class DetailWorkshopActivity : AppCompatActivity() {
                 tvEmailWorkshop.text = it.email
                 tvPhoneWorkshop.text = it.phone
                 tvDescriptionWorkshop.text = it.description
-                tvPrice.text = it.price.toString()
+                val formatter = NumberFormat.getNumberInstance(Locale("in", "ID"))
+                val formattedPrice = formatter.format(it.price)
+                tvPrice.text = "Rp ${formattedPrice}"
 
                 Glide.with(this@DetailWorkshopActivity)
                     .load(it.photo)

@@ -1,4 +1,4 @@
-package com.example.capstoneproject.ui.form.packet
+package com.example.capstoneproject.ui.form.packageList
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -26,7 +26,7 @@ class PackageAdapter(private val packages: List<PackageResponse>) : RecyclerView
             binding.tvPacketName.text = packageItem.packageName
             val formatter = NumberFormat.getNumberInstance(Locale("in", "ID"))
             val formattedPrice = formatter.format(packageItem.price)
-            binding.tvPrice.text = "Rp.${formattedPrice}"
+            binding.tvPrice.text = "Rp ${formattedPrice}"
         }
     }
 

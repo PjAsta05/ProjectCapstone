@@ -8,47 +8,47 @@ import kotlinx.android.parcel.RawValue
 @Parcelize
 data class WorkshopResponse(
     @SerializedName("id")
-    val id: Int,
+    val id: Int ?= null,
 
     @SerializedName("paketId")
-    val paketId: Int,
+    val paketId: Int ?= null,
 
     @SerializedName("userId")
-    val userId: Int,
+    val userId: Int ?= null,
 
     @SerializedName("nama_workshop")
-    val workshopName: String,
+    val workshopName: String ?= null,
 
     @SerializedName("nama_sanggar")
-    val sanggarName: String,
+    val sanggarName: String ?= null,
 
     @SerializedName("alamat")
-    val address: String,
+    val address: String ?= null,
 
     @SerializedName("email")
-    val email: String,
+    val email: String ?= null,
 
     @SerializedName("phone")
-    val phone: String,
+    val phone: String ?= null,
 
     @SerializedName("nama_pemilik")
-    val owner: String,
+    val owner: String ?= null,
 
     @SerializedName("deskripsi")
-    val description: String,
+    val description: String ?= null,
 
     @SerializedName("photo")
-    val photo: String,
+    val photo: String ?= null,
 
     @SerializedName("price")
-    val price: Int,
+    val price: Int ?= null,
 
     @SerializedName("status")
-    val status: String,
+    val status: String ?= null,
 
     @SerializedName("bukti_pembayaran")
-    val proof: String,
+    val proof: String ?= null,
 
     @SerializedName("paket")
-    val paket: @RawValue PackageResponse
+    val paket: @RawValue PackageResponse ?= null
 ) : Parcelable

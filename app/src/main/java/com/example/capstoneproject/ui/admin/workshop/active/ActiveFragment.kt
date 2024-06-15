@@ -71,7 +71,8 @@ class ActiveFragment : Fragment() {
 
     private fun observeWorkshop() {
         viewModel.workshops.observe(viewLifecycleOwner) { list ->
-            if (list != null && list.isNotEmpty()) {
+            if (list.isNotEmpty()) {
+                binding.emptyTextView.visibility = View.GONE
                 adapter = WorkshopAdapter(list)
                 adapter.setOnItemClickCallback(object : WorkshopAdapter.OnItemClickCallback {
                     override fun onItemClicked(data: WorkshopResponse) {
@@ -84,6 +85,8 @@ class ActiveFragment : Fragment() {
                 binding.recyclerView.adapter = adapter
             } else {
                 binding.emptyTextView.visibility = View.VISIBLE
+                adapter = WorkshopAdapter(emptyList())
+                binding.recyclerView.adapter = adapter
             }
         }
     }

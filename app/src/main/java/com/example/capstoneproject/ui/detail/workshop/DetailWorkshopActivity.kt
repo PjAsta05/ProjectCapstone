@@ -33,7 +33,7 @@ class DetailWorkshopActivity : AppCompatActivity() {
     private fun detail() {
         val workshop = intent.getParcelableExtra<WorkshopResponse>(INTENT_PARCELABLE)!!
         token = intent.getStringExtra("token") ?: ""
-        workshopId = workshop.id
+        workshopId = workshop.id!!
         workshop.let {
             binding.apply {
                 nameworkshop.text = it.workshopName

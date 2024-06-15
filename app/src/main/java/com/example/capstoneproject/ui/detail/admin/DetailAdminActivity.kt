@@ -55,9 +55,9 @@ class DetailAdminActivity : AppCompatActivity() {
                 Glide.with(this@DetailAdminActivity)
                     .load(it.photo)
                     .into(imageView)
-                id = it.id
-                packageId = it.paketId
-                userId = it.userId
+                id = it.id!!
+                packageId = it.paketId!!
+                userId = it.userId!!
                 textView2.text = it.workshopName
                 etWorkshop.setText(it.workshopName)
                 etSanggar.setText(it.sanggarName)
@@ -68,9 +68,9 @@ class DetailAdminActivity : AppCompatActivity() {
                 etDescription.setText(it.description)
                 etPrice.setText(it.price.toString())
                 tvItemId.text = it.paketId.toString()
-                tvPacketName.text = it.paket.packageName
+                tvPacketName.text = it.paket?.packageName
                 val formatter = NumberFormat.getNumberInstance(Locale("in", "ID"))
-                val formattedPrice = formatter.format(it.paket.price)
+                val formattedPrice = formatter.format(it.paket?.price)
                 binding.tvPrice.text = "Rp ${formattedPrice}"
                 when(it.status) {
                     "success" -> binding.activeStatus.isChecked = true

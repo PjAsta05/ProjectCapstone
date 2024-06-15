@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -50,31 +49,21 @@ class ResultActivity : AppCompatActivity() {
 
     private fun classifyImage() {
         showLoading(true)
-        var multipartBody: MultipartBody.Part? = null
         currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri,this).reduceFileImage()
             val file = imageFile.asRequestBody("image/jpeg".toMediaType())
-            multipartBody = MultipartBody.Part.createFormData(
+            val multipartBody = MultipartBody.Part.createFormData(
                 "image",
                 imageFile.name,
                 file
             )
-        }
-        lifecycleScope.launch {
-            val isSuccess = multipartBody?.let { viewModel.classifyTari(it) }
-            isSuccess?.let {
+            lifecycleScope.launch {
+                val isSuccess = viewModel.classifyTari(multipartBody)
                 if (!isSuccess) {
-                    binding.tvNameTari.text = getString(R.string.error)
-                    binding.descrtiption.text = getString(R.string.error_classification)
-                    binding.tvPercentage.visibility = View.GONE
-                    binding.btnResult.text = getString(R.string.try_again)
-                    binding.btnResult.setOnClickListener {
-                        classifyImage()
-                    }
+                    setError()
                 } else {
                     observeResult()
                 }
-                showLoading(false)
             }
         }
     }
@@ -110,7 +99,6 @@ class ResultActivity : AppCompatActivity() {
                             setUnknown()
                         }
                     }
-                    binding.tvPercentage.visibility = View.VISIBLE
                     score = classification.data.confidence.toInt()
                 } else {
                     setUnknown()
@@ -118,6 +106,7 @@ class ResultActivity : AppCompatActivity() {
             } else {
                 setUnknown()
             }
+            showLoading(false)
         }
     }
 
@@ -128,11 +117,22 @@ class ResultActivity : AppCompatActivity() {
         binding.btnResult.isEnabled = false
     }
 
+    private fun setError() {
+        binding.tvNameTari.text = getString(R.string.error)
+        binding.descrtiption.text = getString(R.string.error_classification)
+        binding.tvPercentage.visibility = View.GONE
+        binding.btnResult.text = getString(R.string.try_again)
+        binding.btnResult.setOnClickListener {
+            classifyImage()
+        }
+        showLoading(false)
+    }
+
     private fun findDance(dance: String) {
         lifecycleScope.launch {
             val isSuccess = viewModel.findTari(dance, token)
             if (!isSuccess) {
-                Log.d("ResultActivity", "findDance: $isSuccess")
+                setError()
             } else {
                 observeDance()
             }
@@ -144,6 +144,7 @@ class ResultActivity : AppCompatActivity() {
         viewModel.balineseDance.observe(this) { dance ->
             if (dance != null) {
                 binding.tvNameTari.text = dance.namaTari
+                binding.tvPercentage.visibility = View.VISIBLE
                 binding.tvScore.text = "$score%"
                 binding.descrtiption.text = dance.deskripsi
                 binding.btnResult.text = getString(R.string.more_detail)
@@ -173,7 +174,6 @@ class ResultActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_DETAIL) {
-            // Kembali ke MainActivity
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)

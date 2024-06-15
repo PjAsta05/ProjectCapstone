@@ -125,17 +125,14 @@ class EditProfileActivity : AppCompatActivity() {
                         Log.d("Edit Profile", "Error: $message")
                         showToast(message)
                     }
-                    showLoading(false)
                 }else {
                     viewModel.updateResponse.observe(this@EditProfileActivity) { response ->
                         viewModel.updateSession(UserModel(response.id, response.fullName, response.email, response.photo,"", response.role))
-                        val intent = Intent(this@EditProfileActivity, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                        showLoading(false)
                         showToast("Save Success")
                     }
+                    finish()
                 }
+                showLoading(false)
             }
         }
     }

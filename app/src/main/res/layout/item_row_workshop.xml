@@ -47,8 +47,8 @@
             android:id="@+id/tv_item_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_toEndOf="@id/img_item_photo"
+            android:maxLines="1"
             android:textSize="16sp"
             card_view:layout_constraintEnd_toEndOf="@+id/tv_item_name"
             card_view:layout_constraintStart_toStartOf="@+id/tv_item_name"
@@ -59,13 +59,15 @@
             android:id="@+id/tv_item_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_toEndOf="@id/img_item_photo"
-            android:textSize="16sp"
             android:justificationMode="inter_word"
-            tools:targetApi="o"
+            android:maxLines="2"
+            android:textSize="16sp"
             card_view:layout_constraintEnd_toEndOf="@+id/tv_item_address"
             card_view:layout_constraintStart_toStartOf="@+id/tv_item_address"
             card_view:layout_constraintTop_toBottomOf="@+id/tv_item_address"
+            tools:targetApi="o"
             tools:text="description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

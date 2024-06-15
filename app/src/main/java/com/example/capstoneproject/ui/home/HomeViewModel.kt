@@ -9,6 +9,7 @@ import com.example.capstoneproject.model.ClassificationResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import okhttp3.MultipartBody
 import retrofit2.HttpException
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -48,6 +49,12 @@ class HomeViewModel @Inject constructor(
             classification.postValue(response)
             true
         } catch (e: HttpException) {
+            Log.d("classifyTari", "${e.message}")
+            false
+        } catch (e: SocketTimeoutException) {
+            Log.d("classifyTari", "${e.message}")
+            false
+        } catch (e: Exception) {
             Log.d("classifyTari", "${e.message}")
             false
         }

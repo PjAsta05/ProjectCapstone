@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.ActivityResultBinding
+import com.example.capstoneproject.ui.MainActivity
 import com.example.capstoneproject.ui.detail.tari.DetailDanceActivity
 import com.example.capstoneproject.ui.home.HomeViewModel
 import com.example.capstoneproject.ui.reduceFileImage
@@ -29,6 +30,8 @@ class ResultActivity : AppCompatActivity() {
     private var currentImageUri: Uri? = null
     private var score: Int? = null
     private var token: String = ""
+    private val REQUEST_CODE_DETAIL = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
@@ -147,8 +150,7 @@ class ResultActivity : AppCompatActivity() {
                 binding.btnResult.setOnClickListener {
                     val intent = Intent(this, DetailDanceActivity::class.java)
                     intent.putExtra(DetailDanceActivity.INTENT_PARCELABLE, dance)
-                    startActivity(intent)
-                    finish()
+                    startActivityForResult(intent, REQUEST_CODE_DETAIL)
                 }
             }
         }
@@ -165,6 +167,17 @@ class ResultActivity : AppCompatActivity() {
         } else {
             binding.cardResult.visibility = View.VISIBLE
             binding.progressBar.visibility = View.GONE
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_DETAIL) {
+            // Kembali ke MainActivity
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            finish()
         }
     }
 }

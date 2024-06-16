@@ -81,14 +81,14 @@ The creation of our logo consists of several components, namely the letter A whi
   - implementation("androidx.core:core-splashscreen:1.0.0")
 
 ## Screenshoot
-![Welcome Page](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/5e672d15-1a6f-4693-b23a-02ff4740296a)
-![Login](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/5e8932b1-5a52-429d-90ea-eb6e2b485359)
-![Signup](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/e02c2ac2-878c-473f-a741-8fcf26de49c9)
-![Profile](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/d89428f4-c15c-4ea6-8be6-0d923ea2c942)
-![Home](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/9f1ab9ed-ecdb-48ee-a56e-85e26991b37a)
-![Workshop User](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/99f09822-eac1-4788-b478-5ee14ee3b5a7)
-![Workshop Admin](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/7a54fcbd-3a5f-4260-896a-907a8741e31d)
-![Classify](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/81de19d6-c088-4a0d-b5a6-77c06eeb7171)
+<img src="https://github.com/PjAsta05/ProjectCapstone/assets/114798198/5e672d15-1a6f-4693-b23a-02ff4740296a" alt="Welcome Page" width="300"/>
+<img src="https://github.com/PjAsta05/ProjectCapstone/assets/114798198/5e8932b1-5a52-429d-90ea-eb6e2b485359" alt="Login" width="300"/>
+<img src="https://github.com/PjAsta05/ProjectCapstone/assets/114798198/e02c2ac2-878c-473f-a741-8fcf26de49c9" alt="Signup" width="300"/>
+<img src="https://github.com/PjAsta05/ProjectCapstone/assets/114798198/d89428f4-c15c-4ea6-8be6-0d923ea2c942" alt="Profile" width="300"/>
+<img src="https://github.com/PjAsta05/ProjectCapstone/assets/114798198/9f1ab9ed-ecdb-48ee-a56e-85e26991b37a" alt="Home" width="300"/>
+<img src="https://github.com/PjAsta05/ProjectCapstone/assets/114798198/99f09822-eac1-4788-b478-5ee14ee3b5a7" alt="Workshop User" width="300"/>
+<img src="https://github.com/PjAsta05/ProjectCapstone/assets/114798198/7a54fcbd-3a5f-4260-896a-907a8741e31d" alt="Workshop Admin" width="300"/>
+<img src="https://github.com/PjAsta05/ProjectCapstone/assets/114798198/81de19d6-c088-4a0d-b5a6-77c06eeb7171" alt="Classify" width="300"/>
 
 
 

@@ -18,4 +18,4 @@ The creation of our logo consists of several components, namely the letter A whi
 
 ### Figma Design
 ![Group 25](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/617ecc29-b98f-405b-a4d4-f6ff2ae77813)
-
+[Figma](https://www.figma.com/design/NEXWISJqeTf63xL0fwiQe5/Untitled?node-id=118-862&t=DDLIfD0uqcvhsFgZ-1)

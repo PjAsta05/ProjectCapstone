@@ -8,6 +8,7 @@ Users can scan dancers to access information about the dance style, movements, a
 
 ## Logo
 The creation of our logo consists of several components, namely the letter A which is taken from the initial letter of the application, besides that there are ornaments that resemble a gate, which is a traditional Balinese gate. Furthermore, there are illustrations of people who are dancing that reflect the application that we make. In the color section we choose is based on the color of accessories that are often used by Balinese dancers.
+
 ![Ageman Logo](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/3f732502-e629-4aa5-b046-5888d9b4088d)
 
 

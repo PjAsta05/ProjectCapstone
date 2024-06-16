@@ -1,4 +1,4 @@
-![Screenshot_2024-06-16-23-29-45-442_com example capstoneproject](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/108ccaab-489b-477e-add2-a431ea270254)# Mobile Development Team
+# Mobile Development Team
 
 Mobile Development team created the user interface design in Figma and followed Material Design principles to ensure a consistent and engaging user experience. For development, we used Android studio with Kotlin as the main program language.
 

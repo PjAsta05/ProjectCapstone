@@ -1,4 +1,4 @@
-# Mobile Development Team
+![Screenshot_2024-06-16-23-29-45-442_com example capstoneproject](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/108ccaab-489b-477e-add2-a431ea270254)# Mobile Development Team
 
 Mobile Development team created the user interface design in Figma and followed Material Design principles to ensure a consistent and engaging user experience. For development, we used Android studio with Kotlin as the main program language.
 
@@ -61,3 +61,37 @@ The creation of our logo consists of several components, namely the letter A whi
 ![Group 25](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/617ecc29-b98f-405b-a4d4-f6ff2ae77813)
 
 ## Aplication Development
+**Dependecy**
+  - implementation("androidx.fragment:fragment-ktx:1.7.1")
+  - implementation("androidx.activity:activity-ktx:1.9.0")
+  - implementation("com.squareup.retrofit2:retrofit:2.9.0")
+  - implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+  - implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+  - implementation("com.github.bumptech.glide:glide:4.16.0")
+  - implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+  - implementation("com.google.dagger:hilt-android:2.48")
+  - implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+  - implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+  - implementation("androidx.datastore:datastore-preferences:1.1.1")
+  - implementation("androidx.room:room-runtime:2.6.1")
+  - implementation("androidx.room:room-ktx:2.6.1")
+  - implementation("androidx.camera:camera-camera2:1.3.3")
+  - implementation("androidx.camera:camera-lifecycle:1.3.3")
+  - implementation("androidx.camera:camera-view:1.3.3")
+  - implementation("androidx.core:core-splashscreen:1.0.0")
+
+## Screenshoot
+![Welcome Page](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/5e672d15-1a6f-4693-b23a-02ff4740296a)
+![Login](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/5e8932b1-5a52-429d-90ea-eb6e2b485359)
+![Signup](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/e02c2ac2-878c-473f-a741-8fcf26de49c9)
+![Profile](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/d89428f4-c15c-4ea6-8be6-0d923ea2c942)
+![Home](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/9f1ab9ed-ecdb-48ee-a56e-85e26991b37a)
+![Workshop User](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/99f09822-eac1-4788-b478-5ee14ee3b5a7)
+![Workshop Admin](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/7a54fcbd-3a5f-4260-896a-907a8741e31d)
+![Classify](https://github.com/PjAsta05/ProjectCapstone/assets/114798198/81de19d6-c088-4a0d-b5a6-77c06eeb7171)
+
+
+
+
+
+
